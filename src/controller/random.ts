@@ -1,4 +1,6 @@
+import RandomModel from '../models/randomModel.js';
 import LoremIpsum from './loremIpsum.js';
+import TypeChecker from './typechecker.js';
 
 /**
  * Random
@@ -161,6 +163,15 @@ export default class Random {
         return array;
     }
 
+    public generateObjectArray(length: number): any[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateObject());
+        }
+        return array;
+    }
+
     /**
      * Generates words
      * @param length 
@@ -172,7 +183,6 @@ export default class Random {
         const words = text.split(' ');
         return words[this.generateNumber(0, words.length - 1)];
     }
-
 
     /**
      * Generates words array
@@ -195,5 +205,86 @@ export default class Random {
     public generateText(length: number): string {
         const loremIpsum = new LoremIpsum();
         return loremIpsum.getText(length);
+    }
+
+    /**
+     * Generates object
+     * @returns object 
+     */
+    public generateObject(): RandomModel {
+        const randomModel = new RandomModel();
+        return randomModel;
+    }
+
+    /**
+     * Generates object by json template
+     * @param jsonTemplate 
+     * @returns object by json template 
+     * 
+     * @example
+     * const jsonTemplate = {
+     * name: 'string',
+     * age: 'number',
+     * isActive: 'boolean',
+     * date: 'date',
+     * array: 'array',
+     * enum: 'enum',
+     * stringArray: 'stringArray',
+     * numberArray: 'numberArray',
+     * booleanArray: 'booleanArray',
+     * dateArray: 'dateArray',
+     * enumArray: 'enumArray',
+     * objectArray: 'objectArray',
+     * words: 'words',
+     * wordsArray: 'wordsArray',
+     * text: 'text'
+     * }
+     * 
+     * const randomModel = new RandomModel();
+     * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
+     */
+    public generateObjectByJsonTemplate(jsonTemplate: string): any {
+        const json = JSON.parse(jsonTemplate);
+        const keys = Object.keys(json);
+        const typechecker = new TypeChecker();
+        keys.forEach(key => {
+            const value = json[key];
+            if (typechecker.isString(value)) {
+                json[key] = this.generateString(value.length);
+            } else if (typechecker.isNumber(value)) {
+                json[key] = this.generateNumber(value.min, value.max);
+            } else if (typechecker.isBoolean(value)) {
+                json[key] = this.generateBoolean();
+            } else if (typechecker.isDate(value)) {
+                json[key] = this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31));
+            } else if (typechecker.isEnum(value)) {
+                json[key] = this.generateEnum(value.enumeration);
+            } else if (typechecker.isArray(value)) {
+                json[key] = this.generateArray(value.length);
+            } else if (typechecker.isObject(value)) {
+                json[key] = this.generateObjectByJsonTemplate(value.jsonTemplate);
+            }
+        });
+        return json;
+    }
+
+    /**
+     * Generates object array by json template
+     * @param length 
+     * @param jsonTemplate 
+     * @returns object array by json template 
+     * 
+     * @example
+     * 
+     * const jsonTemplate = '{ "name": { "type": "string", "length": 5 }, "age": { "type": "number", "min": 1, "max": 100 } }';
+     * const randomModel = new RandomModel();
+     * const objectArray = randomModel.generateObjectArrayByJsonTemplate(10, jsonTemplate);
+     */
+    public generateObjectArrayByJsonTemplate(length: number, jsonTemplate: string): any[] {
+        const array = new Array(length);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateObjectByJsonTemplate(jsonTemplate));
+        }
+        return array;
     }
 }

@@ -1,4 +1,4 @@
-import { H } from "../dist/FriendlyHelper.js";
+import { H } from "../dist/src/FriendlyHelper.js";
 
 console.log(H.info.VERSION);
 console.log(H.guid.generate());
@@ -8,3 +8,15 @@ console.log(H.color.generateRandomRgba());
 console.log(H.color.generateRandomHsl());
 console.log(H.color.generateRandomHsla());
 console.log(H.color.determineTransparency(H.color.generateRandomHex()) + "%");
+console.log(H.color.determineTransparency(H.color.rgbaToHex(H.color.generateRandomRgba())) + "%");
+console.log(H.color.determineTransparency(H.color.hslToHex(H.color.generateRandomHsl())) + "%");
+console.log(H.color.determineTransparency(H.color.hslaToHex(H.color.generateRandomHsla())) + "%");
+console.log(H.color.determineTransparency(H.color.rgbToHex(H.color.generateRandomRgb())) + "%");
+console.log(H.string.capitalise(H.random.generateString(10)));
+console.log(H.string.decapitalise(H.random.generateString(10)));
+console.log(H.string.toUppercase(H.random.generateString(10)));
+console.log(H.string.toLowercase(H.random.generateString(10)));
+console.log(H.random.generateText(H.random.generateNumber(10, 200)));
+console.log(H.random.generateObject());
+console.log(H.random.generateObjectArray(H.random.generateNumber(10, 40)));
+console.log(H.random.generateObjectArrayByJsonTemplate(H.random.generateNumber(10, 40), '{"name": "", "age": 0}'));

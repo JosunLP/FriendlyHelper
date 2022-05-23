@@ -8,7 +8,7 @@ export default class StringController {
      * @param str 
      * @returns xmltags 
      */
-    static purgeXmltags(str: string): string {
+    public purgeXmltags(str: string): string {
         return str.replace(/<[^>]*>/g, '');
     }
 
@@ -17,7 +17,7 @@ export default class StringController {
      * @param str 
      * @returns html 
      */
-    static purgeHtml(str: string): string {
+    public purgeHtml(str: string): string {
         return str.replace(/<[^>]*>/g, '');
     }
 
@@ -26,7 +26,7 @@ export default class StringController {
      * @param str 
      * @returns sql 
      */
-    static purgeSql(str: string): string {
+    public purgeSql(str: string): string {
         return str.replace(/\'/g, '\'\'');
     }
 
@@ -35,7 +35,7 @@ export default class StringController {
      * @param str 
      * @returns json 
      */
-    static purgeJson(str: string): string {
+    public purgeJson(str: string): string {
         return str.replace(/\'/g, '\\\'');
     }
 
@@ -44,7 +44,7 @@ export default class StringController {
      * @param str 
      * @returns dangerous characters 
      */
-    static purgeDangerousCharacters(str: string): string {
+    public purgeDangerousCharacters(str: string): string {
         return str.replace(/[\u0000-\u001F]/g, '');
     }
 
@@ -53,7 +53,7 @@ export default class StringController {
      * @param str 
      * @returns clean 
      */
-    static clean(str: string): string {
+    public clean(str: string): string {
         return str.replace(/\s+/g, ' ').trim();
     }
 
@@ -62,7 +62,7 @@ export default class StringController {
      * @param str 
      * @returns markdown 
      */
-    static purgeMarkdown(str: string): string {
+    public purgeMarkdown(str: string): string {
 
         // remove markdown header
         str = str.replace(/^#+\s+/, '');
@@ -96,8 +96,8 @@ export default class StringController {
      * @param str 
      * @returns all 
      */
-    static purgeAll(str: string): string {
-        return StringController.purgeXmltags(StringController.purgeHtml(StringController.purgeSql(StringController.purgeJson(StringController.purgeDangerousCharacters(StringController.clean(StringController.purgeMarkdown(str)))))));
+    public purgeAll(str: string): string {
+        return this.purgeXmltags(this.purgeHtml(this.purgeSql(this.purgeJson(this.purgeDangerousCharacters(this.clean(this.purgeMarkdown(str)))))));
     }
 
     /**
@@ -105,7 +105,7 @@ export default class StringController {
      * @param array 
      * @returns string from array 
      */
-    static getStringFromArray(array: string[]): string {
+    public getStringFromArray(array: string[]): string {
         return array.join(', ');
     }
 
@@ -114,8 +114,44 @@ export default class StringController {
      * @param str 
      * @returns array from string 
      */
-    static getArrayFromString(str: string): string[] {
+    public getArrayFromString(str: string): string[] {
         return str.split(', ');
+    }
+
+    /**
+     * Capitalise string controller
+     * @param str 
+     * @returns Capitalise 
+     */
+    public capitalise(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    /**
+     * Decapitalise string controller
+     * @param str 
+     * @returns decapitalise 
+     */
+    public decapitalise(str: string): string {
+        return str.charAt(0).toLowerCase() + str.slice(1);
+    }
+
+    /**
+     * To uppercase
+     * @param str 
+     * @returns uppercase 
+     */
+    public toUppercase(str: string): string {
+        return str.toUpperCase();
+    }
+
+    /**
+     * To lowercase
+     * @param str 
+     * @returns lowercase 
+     */
+    public toLowercase(str: string): string {
+        return str.toLowerCase();
     }
 
 }

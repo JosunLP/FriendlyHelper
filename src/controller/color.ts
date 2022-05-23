@@ -77,7 +77,46 @@ export default class Color {
             ('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
             ('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
             ('0' + parseInt(result[3], 10).toString(16)).slice(-2) : '';
-    }	
+    }
+
+    /**
+     * Rgbas to hex
+     * @param rgba 
+     * @returns to hex 
+     */
+    public rgbaToHex(rgba: string): string {
+        let result = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(rgba);
+        return result ? '#' +
+            ('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[3], 10).toString(16)).slice(-2) : '';
+    }
+
+    /**
+     * Hsls to hex
+     * @param hsl 
+     * @returns to hex 
+     */
+    public hslToHex(hsl: string): string {
+        let result = /^hsl\((\d+),\s*(\d+%),\s*(\d+%)\)$/i.exec(hsl);
+        return result ? '#' +
+            ('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[3], 10).toString(16)).slice(-2) : '';
+    }
+
+    /**
+     * Hslas to hex
+     * @param hsla 
+     * @returns to hex 
+     */
+    public hslaToHex(hsla: string): string {
+        let result = /^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(hsla);
+        return result ? '#' +
+            ('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
+            ('0' + parseInt(result[3], 10).toString(16)).slice(-2) : '';
+    }
 
     /**
      * Hexs to rgb
@@ -141,6 +180,25 @@ export default class Color {
     }
 
     /**
+     * Rgbas to cmyk
+     * @param r 
+     * @param g 
+     * @param b 
+     * @param a 
+     * @returns to cmyk 
+     */
+    public rgbaToCmyk(r: number, g: number, b: number, a: number): { c: number, m: number, y: number, k: number } {
+        r = r / 255;
+        g = g / 255;
+        b = b / 255;
+        let k = 1 - Math.max(r, g, b);
+        let c = (1 - r - k) / (1 - k);
+        let m = (1 - g - k) / (1 - k);
+        let y = (1 - b - k) / (1 - k);
+        return { c: c, m: m, y: y, k: k };
+    }
+
+    /**
      * Cmyks to rgb
      * @param c 
      * @param m 
@@ -160,7 +218,7 @@ export default class Color {
      * @param hex 
      * @returns transparency 
      */
-    determineTransparency(hex: string): number {
+    public determineTransparency(hex: string): number {
         let c: { r: number, g: number, b: number };
         try {
             c = <{ r: number, g: number, b: number }>this.hexToRgb(hex);
@@ -173,6 +231,45 @@ export default class Color {
         let b = c.b;
         let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         return (yiq >= 128) ? 0 : 1;
+    }
+
+    /**
+     * Determines whether color is transparent
+     * @param hex
+     * @returns true if transparent
+     *  
+     * @memberOf ColorService
+     */
+    public isTransparent(hex: string): boolean {
+        return this.determineTransparency(hex) === 1;
+    }
+
+    /**
+     * Determines whether color is opaque
+     * @param hex
+     * @returns true if opaque
+     * 
+     * @memberOf ColorService
+     */
+    public isOpaque(hex: string): boolean {
+        return this.determineTransparency(hex) === 0;
+    }
+
+    /**
+     * Determines whether color is valid
+     * @param hex
+     * @returns true if valid
+     * 
+     * @memberOf ColorService
+     * 
+     * @example
+     * 
+     * isValid('#ffffff'); // true
+     * isValid('#fffffff'); // false
+     * isValid('#ffffffff'); // false
+     */
+    public hexIsValid(hex: string): boolean {
+        return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex);
     }
     
 }
