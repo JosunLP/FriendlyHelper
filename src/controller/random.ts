@@ -1,5 +1,15 @@
-class Random {
+import LoremIpsum from './loremIpsum.js';
+
+/**
+ * Random
+ */
+export default class Random {
     
+    /**
+     * Generates string
+     * @param length 
+     * @returns string 
+     */
     public generateString(length: number): string {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -10,19 +20,40 @@ class Random {
         return result;
     }
 
+    /**
+     * Generates number
+     * @param min 
+     * @param max 
+     * @returns number 
+     */
     public generateNumber(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    /**
+     * Generates boolean
+     * @returns true if boolean 
+     */
     public generateBoolean(): boolean {
         return Math.random() >= 0.5;
     }
 
+    /**
+     * Generates date
+     * @param min 
+     * @param max 
+     * @returns date of date 
+     */
     public generateDate(min: Date, max: Date): Date {
         const diff = max.getTime() - min.getTime();
         return new Date(min.getTime() + Math.random() * diff);
     }
 
+    /**
+     * Generates array
+     * @param length 
+     * @returns array 
+     */
     public generateArray(length: number): string[] {
         const result = [];
         for (let i = 0; i < length; i++) {
@@ -31,32 +62,138 @@ class Random {
         return result;
     }
 
+    /**
+     * Generates enum
+     * @param enumeration 
+     * @returns enum 
+     */
     public generateEnum(enumeration: any): any {
         const keys = Object.keys(enumeration);
         return enumeration[keys[this.generateNumber(0, keys.length - 1)]];
     }
 
-    // generate a method that retunrs a random object based
-    // on the given class
-    public generateObject<T>(classType: { new(): T }): T {
-        const instance = new classType();
-        const keys = Object.keys(instance);
-        for (const key of keys) {
-            const value = instance[key];
-            if (typeof value === 'string') {
-                instance[key] = this.generateString(this.generateNumber(5, 10));
-            } else if (typeof value === 'number') {
-                instance[key] = this.generateNumber(0, 100);
-            } else if (typeof value === 'boolean') {
-                instance[key] = this.generateBoolean();
-            } else if (value instanceof Date) {
-                instance[key] = this.generateDate(new Date(0), new Date());
-            } else if (value instanceof Array) {
-                instance[key] = this.generateArray(this.generateNumber(5, 10));
-            } else if (typeof value === 'object') {
-                instance[key] = this.generateObject(value.constructor);
-            }
+    /**
+     * Generates string array obejct
+     * @param length 
+     * @returns string array obejct 
+     */
+    public generateStringArrayObejct(length: number): any {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateString(this.generateNumber(5, 10)));
         }
-        return instance;
+
+        const result = {
+            array: array
+        };
+        return result;
+    }
+
+    /**
+     * Generates string array
+     * @param length 
+     * @returns string array 
+     */
+    public generateStringArray(length: number): string[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateString(this.generateNumber(5, 10)));
+        }
+        return array;
+    }
+
+    /**
+     * Generates number array
+     * @param length 
+     * @returns number array 
+     */
+    public generateNumberArray(length: number): number[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateNumber(1, 100));
+        }
+        return array;
+    }
+
+    /**
+     * Generates boolean array
+     * @param length 
+     * @returns boolean array 
+     */
+    public generateBooleanArray(length: number): boolean[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateBoolean());
+        }
+        return array;
+    }
+
+    /**
+     * Generates date array
+     * @param length 
+     * @returns date array 
+     */
+    public generateDateArray(length: number): Date[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31)));
+        }
+        return array;
+    }
+
+    /**
+     * Generates enum array
+     * @param length 
+     * @param enumeration 
+     * @returns enum array 
+     */
+    public generateEnumArray(length: number, enumeration: any): any[] {
+        const array = new Array(length);
+        const keys = Object.keys(array);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateEnum(enumeration));
+        }
+        return array;
+    }
+
+    /**
+     * Generates words
+     * @param length 
+     * @returns words 
+     */
+    public generateWords(length: number): string {
+        const loremIpsum = new LoremIpsum();
+        const text = loremIpsum.getText(length);
+        const words = text.split(' ');
+        return words[this.generateNumber(0, words.length - 1)];
+    }
+
+
+    /**
+     * Generates words array
+     * @param length 
+     * @returns words array 
+     */
+    public generateWordsArray(length: number): string[] {
+        const array = new Array(length);
+        for (let i = 0; i < length; i++) {
+            array.push(this.generateWords(this.generateNumber(1, 10)));
+        }
+        return array;
+    }
+
+    /**
+     * Generates text
+     * @param length 
+     * @returns text 
+     */
+    public generateText(length: number): string {
+        const loremIpsum = new LoremIpsum();
+        return loremIpsum.getText(length);
     }
 }
