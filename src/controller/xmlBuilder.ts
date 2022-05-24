@@ -49,7 +49,7 @@ export default class XmlBuilder {
 	 * @param value
 	 * @returns att
 	 */
-	att(name: string, value: any): XmlBuilder {
+	att(name: string, value: undefined): XmlBuilder {
 		this.stack[this.stack.length - 1].attributes[name] = value;
 		return this;
 	}

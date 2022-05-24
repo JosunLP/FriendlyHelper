@@ -30,7 +30,7 @@ export default class FileController {
      * }, true)
      * ```
      */
-    jsonToXmlRecursive(json: [], root: boolean): any {
+    jsonToXmlRecursive(json: [], root: boolean): string {
 		const xml = root ? new XmlBuilder('root') : new XmlBuilder('child');
 		for (const key in json) {
 			if (json.hasOwnProperty(key)) {

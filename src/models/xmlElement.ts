@@ -8,7 +8,7 @@ export default class XmlElement {
 	 * @param name
 	 * @param [content]
 	 */
-	constructor(name: string, content?: any) {
+	constructor(name: string, content?: undefined) {
 		this.name = name;
 		this.attributes = {};
 		this.children = [];
@@ -25,7 +25,7 @@ export default class XmlElement {
 	/**
 	 * Attributes  of xml element
 	 */
-	attributes: { [key: string]: any };
+	attributes: { [key: string]: undefined };
 
 	/**
 	 * Children  of xml element
