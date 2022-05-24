@@ -68,8 +68,17 @@ export default class Random {
      * Generates enum
      * @param enumeration
      * @returns enum
+	 *
+	 * @example
+	 *
+	 * 		const enumeration = {
+	 * 			'A': 'A',
+	 * 			'B': 'B',
+	 * 			'C': 'C'
+	 * 		};
+	 * 		const result = generateEnum(enumeration);
      */
-    public generateEnum(enumeration: any): any {
+    public generateEnum(enumeration: any): Enumerator {
         const keys = Object.keys(enumeration);
         return enumeration[keys[this.generateNumber(0, keys.length - 1)]];
     }
@@ -78,8 +87,20 @@ export default class Random {
      * Generates string array obejct
      * @param length
      * @returns string array obejct
+	 *
+	 * @example
+	 *
+	 * 		const result = generateStringArrayObject(5);
+	 * 		console.log(result);
+	 * 		// {
+	 * 		// 	'0': 'string',
+	 * 		// 	'1': 'string',
+	 * 		// 	'2': 'string',
+	 * 		// 	'3': 'string',
+	 * 		// 	'4': 'string'
+	 * 		// }
      */
-    public generateStringArrayObejct(length: number): any {
+    public generateStringArrayObejct(length: number): {} {
         const array = new Array(length);
         const keys = Object.keys(array);
         for (let i = 0; i < length; i++) {
@@ -154,7 +175,7 @@ export default class Random {
      * @param enumeration
      * @returns enum array
      */
-    public generateEnumArray(length: number, enumeration: any): any[] {
+    public generateEnumArray(length: number, enumeration: undefined): undefined[] {
         const array = new Array(length);
         const keys = Object.keys(array);
         for (let i = 0; i < length; i++) {
@@ -163,7 +184,7 @@ export default class Random {
         return array;
     }
 
-    public generateObjectArray(length: number): any[] {
+    public generateObjectArray(length: number): undefined[] {
         const array = new Array(length);
         const keys = Object.keys(array);
         for (let i = 0; i < length; i++) {
@@ -243,7 +264,7 @@ export default class Random {
      * const randomModel = new RandomModel();
      * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
      */
-    public generateObjectByJsonTemplate(jsonTemplate: string): any {
+    public generateObjectByJsonTemplate(jsonTemplate: string): undefined {
         const json = JSON.parse(jsonTemplate);
         const keys = Object.keys(json);
         const typechecker = new TypeChecker();
@@ -280,7 +301,7 @@ export default class Random {
      * const randomModel = new RandomModel();
      * const objectArray = randomModel.generateObjectArrayByJsonTemplate(10, jsonTemplate);
      */
-    public generateObjectArrayByJsonTemplate(length: number, jsonTemplate: string): any[] {
+    public generateObjectArrayByJsonTemplate(length: number, jsonTemplate: string): undefined[] {
         const array = new Array(length);
         for (let i = 0; i < length; i++) {
             array.push(this.generateObjectByJsonTemplate(jsonTemplate));

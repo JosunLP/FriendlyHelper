@@ -13,7 +13,7 @@ export default class TypeChecker {
      * isString("")
      * ```
      */
-    public isString(value: any): boolean {
+    public isString(value: undefined): boolean {
         return typeof value === 'string';
     }
 
@@ -27,7 +27,7 @@ export default class TypeChecker {
      * isNumber(1)
      * ```
      */
-    public isNumber(value: any): boolean {
+    public isNumber(value: undefined): boolean {
         return typeof value === 'number';
     }
 
@@ -41,7 +41,7 @@ export default class TypeChecker {
      * isBoolean(true)
      * ```
      */
-    public isBoolean(value: any): boolean {
+    public isBoolean(value: undefined): boolean {
         return typeof value === 'boolean';
     }
 
@@ -55,7 +55,7 @@ export default class TypeChecker {
      * isArray([])
      * ```
      */
-    public isArray(value: any): boolean {
+    public isArray(value: undefined): boolean {
         return Array.isArray(value);
     }
 
@@ -69,7 +69,7 @@ export default class TypeChecker {
      * isObject({})
      * ```
      */
-    public isObject(value: any): boolean {
+    public isObject(value: object): boolean {
         return typeof value === 'object';
     }
 
@@ -83,7 +83,7 @@ export default class TypeChecker {
      * isFunction(() => {})
      * ```
      */
-    public isFunction(value: any): boolean {
+    public isFunction(value: undefined): boolean {
         return typeof value === 'function';
     }
 
@@ -97,7 +97,7 @@ export default class TypeChecker {
      * isUndefined(undefined)
      * ```
      */
-    public isUndefined(value: any): boolean {
+    public isUndefined(value: undefined): boolean {
         return typeof value === 'undefined';
     }
 
@@ -111,7 +111,7 @@ export default class TypeChecker {
      * isNull(null)
      * ```
      */
-    public isNull(value: any): boolean {
+    public isNull(value: undefined): boolean {
         return value === null;
     }
 
@@ -125,7 +125,7 @@ export default class TypeChecker {
      * isNullOrUndefined(null)
      * ```
      */
-    public isNullOrUndefined(value: any): boolean {
+    public isNullOrUndefined(value: undefined): boolean {
         return this.isNull(value) || this.isUndefined(value);
     }
 
@@ -139,7 +139,7 @@ export default class TypeChecker {
      * isNullOrUndefinedOrEmpty(null)
      * ```
      */
-    public isNullOrUndefinedOrEmpty(value: any): boolean {
+    public isNullOrUndefinedOrEmpty(value: undefined): boolean {
         return this.isNullOrUndefined(value) || this.isEmpty(value);
     }
 
@@ -153,8 +153,8 @@ export default class TypeChecker {
      * isEmpty("")
      * ```
      */
-    public isEmpty(value: any): boolean {
-        return this.isNullOrUndefined(value) || this.isArray(value) && value.length === 0;
+    public isEmpty(value: undefined): boolean {
+		return this.isNullOrUndefined(value) || value === '';
     }
 
     /**
@@ -167,7 +167,7 @@ export default class TypeChecker {
      * isNotEmpty("")
      * ```
      */
-    public isNotEmpty(value: any): boolean {
+    public isNotEmpty(value: undefined): boolean {
         return !this.isEmpty(value);
     }
 
@@ -181,7 +181,7 @@ export default class TypeChecker {
      * isEnum(Enum.A)
      * ```
      */
-    public isEnum(value: any): boolean {
+    public isEnum(value: undefined): boolean {
         return this.isString(value) || this.isNumber(value);
     }
 
@@ -195,7 +195,7 @@ export default class TypeChecker {
      * isDate(new Date())
      * ```
      */
-    public isDate(value: any): boolean {
-        return this.isObject(value) && value instanceof Date;
+    public isDate(value: Date): boolean {
+		return this.isObject(value) && value instanceof Date;
     }
 }
