@@ -1,3 +1,5 @@
+import XmlBuilder from "./xmlBuilder";
+
 /**
  * File controller
  */
@@ -25,23 +27,21 @@ export default class FileController {
      * year: '1979'
      * }
      * ]
-     * }, xml, true)
+     * }, true)
      * ```
      */
-    jsonToXmlRecursive(json: any, xml: any, root: boolean): any {
-        if (root) {
-            xml = xml.ele('root');
-        }
-        for (const key in json) {
-            if (json.hasOwnProperty(key)) {
-                if (typeof json[key] === 'object') {
-                    xml = this.jsonToXmlRecursive(json[key], xml.ele(key), false);
-                } else {
-                    xml.ele(key).txt(json[key]);
-                }
-            }
-        }
-        return xml;
+    jsonToXmlRecursive(json: [], root: boolean): any {
+		const xml = root ? new XmlBuilder('root') : new XmlBuilder('child');
+		for (const key in json) {
+			if (json.hasOwnProperty(key)) {
+				if (typeof json[key] === 'object') {
+					xml.ele(key, this.jsonToXmlRecursive(json[key], false));
+				} else {
+					xml.ele(key, json[key]);
+				}
+			}
+		}
+		return xml.end();
     }
 
     /**
@@ -51,26 +51,26 @@ export default class FileController {
      * @returns to json recursive
      *
      * @example
-     * ```
-     * xmlToJsonRecursive(xml, json)
-     * ```
+	 * ```
+	 * xmlToJsonRecursive(xml)
+	 * ```
      */
-    xmlToJsonRecursive(xml: any, json: any): any {
-        for (const key in xml.attributes()) {
-            if (xml.attributes().hasOwnProperty(key)) {
-                json[key] = xml.attributes()[key];
-            }
-        }
-        for (const key in xml.children) {
-            if (xml.children.hasOwnProperty(key)) {
-                if (xml.children[key].children.length === 0) {
-                    json[key] = xml.children[key].text();
-                } else {
-                    json[key] = {};
-                    this.xmlToJsonRecursive(xml.children[key], json[key]);
-                }
-            }
-        }
-        return json;
-    }
+    xmlToJsonRecursive(xml: string): JSON {
+		const json: any = {};
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(xml, 'text/xml');
+		const root = doc.children[0];
+		if (root.children.length > 0) {
+			for (const child of root.children) {
+				if (child.children.length > 0) {
+					json[child.nodeName] = this.xmlToJsonRecursive(child.outerHTML);
+				} else {
+					json[child.nodeName] = child.innerHTML;
+				}
+			}
+		} else {
+			json[root.nodeName] = root.innerHTML;
+		}
+		return json;
+	}
 }
