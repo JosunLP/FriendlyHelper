@@ -6,11 +6,11 @@ import TypeChecker from './typechecker.js';
  * Random
  */
 export default class Random {
-    
+
     /**
      * Generates string
-     * @param length 
-     * @returns string 
+     * @param length
+     * @returns string
      */
     public generateString(length: number): string {
         let result = '';
@@ -24,9 +24,9 @@ export default class Random {
 
     /**
      * Generates number
-     * @param min 
-     * @param max 
-     * @returns number 
+     * @param min
+     * @param max
+     * @returns number
      */
     public generateNumber(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -34,7 +34,7 @@ export default class Random {
 
     /**
      * Generates boolean
-     * @returns true if boolean 
+     * @returns true if boolean
      */
     public generateBoolean(): boolean {
         return Math.random() >= 0.5;
@@ -42,9 +42,9 @@ export default class Random {
 
     /**
      * Generates date
-     * @param min 
-     * @param max 
-     * @returns date of date 
+     * @param min
+     * @param max
+     * @returns date of date
      */
     public generateDate(min: Date, max: Date): Date {
         const diff = max.getTime() - min.getTime();
@@ -53,8 +53,8 @@ export default class Random {
 
     /**
      * Generates array
-     * @param length 
-     * @returns array 
+     * @param length
+     * @returns array
      */
     public generateArray(length: number): string[] {
         const result = [];
@@ -66,8 +66,8 @@ export default class Random {
 
     /**
      * Generates enum
-     * @param enumeration 
-     * @returns enum 
+     * @param enumeration
+     * @returns enum
      */
     public generateEnum(enumeration: any): any {
         const keys = Object.keys(enumeration);
@@ -76,8 +76,8 @@ export default class Random {
 
     /**
      * Generates string array obejct
-     * @param length 
-     * @returns string array obejct 
+     * @param length
+     * @returns string array obejct
      */
     public generateStringArrayObejct(length: number): any {
         const array = new Array(length);
@@ -94,8 +94,8 @@ export default class Random {
 
     /**
      * Generates string array
-     * @param length 
-     * @returns string array 
+     * @param length
+     * @returns string array
      */
     public generateStringArray(length: number): string[] {
         const array = new Array(length);
@@ -108,8 +108,8 @@ export default class Random {
 
     /**
      * Generates number array
-     * @param length 
-     * @returns number array 
+     * @param length
+     * @returns number array
      */
     public generateNumberArray(length: number): number[] {
         const array = new Array(length);
@@ -122,8 +122,8 @@ export default class Random {
 
     /**
      * Generates boolean array
-     * @param length 
-     * @returns boolean array 
+     * @param length
+     * @returns boolean array
      */
     public generateBooleanArray(length: number): boolean[] {
         const array = new Array(length);
@@ -136,8 +136,8 @@ export default class Random {
 
     /**
      * Generates date array
-     * @param length 
-     * @returns date array 
+     * @param length
+     * @returns date array
      */
     public generateDateArray(length: number): Date[] {
         const array = new Array(length);
@@ -150,9 +150,9 @@ export default class Random {
 
     /**
      * Generates enum array
-     * @param length 
-     * @param enumeration 
-     * @returns enum array 
+     * @param length
+     * @param enumeration
+     * @returns enum array
      */
     public generateEnumArray(length: number, enumeration: any): any[] {
         const array = new Array(length);
@@ -174,8 +174,8 @@ export default class Random {
 
     /**
      * Generates words
-     * @param length 
-     * @returns words 
+     * @param length
+     * @returns words
      */
     public generateWords(length: number): string {
         const loremIpsum = new LoremIpsum();
@@ -186,8 +186,8 @@ export default class Random {
 
     /**
      * Generates words array
-     * @param length 
-     * @returns words array 
+     * @param length
+     * @returns words array
      */
     public generateWordsArray(length: number): string[] {
         const array = new Array(length);
@@ -199,8 +199,8 @@ export default class Random {
 
     /**
      * Generates text
-     * @param length 
-     * @returns text 
+     * @param length
+     * @returns text
      */
     public generateText(length: number): string {
         const loremIpsum = new LoremIpsum();
@@ -209,7 +209,7 @@ export default class Random {
 
     /**
      * Generates object
-     * @returns object 
+     * @returns object
      */
     public generateObject(): RandomModel {
         const randomModel = new RandomModel();
@@ -218,9 +218,9 @@ export default class Random {
 
     /**
      * Generates object by json template
-     * @param jsonTemplate 
-     * @returns object by json template 
-     * 
+     * @param jsonTemplate
+     * @returns object by json template
+     *
      * @example
      * const jsonTemplate = {
      * name: 'string',
@@ -239,7 +239,7 @@ export default class Random {
      * wordsArray: 'wordsArray',
      * text: 'text'
      * }
-     * 
+     *
      * const randomModel = new RandomModel();
      * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
      */
@@ -270,12 +270,12 @@ export default class Random {
 
     /**
      * Generates object array by json template
-     * @param length 
-     * @param jsonTemplate 
-     * @returns object array by json template 
-     * 
+     * @param length
+     * @param jsonTemplate
+     * @returns object array by json template
+     *
      * @example
-     * 
+     *
      * const jsonTemplate = '{ "name": { "type": "string", "length": 5 }, "age": { "type": "number", "min": 1, "max": 100 } }';
      * const randomModel = new RandomModel();
      * const objectArray = randomModel.generateObjectArrayByJsonTemplate(10, jsonTemplate);

@@ -2,10 +2,10 @@
  * Color
  */
 export default class Color {
-    
+
     /**
      * Generates random
-     * @returns random 
+     * @returns random
      */
     public generateRandomHex(): string {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
@@ -13,7 +13,7 @@ export default class Color {
 
     /**
      * Generates random rgb
-     * @returns random rgb 
+     * @returns random rgb
      */
     public generateRandomRgb(): string {
         return 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')';
@@ -21,7 +21,7 @@ export default class Color {
 
     /**
      * Generates random rgba
-     * @returns random rgba 
+     * @returns random rgba
      */
     public generateRandomRgba(): string {
         let r = Math.floor(Math.random() * 255);
@@ -33,7 +33,7 @@ export default class Color {
 
     /**
      * Generates random cmyk
-     * @returns random cmyk 
+     * @returns random cmyk
      */
     public generateRandomCmyk(): string {
         let c = Math.floor(Math.random() * 100);
@@ -45,7 +45,7 @@ export default class Color {
 
     /**
      * Generates random hsl
-     * @returns random hsl 
+     * @returns random hsl
      */
     public generateRandomHsl(): string {
         let h = Math.floor(Math.random() * 360);
@@ -56,7 +56,7 @@ export default class Color {
 
     /**
      * Generates random hsla
-     * @returns random hsla 
+     * @returns random hsla
      */
     public generateRandomHsla(): string {
         let h = Math.floor(Math.random() * 360);
@@ -68,8 +68,8 @@ export default class Color {
 
     /**
      * Rgbs to hex
-     * @param rgb 
-     * @returns to hex 
+     * @param rgb
+     * @returns to hex
      */
     public rgbToHex(rgb: string): string {
         let result = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i.exec(rgb);
@@ -81,8 +81,14 @@ export default class Color {
 
     /**
      * Rgbas to hex
-     * @param rgba 
-     * @returns to hex 
+     * @param rgba
+     * @returns to hex
+     *
+     * @example
+     * ```
+     * rgbaToHex('rgba(255, 255, 255, 1)')
+     * // => '#ffffff'
+     * ```
      */
     public rgbaToHex(rgba: string): string {
         let result = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(rgba);
@@ -94,8 +100,14 @@ export default class Color {
 
     /**
      * Hsls to hex
-     * @param hsl 
-     * @returns to hex 
+     * @param hsl
+     * @returns to hex
+     *
+     * @example
+     * ```
+     * hslToHex('hsl(0, 100%, 50%)')
+     * // => '#ffffff'
+     * ```
      */
     public hslToHex(hsl: string): string {
         let result = /^hsl\((\d+),\s*(\d+%),\s*(\d+%)\)$/i.exec(hsl);
@@ -107,8 +119,14 @@ export default class Color {
 
     /**
      * Hslas to hex
-     * @param hsla 
-     * @returns to hex 
+     * @param hsla
+     * @returns to hex
+     *
+     * @example
+     * ```
+     * hslaToHex('hsla(0, 100%, 50%, 1)')
+     * // => '#ffffff'
+     * ```
      */
     public hslaToHex(hsla: string): string {
         let result = /^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(hsla);
@@ -120,8 +138,14 @@ export default class Color {
 
     /**
      * Hexs to rgb
-     * @param hex 
-     * @returns  
+     * @param hex
+     * @returns
+     *
+     * @example
+     * ```
+     * hexToRgb('#ffffff')
+     * // => 'rgb(255, 255, 255)'
+     * ```
      */
     public hexToRgb(hex: string): { r: number, g: number, b: number } | null {
         let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -134,15 +158,21 @@ export default class Color {
 
     /**
      * Determines whether color is dark
-     * @param hex 
-     * @returns true if dark 
+     * @param hex
+     * @returns true if dark
+     *
+     * @example
+     * ```
+     * isDark('#ffffff')
+     * // => false
+     * ```
      */
     public isDark(hex: string): boolean {
         let c: { r: number, g: number, b: number };
         try {
             c = <{ r: number, g: number, b: number }>this.hexToRgb(hex);
         } catch (e) {
-            console.error(e);            
+            console.error(e);
             return false;
         }
         let r = c.r;
@@ -154,8 +184,14 @@ export default class Color {
 
     /**
      * Determines whether color is light
-     * @param hex 
-     * @returns true if light 
+     * @param hex
+     * @returns true if light
+     *
+     * @example
+     * ```
+     * isLight('#ffffff')
+     * // => true
+     * ```
      */
     public isLight(hex: string): boolean {
         return !this.isDark(hex);
@@ -163,10 +199,16 @@ export default class Color {
 
     /**
      * Rgbs to cmyk
-     * @param r 
-     * @param g 
-     * @param b 
-     * @returns to cmyk 
+     * @param r
+     * @param g
+     * @param b
+     * @returns to cmyk
+     *
+     * @example
+     * ```
+     * rgbToCmyk(255, 255, 255)
+     * // => { c: 0, m: 0, y: 0, k: 0 }
+     * ```
      */
     public rgbToCmyk(r: number, g: number, b: number): { c: number, m: number, y: number, k: number } {
         r = r / 255;
@@ -181,11 +223,17 @@ export default class Color {
 
     /**
      * Rgbas to cmyk
-     * @param r 
-     * @param g 
-     * @param b 
-     * @param a 
-     * @returns to cmyk 
+     * @param r
+     * @param g
+     * @param b
+     * @param a
+     * @returns to cmyk
+     *
+     * @example
+     * ```
+     * rgbaToCmyk(255, 255, 255, 1)
+     * // => { c: 0, m: 0, y: 0, k: 0 }
+     * ```
      */
     public rgbaToCmyk(r: number, g: number, b: number, a: number): { c: number, m: number, y: number, k: number } {
         r = r / 255;
@@ -200,11 +248,17 @@ export default class Color {
 
     /**
      * Cmyks to rgb
-     * @param c 
-     * @param m 
-     * @param y 
-     * @param k 
-     * @returns to rgb 
+     * @param c
+     * @param m
+     * @param y
+     * @param k
+     * @returns to rgb
+     *
+     * @example
+     * ```
+     * cmykToRgb(0, 0, 0, 1)
+     * // => { r: 255, g: 255, b: 255 }
+     * ```
      */
     public cmykToRgb(c: number, m: number, y: number, k: number): { r: number, g: number, b: number } {
         let r = (1 - c) * (1 - k);
@@ -215,8 +269,14 @@ export default class Color {
 
     /**
      * Determines transparency
-     * @param hex 
-     * @returns transparency 
+     * @param hex
+     * @returns transparency
+     *
+     * @example
+     * ```
+     * determineTransparency('#ffffff')
+     * // => 1
+     * ```
      */
     public determineTransparency(hex: string): number {
         let c: { r: number, g: number, b: number };
@@ -237,8 +297,14 @@ export default class Color {
      * Determines whether color is transparent
      * @param hex
      * @returns true if transparent
-     *  
+     *
      * @memberOf ColorService
+     *
+     * @example
+     * ```
+     * isTransparent('#ffffff')
+     * // => false
+     * ```
      */
     public isTransparent(hex: string): boolean {
         return this.determineTransparency(hex) === 1;
@@ -248,8 +314,14 @@ export default class Color {
      * Determines whether color is opaque
      * @param hex
      * @returns true if opaque
-     * 
+     *
      * @memberOf ColorService
+     *
+     * @example
+     * ```
+     * isOpaque('#ffffff')
+     * // => true
+     * ```
      */
     public isOpaque(hex: string): boolean {
         return this.determineTransparency(hex) === 0;
@@ -259,11 +331,11 @@ export default class Color {
      * Determines whether color is valid
      * @param hex
      * @returns true if valid
-     * 
+     *
      * @memberOf ColorService
-     * 
+     *
      * @example
-     * 
+     *
      * isValid('#ffffff'); // true
      * isValid('#fffffff'); // false
      * isValid('#ffffffff'); // false
@@ -271,5 +343,5 @@ export default class Color {
     public hexIsValid(hex: string): boolean {
         return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(hex);
     }
-    
+
 }

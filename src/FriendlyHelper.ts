@@ -1,6 +1,8 @@
 import Color from './controller/color.js';
+import General from './controller/general.js';
 import GUID from './controller/guid.js';
 import Info from './controller/info.js';
+import Number from './controller/number.js';
 import Random from './controller/random.js';
 import StringController from './controller/string.js';
 
@@ -8,7 +10,7 @@ import StringController from './controller/string.js';
  * Friendly helper
  */
 class FriendlyHelper {
-    
+
     /**
      * Info  of friendly helper
      */
@@ -33,6 +35,16 @@ class FriendlyHelper {
      * String  of friendly helper
      */
     public static readonly string = new StringController();
+
+    /**
+     * Number  of friendly helper
+     */
+    public static readonly number = new Number();
+
+    /**
+     * General  of friendly helper
+     */
+    public static readonly general = new General();
 }
 
 export { FriendlyHelper } ;

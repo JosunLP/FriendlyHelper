@@ -2,11 +2,11 @@
  * String controller
  */
 export default class StringController {
-    
+
     /**
      * Purges xmltags
-     * @param str 
-     * @returns xmltags 
+     * @param str
+     * @returns xmltags
      */
     public purgeXmltags(str: string): string {
         return str.replace(/<[^>]*>/g, '');
@@ -14,8 +14,8 @@ export default class StringController {
 
     /**
      * Purges html
-     * @param str 
-     * @returns html 
+     * @param str
+     * @returns html
      */
     public purgeHtml(str: string): string {
         return str.replace(/<[^>]*>/g, '');
@@ -23,8 +23,8 @@ export default class StringController {
 
     /**
      * Purges sql
-     * @param str 
-     * @returns sql 
+     * @param str
+     * @returns sql
      */
     public purgeSql(str: string): string {
         return str.replace(/\'/g, '\'\'');
@@ -32,8 +32,8 @@ export default class StringController {
 
     /**
      * Purges json
-     * @param str 
-     * @returns json 
+     * @param str
+     * @returns json
      */
     public purgeJson(str: string): string {
         return str.replace(/\'/g, '\\\'');
@@ -41,8 +41,8 @@ export default class StringController {
 
     /**
      * Purges dangerous characters
-     * @param str 
-     * @returns dangerous characters 
+     * @param str
+     * @returns dangerous characters
      */
     public purgeDangerousCharacters(str: string): string {
         return str.replace(/[\u0000-\u001F]/g, '');
@@ -50,8 +50,8 @@ export default class StringController {
 
     /**
      * Cleans string controller
-     * @param str 
-     * @returns clean 
+     * @param str
+     * @returns clean
      */
     public clean(str: string): string {
         return str.replace(/\s+/g, ' ').trim();
@@ -59,8 +59,8 @@ export default class StringController {
 
     /**
      * Purges markdown
-     * @param str 
-     * @returns markdown 
+     * @param str
+     * @returns markdown
      */
     public purgeMarkdown(str: string): string {
 
@@ -93,8 +93,8 @@ export default class StringController {
 
     /**
      * Purges all
-     * @param str 
-     * @returns all 
+     * @param str
+     * @returns all
      */
     public purgeAll(str: string): string {
         return this.purgeXmltags(this.purgeHtml(this.purgeSql(this.purgeJson(this.purgeDangerousCharacters(this.clean(this.purgeMarkdown(str)))))));
@@ -102,8 +102,8 @@ export default class StringController {
 
     /**
      * Gets string from array
-     * @param array 
-     * @returns string from array 
+     * @param array
+     * @returns string from array
      */
     public getStringFromArray(array: string[]): string {
         return array.join(', ');
@@ -111,8 +111,8 @@ export default class StringController {
 
     /**
      * Gets array from string
-     * @param str 
-     * @returns array from string 
+     * @param str
+     * @returns array from string
      */
     public getArrayFromString(str: string): string[] {
         return str.split(', ');
@@ -120,8 +120,8 @@ export default class StringController {
 
     /**
      * Capitalise string controller
-     * @param str 
-     * @returns Capitalise 
+     * @param str
+     * @returns Capitalise
      */
     public capitalise(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -129,8 +129,8 @@ export default class StringController {
 
     /**
      * Decapitalise string controller
-     * @param str 
-     * @returns decapitalise 
+     * @param str
+     * @returns decapitalise
      */
     public decapitalise(str: string): string {
         return str.charAt(0).toLowerCase() + str.slice(1);
@@ -138,8 +138,8 @@ export default class StringController {
 
     /**
      * To uppercase
-     * @param str 
-     * @returns uppercase 
+     * @param str
+     * @returns uppercase
      */
     public toUppercase(str: string): string {
         return str.toUpperCase();
@@ -147,8 +147,8 @@ export default class StringController {
 
     /**
      * To lowercase
-     * @param str 
-     * @returns lowercase 
+     * @param str
+     * @returns lowercase
      */
     public toLowercase(str: string): string {
         return str.toLowerCase();

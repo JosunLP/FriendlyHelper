@@ -2,10 +2,15 @@
  * Guid
  */
 export default class GUID {
-    
+
     /**
      * Generates guid
-     * @returns generate 
+     * @returns generate
+     *
+     * @example
+     * ```
+     * generate()
+     * ```
      */
     public generate(): string {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {

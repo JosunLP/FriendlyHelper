@@ -1,5 +1,33 @@
+/**
+ * File controller
+ */
 export default class FileController {
-    
+
+    /**
+     * Jsons to xml recursive
+     * @param json
+     * @param xml
+     * @param root
+     * @returns to xml recursive
+     *
+     * @example
+     * ```
+     * jsonToXmlRecursive({
+     *    name: 'John',
+     *   age: 30,
+     *  cars: [
+     *   {
+     *    model: 'Buick',
+     *   year: '1970'
+     *  },
+     * {
+     *   model: 'Cadillac',
+     * year: '1979'
+     * }
+     * ]
+     * }, xml, true)
+     * ```
+     */
     jsonToXmlRecursive(json: any, xml: any, root: boolean): any {
         if (root) {
             xml = xml.ele('root');
@@ -16,6 +44,17 @@ export default class FileController {
         return xml;
     }
 
+    /**
+     * Xmls to json recursive
+     * @param xml
+     * @param json
+     * @returns to json recursive
+     *
+     * @example
+     * ```
+     * xmlToJsonRecursive(xml, json)
+     * ```
+     */
     xmlToJsonRecursive(xml: any, json: any): any {
         for (const key in xml.attributes()) {
             if (xml.attributes().hasOwnProperty(key)) {
@@ -34,5 +73,4 @@ export default class FileController {
         }
         return json;
     }
-
 }

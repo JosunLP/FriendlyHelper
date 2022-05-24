@@ -12,9 +12,9 @@ export default class RandomModel {
      * Id  of random model
      */
     public readonly ID = new GUID().generate();
-    
+
     public readonly TEXT = this.random.generateText(this.random.generateNumber(100, 1000));
-    
+
     public readonly NUMBER = this.random.generateNumber(0, 1000);
 
     public readonly BOOLEAN = this.random.generateBoolean();
