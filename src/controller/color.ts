@@ -283,7 +283,6 @@ export default class Color {
         try {
             c = <{ r: number, g: number, b: number }>this.hexToRgb(hex);
         } catch (e) {
-            console.error(e);
             return 0;
         }
         let r = c.r;

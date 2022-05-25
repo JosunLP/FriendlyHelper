@@ -26,3 +26,7 @@ A Typescript-based standard library with handy little methods like GUID generati
 ## Tests
 
     npm run test
+
+## Support
+
+Soon (TM)
