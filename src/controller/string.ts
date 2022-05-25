@@ -9,6 +9,7 @@ export default class StringController {
      * @returns xmltags
      */
     public purgeXmltags(str: string): string {
+		str = str.replace(/<script[^>]*>([\s\S]*?)<\/script>/g, '');
         return str.replace(/<[^>]*>/g, '');
     }
 
@@ -18,6 +19,7 @@ export default class StringController {
      * @returns html
      */
     public purgeHtml(str: string): string {
+		str = str.replace(/<script[^>]*>([\s\S]*?)<\/script>/g, '');
         return str.replace(/<[^>]*>/g, '');
     }
 
@@ -36,6 +38,7 @@ export default class StringController {
      * @returns json
      */
     public purgeJson(str: string): string {
+		str = str.replace(/\\/g, '\\\\');
         return str.replace(/\'/g, '\\\'');
     }
 
