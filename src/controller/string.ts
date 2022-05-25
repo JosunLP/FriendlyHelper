@@ -7,18 +7,68 @@ export default class StringController {
      * Purges xmltags
      * @param str
      * @returns xmltags
+     *
+     * @example
+     * ```
+     * const str = '<p>Hello</p>';
+     * const result = purgeXmltags(str);
+     * console.log(result);
+     * // Hello
      */
     public purgeXmltags(str: string): string {
-        return str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '').replace(/<\/?[a-z][^>]*>/gi, '');
+        return this.htmlSanitize(str.replace(/<(?:.|\s)*?>/g, '').replace(/<!--(?:.|\s)*?-->/g, '').replace(/<!\[CDATA\[(?:.|\s)*?\]\]>/g, '').replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, ''));
     }
 
     /**
      * Purges html
      * @param str
-     * @returns html
+     * @returns string
+     *
+     * @example
+     * ```
+     * const str = '<p>Hello</p>';
+     * const result = purgeHtml(str);
+     * console.log(result);
+     * // Hello
      */
     public purgeHtml(str: string): string {
-        return str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '').replace(/<\/?[a-z][^>]*>/gi, '');
+        return this.htmlSanitize(str.replace(/<(?:.|\s)*?>/g, '').replace(/<!--(?:.|\s)*?-->/g, '').replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, ''));
+    }
+
+    /**
+     * Htmls sanitize
+     * @param str
+     * @returns sanitized string
+     */
+    public htmlSanitize(str: string): string {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+	/**
+	 * To camel case
+	 * @param str
+	 * @returns camel case
+	 */
+	public toCamelCase(str: string): string {
+        return str.replace(/\s(.)/g, function ($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
+    }
+
+	/**
+	 * To snake case
+	 * @param str
+	 * @returns snake case
+	 */
+	public toSnakeCase(str: string): string {
+        return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+    }
+
+	/**
+	 * To kebab case
+	 * @param str
+	 * @returns kebab case
+	 */
+	public toKebabCase(str: string): string {
+        return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     }
 
     /**
