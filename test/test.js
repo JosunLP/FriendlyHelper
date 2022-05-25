@@ -19,4 +19,4 @@ console.log(H.string.toLowercase(H.random.generateString(10)));
 console.log(H.random.generateText(H.random.generateNumber(10, 200)));
 console.log(H.random.generateObject());
 console.log(H.random.generateObjectArray(H.random.generateNumber(10, 40)));
-console.log(H.random.generateObjectArrayByJsonTemplate(H.random.generateNumber(10, 40), '{"name": "", "age": 0}'));
+console.log(H.random.generateObjectArrayByJsonTemplate(H.random.generateNumber(10, 40), '{"name": "test", "age": false, "id": "24c02e2e-9966-4d07-bc18-2d8626c41235"}'));

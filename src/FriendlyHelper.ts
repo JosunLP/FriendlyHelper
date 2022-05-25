@@ -1,6 +1,8 @@
 import Color from './controller/color.js';
+import FileController from './controller/file.js';
 import General from './controller/general.js';
 import GUID from './controller/guid.js';
+import ImageController from './controller/image.js';
 import Info from './controller/info.js';
 import Number from './controller/number.js';
 import Random from './controller/random.js';
@@ -51,6 +53,16 @@ class FriendlyHelper {
 	 * Typechecker  of friendly helper
 	 */
 	public static readonly typechecker = new TypeChecker();
+
+	/**
+	 * File  of friendly helper
+	 */
+	public static readonly file = new FileController();
+
+	/**
+	 * Image  of friendly helper
+	 */
+	public static readonly image = new ImageController();
 }
 
 export { FriendlyHelper } ;

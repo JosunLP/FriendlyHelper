@@ -1,4 +1,4 @@
-import XmlBuilder from "./xmlBuilder";
+import XmlBuilder from "./xmlBuilder.js";
 
 /**
  * File controller
@@ -72,5 +72,83 @@ export default class FileController {
 			json[root.nodeName] = root.innerHTML;
 		}
 		return json;
+	}
+
+	/**
+	 * Files to blob
+	 * @param file
+	 * @returns to blob
+	 *
+	 * @example
+	 * ```
+	 * fileToBlob(file)
+	 * ```
+	 */
+	public async fileToBlob(file: File): Promise<Blob> {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = (e: any) => {
+				resolve(e.target.result);
+			};
+			reader.onerror = (e: any) => {
+				reject(e);
+			};
+			reader.readAsArrayBuffer(file);
+		});
+	}
+
+	/**
+	 * Blobs to file
+	 * @param blob
+	 * @param fileName
+	 * @returns to file
+	 *
+	 * @example
+	 * ```
+	 * blobToFile(blob, 'file.txt')
+	 * ```
+	 */
+	public blobToFile(blob: Blob, fileName: string): File {
+		const file = new File([blob], fileName, { type: blob.type });
+		return file;
+	}
+
+	/**
+	 * Files to array buffer
+	 * @param file
+	 * @returns to array buffer
+	 *
+	 * @example
+	 * ```
+	 * fileToArrayBuffer(file)
+	 * ```
+	 */
+	public fileToArrayBuffer(file: File): Promise<ArrayBuffer> {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.onload = (e: any) => {
+				resolve(e.target.result);
+			};
+			reader.onerror = (e: any) => {
+				reject(e);
+			};
+			reader.readAsArrayBuffer(file);
+		});
+	}
+
+	/**
+	 * Arrays buffer to file
+	 * @param arrayBuffer
+	 * @param fileName
+	 * @returns buffer to file
+	 *
+	 * @example
+	 * ```
+	 * arrayBufferToFile(arrayBuffer, 'file.txt')
+	 * ```
+	 */
+	public arrayBufferToFile(arrayBuffer: ArrayBuffer, fileName: string): File {
+		const blob = new Blob([arrayBuffer], { type: 'application/octet-stream' });
+		return this.blobToFile(blob, fileName);
 	}
 }
