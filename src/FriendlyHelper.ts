@@ -5,6 +5,7 @@ import Info from './controller/info.js';
 import Number from './controller/number.js';
 import Random from './controller/random.js';
 import StringController from './controller/string.js';
+import TypeChecker from './controller/typechecker.js';
 
 /**
  * Friendly helper
@@ -45,6 +46,11 @@ class FriendlyHelper {
      * General  of friendly helper
      */
     public static readonly general = new General();
+
+	/**
+	 * Typechecker  of friendly helper
+	 */
+	public static readonly typechecker = new TypeChecker();
 }
 
 export { FriendlyHelper } ;
