@@ -14,7 +14,7 @@ export default class TypeChecker {
      * ```
      */
     public isString(value: undefined): boolean {
-        return typeof value === 'string';
+		return typeof value === 'string';
     }
 
     /**
