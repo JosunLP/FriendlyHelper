@@ -9,8 +9,7 @@ export default class StringController {
      * @returns xmltags
      */
     public purgeXmltags(str: string): string {
-		str = str.replace(/<script[^>]*>([\s\S]*?)<\/script>/g, '');
-        return str.replace(/<[^>]*>/g, '');
+        return str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '').replace(/<\/?[a-z][^>]*>/gi, '');
     }
 
     /**
@@ -19,8 +18,7 @@ export default class StringController {
      * @returns html
      */
     public purgeHtml(str: string): string {
-		str = str.replace(/<script[^>]*>([\s\S]*?)<\/script>/g, '');
-        return str.replace(/<[^>]*>/g, '');
+        return str.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, '').replace(/<\/?[a-z][^>]*>/gi, '');
     }
 
     /**
