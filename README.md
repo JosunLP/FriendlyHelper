@@ -11,11 +11,11 @@ A Typescript-based standard library with handy little methods like GUID generati
 
 ## Installation
 
-    npm install friendlyhelper
+    npm install friendly-helper
 
 ## Usage
 
-    import { FriendlyHelper | Helper | H } from 'friendlyhelper';
+    import { FriendlyHelper | Helper | H } from 'friendly-helper';
 
     H.guid.generate(); // Generates a GUID
 
@@ -25,9 +25,4 @@ A Typescript-based standard library with handy little methods like GUID generati
 
 ## Tests
 
-    npm test
-
-## Changelog
-
-    ### v1.0.0
-    - Initial release
+    npm run test
