@@ -1,10 +1,10 @@
 # Changelog
 
-## [1.2.0] - Changes to File handling
+## [1.2.0]—Profile data generation, emails, and improvements
 
-* Added support for random user generation and defferent types of personal data
+* Added support for random user generation and different types of personal data
 * Added support for the generation of emails by template
-* Bugfixes and improvements
+* Bug fixes and improvements
 
 ## [1.1.0] - Changes to File handling
 
