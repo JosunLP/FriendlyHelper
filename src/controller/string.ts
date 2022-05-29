@@ -249,5 +249,4 @@ export default class StringController {
 	public toLowercase(str: string): string {
 		return str.toLowerCase();
 	}
-
 }

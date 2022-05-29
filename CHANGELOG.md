@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] - Changes to File handling
+
+* Added support for random user generation and defferent types of personal data
+* Added support for the generation of emails by template
+* Bugfixes and improvements
+
 ## [1.1.0] - Changes to File handling
 
 * Added support for Image File conversion

@@ -20,3 +20,5 @@ console.log(H.random.generateText(H.random.generateNumber(10, 200)));
 console.log(H.random.generateObject());
 console.log(H.random.generateObjectArray(H.random.generateNumber(10, 40)));
 console.log(H.random.generateObjectArrayByJsonTemplate(H.random.generateNumber(10, 40), '{"name": "test", "age": false, "id": "24c02e2e-9966-4d07-bc18-2d8626c41235"}'));
+console.log(H.random.generatePersonArray(H.random.generateNumber(10, 40)));
+console.log(H.email.generateEmailByTemplate('TEST', '<p>TEST</p>', 'https://www.google.de/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png', 'google.de'));
