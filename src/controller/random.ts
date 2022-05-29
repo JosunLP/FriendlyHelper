@@ -4,6 +4,7 @@ import TypeChecker from './typechecker.js';
 import Names from '../models/names.js';
 import PhoneNumber from '../models/phoneNumber.js';
 import Person from '../models/person.js';
+import Email from '../models/email.js';
 
 /**
  * Random
@@ -265,8 +266,6 @@ export default class Random {
 		return words[this.generateNumber(0, words.length - 1)];
 	}
 
-
-
 	/**
 	 * Generates text
 	 * @param length
@@ -275,6 +274,33 @@ export default class Random {
 	public generateText(length: number): string {
 		const loremIpsum = new LoremIpsum();
 		return loremIpsum.getText(length);
+	}
+
+	/**
+	 * Generates email by template
+	 * @param subject
+	 * @param body
+	 * @param logoUrl
+	 * @param domain
+	 * @returns email by template
+	 *
+	 * @example
+	 *
+	 * 		const subject = 'Hello';
+	 *
+	 * 		const body = '<h1>Hello</h1>';
+	 *
+	 * 		const logoUrl = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
+	 *
+	 * 		const domain = 'google.com';
+	 *
+	 * 		const result = generateEmailByTemplate(subject, body, logoUrl, domain);
+	 *
+	 * 		console.log(result);
+	 *
+	 */
+	public generateEmailByTemplate(subject: string, body: string, logoUrl: string, domain: string): string {
+		return new Email(subject, body, logoUrl, domain).getMail();
 	}
 
 	//#endregion
