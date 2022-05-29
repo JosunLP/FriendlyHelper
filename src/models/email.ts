@@ -76,7 +76,7 @@ export default class Email {
 												<table border="0" cellpadding="0" cellspacing="0">
 													<tr>
 														<td style="font-family: Arial, sans-serif; font-size: 12px; font-weight: bold;">
-															<a href="{{domain}}" style="color: #ffffff;">{{domain}}</a>
+															<a href="https://{{domain}}" style="color: #ffffff;">{{domain}}</a>
 														</td>
 													</tr>
 												</table>
@@ -117,22 +117,6 @@ export default class Email {
 	}
 
 	/**
-	 * Gets subject
-	 * @returns subject
-	 */
-	public getSubject(): string {
-		return this.subject;
-	}
-
-	/**
-	 * Gets body
-	 * @returns body
-	 */
-	public getBody(): string {
-		return this.body;
-	}
-
-	/**
 	 * Gets mail
 	 * @returns mail
 	 */
@@ -145,11 +129,10 @@ export default class Email {
 	 */
 	private generateMail(): void {
 		this.mail = this.template
-			.replace('{{subject}}', this.subject)
-			.replace('{{body}}', this.body)
-			.replace('{{logoUrl}}', this.logoUrl)
-			.replace('{{domain}}', this.domain)
-			.replace('{{year}}', new Date().getFullYear().toString());
+			.replace(new RegExp('{{subject}}', 'g'), this.subject)
+			.replace(new RegExp('{{body}}', 'g'), this.body)
+			.replace(new RegExp('{{logoUrl}}', 'g'), this.logoUrl)
+			.replace(new RegExp('{{domain}}', 'g'), this.domain)
+			.replace(new RegExp('{{year}}', 'g'), new Date().getFullYear().toString());
 	}
-
 }

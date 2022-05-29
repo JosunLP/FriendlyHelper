@@ -1,9 +1,10 @@
 import Color from './controller/color.js';
+import EmailController from './controller/emailController.js';
 import FileController from './controller/file.js';
 import General from './controller/general.js';
 import GUID from './controller/guid.js';
 import ImageController from './controller/image.js';
-import Info from './controller/info.js';
+import Info from './models/info.js';
 import Number from './controller/number.js';
 import Random from './controller/random.js';
 import StringController from './controller/string.js';
@@ -63,6 +64,11 @@ class FriendlyHelper {
 	 * Image  of friendly helper
 	 */
 	public static readonly image = new ImageController();
+
+	/**
+	 * Email  of friendly helper
+	 */
+	public static readonly email = new EmailController();
 }
 
 export { FriendlyHelper } ;
