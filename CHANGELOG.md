@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1]—BUG FIXES -> Nullpointer Exception in random controller
+
+* Fixed Nullpointer Exception in random controller
+* Changed Target to ESNEXT
+* Bug fixes and improvements
+
 ## [1.2.0]—Profile data generation, emails, and improvements
 
 * Added support for random user generation and different types of personal data

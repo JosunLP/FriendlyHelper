@@ -49,17 +49,17 @@ export default class Person {
 	/**
 	 * Address  of person
 	 */
-	public  address: string = this._random.generateStreet();
+	public address: string = this._random.generateStreet();
 
 	/**
 	 * City  of person
 	 */
-	public  city: string = this._random.generateCityName();
+	public city: string = this._random.generateCityName();
 
 	/**
 	 * State  of person
 	 */
-	public  state: string = this._random.generateState();
+	public state: string = this._random.generateState();
 
 	/**
 	 * Zip  of person
@@ -69,20 +69,20 @@ export default class Person {
 	/**
 	 * Country  of person
 	 */
-	public  country: string = this._random.generateCountry();
+	public country: string = this._random.generateCountry();
 
 	/**
 	 * Company  of person
 	 */
-	public  company: string = this._random.generateCompanyName();
+	public company: string = this._random.generateCompanyName();
 
 	/**
 	 * Title  of person
 	 */
-	public  title: string = this._random.generateJobTitle();
+	public title: string = this._random.generateJobTitle();
 
 	/**
 	 * About  of person
 	 */
-	public  about: string = this._random.generateText(100);
+	public about: string = this._random.generateText(100);
 }

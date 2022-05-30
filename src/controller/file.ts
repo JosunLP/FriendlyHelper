@@ -5,32 +5,32 @@ import XmlBuilder from "./xmlBuilder.js";
  */
 export default class FileController {
 
-    /**
-     * Jsons to xml recursive
-     * @param json
-     * @param xml
-     * @param root
-     * @returns to xml recursive
-     *
-     * @example
-     * ```
-     * jsonToXmlRecursive({
-     *    name: 'John',
-     *   age: 30,
-     *  cars: [
-     *   {
-     *    model: 'Buick',
-     *   year: '1970'
-     *  },
-     * {
-     *   model: 'Cadillac',
-     * year: '1979'
-     * }
-     * ]
-     * }, true)
-     * ```
-     */
-    jsonToXmlRecursive(json: [], root: boolean): string {
+	/**
+	 * Jsons to xml recursive
+	 * @param json
+	 * @param xml
+	 * @param root
+	 * @returns to xml recursive
+	 *
+	 * @example
+	 * ```
+	 * jsonToXmlRecursive({
+	 *    name: 'John',
+	 *   age: 30,
+	 *  cars: [
+	 *   {
+	 *    model: 'Buick',
+	 *   year: '1970'
+	 *  },
+	 * {
+	 *   model: 'Cadillac',
+	 * year: '1979'
+	 * }
+	 * ]
+	 * }, true)
+	 * ```
+	 */
+	jsonToXmlRecursive(json: [], root: boolean): string {
 		const xml = root ? new XmlBuilder('root') : new XmlBuilder('child');
 		for (const key in json) {
 			if (json.hasOwnProperty(key)) {
@@ -42,20 +42,20 @@ export default class FileController {
 			}
 		}
 		return xml.end();
-    }
+	}
 
-    /**
-     * Xmls to json recursive
-     * @param xml
-     * @param json
-     * @returns to json recursive
-     *
-     * @example
+	/**
+	 * Xmls to json recursive
+	 * @param xml
+	 * @param json
+	 * @returns to json recursive
+	 *
+	 * @example
 	 * ```
 	 * xmlToJsonRecursive(xml)
 	 * ```
-     */
-    xmlToJsonRecursive(xml: string): JSON {
+	 */
+	xmlToJsonRecursive(xml: string): JSON {
 		const json: any = {};
 		const parser = new DOMParser();
 		const doc = parser.parseFromString(xml, 'text/xml');

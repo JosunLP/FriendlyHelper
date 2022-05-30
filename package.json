@@ -1,6 +1,6 @@
 {
   "name": "friendly-helper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.",
   "main": "./dist/src/FriendlyHelper.js",
   "type": "module",
