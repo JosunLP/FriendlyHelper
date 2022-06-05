@@ -6,12 +6,27 @@ export default class Info {
 	/**
 	 * Version  of info
 	 */
-	public readonly VERSION: string = "1.2.1";
+	private readonly VERSION: string = "1.3.0"
 
 	/**
 	 * Author  of info
 	 */
-	public readonly AUTHOR: string = "Jonas Pfalzgraf | JosunLP";
+	private readonly AUTHOR: string = "Jonas Pfalzgraf"
+
+	/**
+	 * License  of info
+	 */
+	private readonly LICENSE: string = "MPL-2.0"
+
+	/**
+	 * Repository  of info
+	 */
+	private readonly REPOSITORY: string = "git+https://github.com/JosunLP/FriendlyHelper.git"
+
+	/**
+	 * Homepage  of info
+	 */
+	private readonly HOMEPAGE: string = "https://github.com/JosunLP/FriendlyHelper#readme"
 
 	/**
 	 * Gets info
@@ -25,7 +40,10 @@ export default class Info {
 	public getInfo() {
 		return {
 			VERSION: this.VERSION,
-			AUTHOR: this.AUTHOR
+			AUTHOR: this.AUTHOR,
+			LICENSE: this.LICENSE,
+			REPOSITORY: this.REPOSITORY,
+			HOMEPAGE: this.HOMEPAGE
 		};
 	}
 
