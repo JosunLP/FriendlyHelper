@@ -84,10 +84,31 @@ export default class Random {
 	/**
 	 * Generates email
 	 * @returns email
+	 *
+	 * @example
+	 *
+	 * generateEmail(); // random.Name@somedomain.lol
+	 *
+	 * generateEmail('Mustermann', 'Max'); // Mustermann.Max@somedomain.lol (with first name and last name)
+	 *
 	 */
-	public generateEmail(): string {
+	public generateEmail(lastName?: string, firstName?: string): string {
 		let firstPart;
-		const randomNumber = this.generateNumber(1, 4);
+		let lastNameSet;
+		let firstNameSet;
+		const randomNumber = this.generateNumber(1, 11);
+
+		if (lastName) {
+			lastNameSet = lastName;
+		} else {
+			lastNameSet = this.generateLastName();
+		}
+		if (firstName) {
+			firstNameSet = firstName;
+		} else {
+			firstNameSet = this.generateFirstName();
+		}
+
 		const randomEmailDomain = Names.emailDomains[this.generateNumber(0, Names.emailDomains.length - 1)];
 
 		switch (randomNumber) {
@@ -95,13 +116,34 @@ export default class Random {
 				firstPart = this.generateString(this.generateNumber(5, 10));
 				break;
 			case 2:
-				firstPart = this.generateFirstName() + '.' + this.generateLastName();
+				firstPart = firstNameSet + '.' + lastNameSet;
 				break;
 			case 3:
-				firstPart = this.generateLastName() + this.generateNumber(1, 455);
+				firstPart = firstNameSet + lastNameSet;
 				break;
 			case 4:
+				firstPart = lastNameSet + '.' +  firstNameSet;
+				break;
+			case 5:
+				firstPart = lastNameSet + firstNameSet;
+				break;
+			case 6:
+				firstPart = lastNameSet + this.generateNumber(1, 455);
+				break;
+			case 7:
+				firstPart = this.generateNumber(1, 455) + lastNameSet;
+				break;
+			case 8:
+				firstPart = firstNameSet + this.generateNumber(1, 455);
+				break;
+			case 9:
+				firstPart = this.generateNumber(1, 455) + firstNameSet;
+				break;
+			case 10:
 				firstPart = this.generateGamerName() + this.generateNumber(1, 455);
+				break;
+			case 11:
+				firstPart = this.generateNumber(1, 455) + this.generateGamerName();
 				break;
 		}
 
@@ -144,7 +186,7 @@ export default class Random {
 	 * Generates city name
 	 * @returns city name
 	 */
-	public generateCityName(): string {
+	public generateCity(): string {
 		return Names.cityNames[this.generateNumber(0, Names.cityNames.length - 1)];
 	}
 
@@ -231,9 +273,37 @@ export default class Random {
 	/**
 	 * Generates person
 	 * @returns person
+	 *
+	 * @example
+	 * generatePerson(); // generates random person with all available properties
+	 *
+	 * generatePerson(['firstName', 'lastName', 'email']); // generates random person with only firstName, lastName and email
 	 */
-	public generatePerson(): Person {
-		return new Person();
+	public generatePerson(properties?: string[]): Person {
+		const person = new Person();
+		let _props: string[] = Object.getOwnPropertyNames(person);
+		let _stayList: string[] = [];
+
+		if (properties) {
+			properties.forEach(property => {
+				_props.forEach(prop => {
+					if (prop === property) {
+						_stayList.push(property);
+					}
+				});
+			});
+		}
+
+		if (_stayList.length > 0) {
+			_props.forEach(property => {
+				if (!_stayList.includes(property)) {
+					// @ts-ignore
+					delete person[property];
+				}
+			});
+		}
+
+		return person;
 	}
 
 	/**
@@ -448,11 +518,32 @@ export default class Random {
 	 * Generates person array
 	 * @param length
 	 * @returns person array
+	 *
+	 * @example
+	 *
+	 * generatePersonArray(5);
+	 * // returns 3 persons with all available properties^
+	 *
+	 * generatePersonArray(5, ['firstName', 'lastName', 'age']);
+	 * // returns 3 persons with only firstName, lastName and age properties^
 	 */
-	public generatePersonArray(length: number): Person[] {
+	public generatePersonArray(length: number, properties?: string[]): Person[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generatePerson());
+			array.push(this.generatePerson(properties));
+		}
+		return array;
+	}
+
+	/**
+	 * Generates email array
+	 * @param length
+	 * @returns email array
+	 */
+	public generateEmailArray(length: number): string[] {
+		const array = new Array(length);
+		for (let i = 0; i < length; i++) {
+			array.push(this.generateEmail());
 		}
 		return array;
 	}
