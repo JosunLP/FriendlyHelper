@@ -598,48 +598,56 @@ export default class Random {
 	 *
 	 * @example
 	 * const jsonTemplate = {
-	 * name: 'string',
-	 * age: 'number',
-	 * isActive: 'boolean',
-	 * date: 'date',
-	 * array: 'array',
-	 * enum: 'enum',
-	 * stringArray: 'stringArray',
-	 * numberArray: 'numberArray',
-	 * booleanArray: 'booleanArray',
-	 * dateArray: 'dateArray',
-	 * enumArray: 'enumArray',
-	 * objectArray: 'objectArray',
-	 * words: 'words',
-	 * wordsArray: 'wordsArray',
-	 * text: 'text'
+	 * id: '{{guid}}
+	 * name: '{{fullName}}',
+	 * age: '{{age}}',
+	 * isActive: '{{boolean}}',
+	 * date: '{{date}}',
+	 * array: '{{array}}',
+	 * person: '{{person}}',
+	 * email: '{{email}}',
+	 * stringArray: '{{stringArray}}',
+	 * numberArray: '{{numberArray}}',
+	 * booleanArray: '{{booleanArray}}',
+	 * dateArray: '{{dateArray}}',
+	 * objectArray: '{{objectArray}}',
+	 * words: '{{words}}',
+	 * wordsArray: '{{wordsArray}}',
+	 * text: '{{text}}',
+	 * textArray: '{{textArray}}',
+	 * personArray: '{{personArray}}',
 	 * }
 	 *
 	 * const randomModel = new RandomModel();
 	 * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
 	 */
-	public generateObjectByJsonTemplate(jsonTemplate: string): undefined {
+	public generateObjectByJsonTemplate(jsonTemplate: string): object {
+		let person = new Person();
+		let randomModel = new RandomModel();
+
+		jsonTemplate = jsonTemplate.toLowerCase();
+
+		jsonTemplate = jsonTemplate.replaceAll('{{guid}}', person.id);
+		jsonTemplate = jsonTemplate.replaceAll('{{fullname}}', person.fullName);
+		jsonTemplate = jsonTemplate.replaceAll('{{age}}', person.age.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{boolean}}', this.generateBoolean().toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{date}}', randomModel.DATE.toDateString());
+		jsonTemplate = jsonTemplate.replaceAll('{{array}}', this.generateArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{person}}', person.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{email}}', person.email.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{stringarray}}', this.generateStringArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{numberarray}}', this.generateNumberArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{booleanarray}}', this.generateBooleanArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{datearray}}', this.generateDateArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{objectarray}}', this.generateObjectArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{words}}', this.generateWords(this.generateNumber(1, 10)));
+		jsonTemplate = jsonTemplate.replaceAll('{{wordsarray}}', this.generateWordsArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{text}}', this.generateText(this.generateNumber(1, 10)));
+		jsonTemplate = jsonTemplate.replaceAll('{{textarray}}', this.generateTextArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{personarray}}', this.generatePersonArray(this.generateNumber(1, 10)).toString());
+
 		const json = JSON.parse(jsonTemplate);
-		const keys = Object.keys(json);
-		const typechecker = new TypeChecker();
-		keys.forEach(key => {
-			const value = json[key];
-			if (typechecker.isString(value)) {
-				json[key] = this.generateString(value.length);
-			} else if (typechecker.isNumber(value)) {
-				json[key] = this.generateNumber(value.min, value.max);
-			} else if (typechecker.isBoolean(value)) {
-				json[key] = this.generateBoolean();
-			} else if (typechecker.isDate(value)) {
-				json[key] = this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31));
-			} else if (typechecker.isEnum(value)) {
-				json[key] = this.generateEnum(value.enumeration);
-			} else if (typechecker.isArray(value)) {
-				json[key] = this.generateArray(value.length);
-			} else if (typechecker.isObject(value)) {
-				json[key] = this.generateObjectByJsonTemplate(value.jsonTemplate);
-			}
-		});
+
 		return json;
 	}
 
@@ -651,7 +659,27 @@ export default class Random {
 	 *
 	 * @example
 	 *
-	 * const jsonTemplate = '{ "name": { "type": "string", "length": 5 }, "age": { "type": "number", "min": 1, "max": 100 } }';
+	 * const jsonTemplate = {
+	 * id: '{{guid}}
+	 * name: '{{fullName}}',
+	 * age: '{{age}}',
+	 * isActive: '{{boolean}}',
+	 * date: '{{date}}',
+	 * array: '{{array}}',
+	 * person: '{{person}}',
+	 * email: '{{email}}',
+	 * stringArray: '{{stringArray}}',
+	 * numberArray: '{{numberArray}}',
+	 * booleanArray: '{{booleanArray}}',
+	 * dateArray: '{{dateArray}}',
+	 * objectArray: '{{objectArray}}',
+	 * words: '{{words}}',
+	 * wordsArray: '{{wordsArray}}',
+	 * text: '{{text}}',
+	 * textArray: '{{textArray}}',
+	 * personArray: '{{personArray}}',
+	 * }
+	 *
 	 * const randomModel = new RandomModel();
 	 * const objectArray = randomModel.generateObjectArrayByJsonTemplate(10, jsonTemplate);
 	 */
