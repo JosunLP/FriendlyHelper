@@ -24,3 +24,8 @@ console.log(H.random.generatePersonArray(H.random.generateNumber(10, 40)));
 console.log(H.email.generateEmailByTemplate('TEST', '<p>TEST</p>', 'https://www.google.de/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png', 'google.de'));
 console.log(H.random.generatePerson(["id", "fullName", "email"]));
 console.log(H.random.generatePersonArray(H.random.generateNumber(10, 40), ["id", "fullName", "email"]));
+let text = JSON.stringify(H.random.generatePerson());
+const key = H.guid.generate() + H.guid.generate() + H.guid.generate() + H.guid.generate();
+console.log(text = H.encryption.encryptSymmetric(text, key));
+console.log(JSON.parse(H.encryption.decryptSymmetric(text, key)));
+console.log(key);

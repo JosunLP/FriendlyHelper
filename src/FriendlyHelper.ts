@@ -9,6 +9,7 @@ import Number from './controller/number.js';
 import Random from './controller/random.js';
 import StringController from './controller/string.js';
 import TypeChecker from './controller/typechecker.js';
+import Encryption from './controller/encryption.js';
 
 /**
  * Friendly helper
@@ -69,6 +70,11 @@ class FriendlyHelper {
 	 * Email  of friendly helper
 	 */
 	public static readonly email = new EmailController();
+
+	/**
+	 * Encryption  of friendly helper
+	 */
+	public static readonly encryption = new Encryption();
 }
 
 export { FriendlyHelper };
