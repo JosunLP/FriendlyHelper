@@ -7,82 +7,100 @@ import Random from "../controller/random.js";
 export default class Person {
 
 	/**
-	 * Random  of person
+	 * Creates an instance of person.
+	 * @param [properties]
 	 */
-	private readonly _random = new Random();
+	constructor(properties?: string[]) {
+		let _random = new Random();
+		this.id = new GUID().generate();
+		this.firstName = _random.generateFirstName();
+		this.lastName = _random.generateLastName();
+		this.fullName = this.firstName + " " + this.lastName;
+		this.age = _random.generateAge();
+		this.email = _random.generateEmail(this.lastName, this.firstName);
+		this.phone = _random.generatePhoneNumber();
+		this.address = _random.generateStreet();
+		this.city = _random.generateCity();
+		this.state = _random.generateState();
+		this.zip = _random.generateZipCode();
+		this.country = _random.generateCountry();
+		this.company = _random.generateCompanyName();
+		this.jobTitle = _random.generateJobTitle();
+		this.about = _random.generateText(_random.generateNumber(10, 100));
+	}
 
 	/**
 	 * Id  of person
 	 */
-	public readonly id = new GUID().generate();
+	public  id;
 
 	/**
 	 * First name of person
 	 */
-	public firstName: string = this._random.generateFirstName();
+	public firstName: string;
 
 	/**
 	 * Last name of person
 	 */
-	public lastName: string = this._random.generateLastName();
+	public lastName: string;
 
 	/**
 	 * Full name of person
 	 */
-	public fullName: string = `${this.firstName} ${this.lastName}`;
+	public fullName: string;
 
 	/**
 	 * Age  of person
 	 */
-	public age: number = this._random.generateAge();
+	public age: number;
 
 	/**
 	 * Email  of person
 	 */
-	public email: string = this._random.generateEmail();
+	public email: string;
 
 	/**
 	 * Phone  of person
 	 */
-	public phone: string = this._random.generatePhoneNumber();
+	public phone: string;
 
 	/**
 	 * Address  of person
 	 */
-	public address: string = this._random.generateStreet();
+	public address: string;
 
 	/**
 	 * City  of person
 	 */
-	public city: string = this._random.generateCityName();
+	public city: string;
 
 	/**
 	 * State  of person
 	 */
-	public state: string = this._random.generateState();
+	public state: string;
 
 	/**
 	 * Zip  of person
 	 */
-	public zip: string = this._random.generateZipCode();
+	public zip: string;
 
 	/**
 	 * Country  of person
 	 */
-	public country: string = this._random.generateCountry();
+	public country: string;
 
 	/**
 	 * Company  of person
 	 */
-	public company: string = this._random.generateCompanyName();
+	public company: string;
 
 	/**
 	 * Title  of person
 	 */
-	public title: string = this._random.generateJobTitle();
+	public jobTitle: string;
 
 	/**
 	 * About  of person
 	 */
-	public about: string = this._random.generateText(100);
+	public about: string;
 }
