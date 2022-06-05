@@ -27,6 +27,10 @@ A Typescript-based standard library with handy little methods like GUID generati
 
     npm run test
 
+## Docs
+
+To this point, the library is just documented by code comments. If you want an example of a few of the methods, you can check the ```./test/test.js``` file.
+
 ## Support
 
 Soon (TM)

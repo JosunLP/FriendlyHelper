@@ -84,10 +84,31 @@ export default class Random {
 	/**
 	 * Generates email
 	 * @returns email
+	 *
+	 * @example
+	 *
+	 * generateEmail(); // random.Name@somedomain.lol
+	 *
+	 * generateEmail('Mustermann', 'Max'); // Mustermann.Max@somedomain.lol (with first name and last name)
+	 *
 	 */
-	public generateEmail(): string {
+	public generateEmail(lastName?: string, firstName?: string): string {
 		let firstPart;
-		const randomNumber = this.generateNumber(1, 4);
+		let lastNameSet;
+		let firstNameSet;
+		const randomNumber = this.generateNumber(1, 11);
+
+		if (lastName) {
+			lastNameSet = lastName;
+		} else {
+			lastNameSet = this.generateLastName();
+		}
+		if (firstName) {
+			firstNameSet = firstName;
+		} else {
+			firstNameSet = this.generateFirstName();
+		}
+
 		const randomEmailDomain = Names.emailDomains[this.generateNumber(0, Names.emailDomains.length - 1)];
 
 		switch (randomNumber) {
@@ -95,13 +116,34 @@ export default class Random {
 				firstPart = this.generateString(this.generateNumber(5, 10));
 				break;
 			case 2:
-				firstPart = this.generateFirstName() + '.' + this.generateLastName();
+				firstPart = firstNameSet + '.' + lastNameSet;
 				break;
 			case 3:
-				firstPart = this.generateLastName() + this.generateNumber(1, 455);
+				firstPart = firstNameSet + lastNameSet;
 				break;
 			case 4:
+				firstPart = lastNameSet + '.' +  firstNameSet;
+				break;
+			case 5:
+				firstPart = lastNameSet + firstNameSet;
+				break;
+			case 6:
+				firstPart = lastNameSet + this.generateNumber(1, 455);
+				break;
+			case 7:
+				firstPart = this.generateNumber(1, 455) + lastNameSet;
+				break;
+			case 8:
+				firstPart = firstNameSet + this.generateNumber(1, 455);
+				break;
+			case 9:
+				firstPart = this.generateNumber(1, 455) + firstNameSet;
+				break;
+			case 10:
 				firstPart = this.generateGamerName() + this.generateNumber(1, 455);
+				break;
+			case 11:
+				firstPart = this.generateNumber(1, 455) + this.generateGamerName();
 				break;
 		}
 
@@ -144,7 +186,7 @@ export default class Random {
 	 * Generates city name
 	 * @returns city name
 	 */
-	public generateCityName(): string {
+	public generateCity(): string {
 		return Names.cityNames[this.generateNumber(0, Names.cityNames.length - 1)];
 	}
 
@@ -231,9 +273,37 @@ export default class Random {
 	/**
 	 * Generates person
 	 * @returns person
+	 *
+	 * @example
+	 * generatePerson(); // generates random person with all available properties
+	 *
+	 * generatePerson(['firstName', 'lastName', 'email']); // generates random person with only firstName, lastName and email
 	 */
-	public generatePerson(): Person {
-		return new Person();
+	public generatePerson(properties?: string[]): Person {
+		const person = new Person();
+		let _props: string[] = Object.getOwnPropertyNames(person);
+		let _stayList: string[] = [];
+
+		if (properties) {
+			properties.forEach(property => {
+				_props.forEach(prop => {
+					if (prop === property) {
+						_stayList.push(property);
+					}
+				});
+			});
+		}
+
+		if (_stayList.length > 0) {
+			_props.forEach(property => {
+				if (!_stayList.includes(property)) {
+					// @ts-ignore
+					delete person[property];
+				}
+			});
+		}
+
+		return person;
 	}
 
 	/**
@@ -448,11 +518,32 @@ export default class Random {
 	 * Generates person array
 	 * @param length
 	 * @returns person array
+	 *
+	 * @example
+	 *
+	 * generatePersonArray(5);
+	 * // returns 3 persons with all available properties^
+	 *
+	 * generatePersonArray(5, ['firstName', 'lastName', 'age']);
+	 * // returns 3 persons with only firstName, lastName and age properties^
 	 */
-	public generatePersonArray(length: number): Person[] {
+	public generatePersonArray(length: number, properties?: string[]): Person[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generatePerson());
+			array.push(this.generatePerson(properties));
+		}
+		return array;
+	}
+
+	/**
+	 * Generates email array
+	 * @param length
+	 * @returns email array
+	 */
+	public generateEmailArray(length: number): string[] {
+		const array = new Array(length);
+		for (let i = 0; i < length; i++) {
+			array.push(this.generateEmail());
 		}
 		return array;
 	}
@@ -507,48 +598,56 @@ export default class Random {
 	 *
 	 * @example
 	 * const jsonTemplate = {
-	 * name: 'string',
-	 * age: 'number',
-	 * isActive: 'boolean',
-	 * date: 'date',
-	 * array: 'array',
-	 * enum: 'enum',
-	 * stringArray: 'stringArray',
-	 * numberArray: 'numberArray',
-	 * booleanArray: 'booleanArray',
-	 * dateArray: 'dateArray',
-	 * enumArray: 'enumArray',
-	 * objectArray: 'objectArray',
-	 * words: 'words',
-	 * wordsArray: 'wordsArray',
-	 * text: 'text'
+	 * id: '{{guid}}
+	 * name: '{{fullName}}',
+	 * age: '{{age}}',
+	 * isActive: '{{boolean}}',
+	 * date: '{{date}}',
+	 * array: '{{array}}',
+	 * person: '{{person}}',
+	 * email: '{{email}}',
+	 * stringArray: '{{stringArray}}',
+	 * numberArray: '{{numberArray}}',
+	 * booleanArray: '{{booleanArray}}',
+	 * dateArray: '{{dateArray}}',
+	 * objectArray: '{{objectArray}}',
+	 * words: '{{words}}',
+	 * wordsArray: '{{wordsArray}}',
+	 * text: '{{text}}',
+	 * textArray: '{{textArray}}',
+	 * personArray: '{{personArray}}',
 	 * }
 	 *
 	 * const randomModel = new RandomModel();
 	 * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
 	 */
-	public generateObjectByJsonTemplate(jsonTemplate: string): undefined {
+	public generateObjectByJsonTemplate(jsonTemplate: string): object {
+		let person = new Person();
+		let randomModel = new RandomModel();
+
+		jsonTemplate = jsonTemplate.toLowerCase();
+
+		jsonTemplate = jsonTemplate.replaceAll('{{guid}}', person.id);
+		jsonTemplate = jsonTemplate.replaceAll('{{fullname}}', person.fullName);
+		jsonTemplate = jsonTemplate.replaceAll('{{age}}', person.age.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{boolean}}', this.generateBoolean().toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{date}}', randomModel.DATE.toDateString());
+		jsonTemplate = jsonTemplate.replaceAll('{{array}}', this.generateArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{person}}', person.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{email}}', person.email.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{stringarray}}', this.generateStringArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{numberarray}}', this.generateNumberArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{booleanarray}}', this.generateBooleanArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{datearray}}', this.generateDateArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{objectarray}}', this.generateObjectArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{words}}', this.generateWords(this.generateNumber(1, 10)));
+		jsonTemplate = jsonTemplate.replaceAll('{{wordsarray}}', this.generateWordsArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{text}}', this.generateText(this.generateNumber(1, 10)));
+		jsonTemplate = jsonTemplate.replaceAll('{{textarray}}', this.generateTextArray(this.generateNumber(1, 10)).toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{personarray}}', this.generatePersonArray(this.generateNumber(1, 10)).toString());
+
 		const json = JSON.parse(jsonTemplate);
-		const keys = Object.keys(json);
-		const typechecker = new TypeChecker();
-		keys.forEach(key => {
-			const value = json[key];
-			if (typechecker.isString(value)) {
-				json[key] = this.generateString(value.length);
-			} else if (typechecker.isNumber(value)) {
-				json[key] = this.generateNumber(value.min, value.max);
-			} else if (typechecker.isBoolean(value)) {
-				json[key] = this.generateBoolean();
-			} else if (typechecker.isDate(value)) {
-				json[key] = this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31));
-			} else if (typechecker.isEnum(value)) {
-				json[key] = this.generateEnum(value.enumeration);
-			} else if (typechecker.isArray(value)) {
-				json[key] = this.generateArray(value.length);
-			} else if (typechecker.isObject(value)) {
-				json[key] = this.generateObjectByJsonTemplate(value.jsonTemplate);
-			}
-		});
+
 		return json;
 	}
 
@@ -560,7 +659,27 @@ export default class Random {
 	 *
 	 * @example
 	 *
-	 * const jsonTemplate = '{ "name": { "type": "string", "length": 5 }, "age": { "type": "number", "min": 1, "max": 100 } }';
+	 * const jsonTemplate = {
+	 * id: '{{guid}}
+	 * name: '{{fullName}}',
+	 * age: '{{age}}',
+	 * isActive: '{{boolean}}',
+	 * date: '{{date}}',
+	 * array: '{{array}}',
+	 * person: '{{person}}',
+	 * email: '{{email}}',
+	 * stringArray: '{{stringArray}}',
+	 * numberArray: '{{numberArray}}',
+	 * booleanArray: '{{booleanArray}}',
+	 * dateArray: '{{dateArray}}',
+	 * objectArray: '{{objectArray}}',
+	 * words: '{{words}}',
+	 * wordsArray: '{{wordsArray}}',
+	 * text: '{{text}}',
+	 * textArray: '{{textArray}}',
+	 * personArray: '{{personArray}}',
+	 * }
+	 *
 	 * const randomModel = new RandomModel();
 	 * const objectArray = randomModel.generateObjectArrayByJsonTemplate(10, jsonTemplate);
 	 */
