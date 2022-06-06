@@ -51,4 +51,6 @@ export default class Encryption {
 		}
 		return decrypted.join("");
 	}
+
+	// https://www.npmjs.com/package/aes-js
 }
