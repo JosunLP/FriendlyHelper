@@ -29,3 +29,4 @@ const key = H.guid.generate() + H.guid.generate() + H.guid.generate() + H.guid.g
 console.log(text = H.encryption.encryptSymmetric(text, key));
 console.log(JSON.parse(H.encryption.decryptSymmetric(text, key)));
 console.log(key);
+console.log(H.encryption.generateSymetricKey());

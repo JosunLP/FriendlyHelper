@@ -1,3 +1,5 @@
+import aesjs from 'aes-js';
+
 /**
  * Encryption
  */
@@ -52,5 +54,67 @@ export default class Encryption {
 		return decrypted.join("");
 	}
 
-	// https://www.npmjs.com/package/aes-js
+	/**
+	 * Generates symetric key
+	 * @returns symetric key
+	 *
+	 * @example
+	 * ```
+	 * let key = Encryption.generateSymetricKey();
+	 * ```
+	 */
+	public generateSymetricKey(): string {
+		let key = "";
+		for (let i = 0; i < 16; i++) {
+			key += String.fromCharCode(Math.floor(Math.random() * 256));
+		}
+		return key;
+	}
+
+	/**
+	 * Encrypts aes
+	 * @param val
+	 * @param key
+	 * @returns aes encrypted string
+	 *
+	 * @info This method implements the AES-JS library -> https://www.npmjs.com/package/aes-js
+	 *
+	 * @example
+	 * ```
+	 * let encrypted = Encryption.encryptAES("Hello World", "password");
+	 * let decrypted = Encryption.decryptAES(encrypted, "password");
+	 * ```
+	 */
+	public encryptAES(val: string, key: string): string {
+		let textBytes = aesjs.utils.utf8.toBytes(val);
+		let aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
+		let encryptedBytes = aesCtr.encrypt(textBytes);
+		let encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+		return encryptedHex;
+	}
+
+	/**
+	 * Decrypts aes
+	 * @param val
+	 * @param key
+	 * @returns aes decrypted string
+	 *
+	 * @info This method implements the AES-JS library -> https://www.npmjs.com/package/aes-js
+	 *
+	 * @example
+	 * ```
+	 * let encrypted = Encryption.encryptAES("Hello World", "password");
+	 * let decrypted = Encryption.decryptAES(encrypted, "password");
+	 * ```
+	 */
+	public decryptAES(val: string, key: string): string {
+		let encryptedBytes = aesjs.utils.hex.toBytes(val);
+		let aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
+		let decryptedBytes = aesCtr.decrypt(encryptedBytes);
+		let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+		return decryptedText;
+	}
+
+	// https://www.npmjs.com/package/node-rsa
+
 }

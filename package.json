@@ -31,5 +31,9 @@
   "bugs": {
     "url": "https://github.com/JosunLP/FriendlyHelper/issues"
   },
-  "homepage": "https://github.com/JosunLP/FriendlyHelper#readme"
+  "homepage": "https://github.com/JosunLP/FriendlyHelper#readme",
+  "dependencies": {
+    "@types/aes-js": "^3.1.1",
+    "aes-js": "^3.1.2"
+  }
 }
