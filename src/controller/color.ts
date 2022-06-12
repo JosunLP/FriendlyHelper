@@ -236,6 +236,7 @@ export default class Color {
 	 * ```
 	 */
 	public rgbaToCmyk(r: number, g: number, b: number, a: number): { c: number, m: number, y: number, k: number } {
+		a = a / 255;
 		r = r / 255;
 		g = g / 255;
 		b = b / 255;

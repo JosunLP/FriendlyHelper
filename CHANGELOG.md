@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.1] - Removing unused code
+## [1.4.1-2] - Removing unused code
 
 * Removing unused code, imports and constants
 
