@@ -8,9 +8,8 @@ export default class Person {
 
 	/**
 	 * Creates an instance of person.
-	 * @param [properties]
 	 */
-	constructor(properties?: string[]) {
+	constructor() {
 		const _random = new Random();
 		this.id = new GUID().generate();
 		this.firstName = _random.generateFirstName();
