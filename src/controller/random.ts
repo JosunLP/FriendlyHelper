@@ -1,10 +1,8 @@
 import RandomModel from '../models/randomModel.js';
 import LoremIpsum from './loremIpsum.js';
-import TypeChecker from './typechecker.js';
 import Names from '../models/names.js';
 import PhoneNumber from '../models/phoneNumber.js';
 import Person from '../models/person.js';
-import Email from '../models/email.js';
 
 /**
  * Random
@@ -410,7 +408,6 @@ export default class Random {
 	 */
 	public generateStringArray(length: number): string[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateString(this.generateNumber(5, 10)));
 		}
@@ -424,7 +421,6 @@ export default class Random {
 	 */
 	public generateNumberArray(length: number): number[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateNumber(1, 100));
 		}
@@ -438,7 +434,6 @@ export default class Random {
 	 */
 	public generateBooleanArray(length: number): boolean[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateBoolean());
 		}
@@ -452,7 +447,6 @@ export default class Random {
 	 */
 	public generateDateArray(length: number): Date[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31)));
 		}
@@ -467,7 +461,6 @@ export default class Random {
 	 */
 	public generateEnumArray(length: number, enumeration: undefined): undefined[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateEnum(enumeration));
 		}
@@ -481,7 +474,6 @@ export default class Random {
 	 */
 	public generateObjectArray(length: number): undefined[] {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateObject());
 		}
@@ -571,7 +563,6 @@ export default class Random {
 	 */
 	public generateStringArrayObejct(length: number): {} {
 		const array = new Array(length);
-		const keys = Object.keys(array);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateString(this.generateNumber(5, 10)));
 		}
