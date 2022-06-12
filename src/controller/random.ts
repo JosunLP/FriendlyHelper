@@ -281,8 +281,8 @@ export default class Random {
 	 */
 	public generatePerson(properties?: string[]): Person {
 		const person = new Person();
-		let _props: string[] = Object.getOwnPropertyNames(person);
-		let _stayList: string[] = [];
+		const _props: string[] = Object.getOwnPropertyNames(person);
+		const _stayList: string[] = [];
 
 		if (properties) {
 			properties.forEach(property => {
@@ -622,8 +622,8 @@ export default class Random {
 	 * const result = randomModel.generateObjectByJsonTemplate(jsonTemplate);
 	 */
 	public generateObjectByJsonTemplate(jsonTemplate: string): object {
-		let person = new Person();
-		let randomModel = new RandomModel();
+		const person = new Person();
+		const randomModel = new RandomModel();
 
 		jsonTemplate = jsonTemplate.toLowerCase();
 
