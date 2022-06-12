@@ -1,4 +1,7 @@
 import aesjs from 'aes-js';
+import NodeRSA from 'node-rsa';
+import { RSA } from '../types/rsaKey';
+import StringController from './string';
 
 /**
  * Encryption
@@ -115,6 +118,111 @@ export default class Encryption {
 		return decryptedText;
 	}
 
-	// https://www.npmjs.com/package/node-rsa
+	/**
+	 * Generates rsa key pair
+	 * @param [bits]
+	 * @param [exponent]
+	 * @returns rsa key pair
+	 *
+	 * @info This method implements the NodeRSA library -> https://www.npmjs.com/package/node-rsa
+	 *
+	 * @example
+	 * ```
+	 * let key = Encryption.generateRsaKeyPair();
+	 * ```
+	 */
+	public generateRsaKeyPair(bits?: number, exponent?: number): RSA {
+		let key = new NodeRSA().generateKeyPair(bits, exponent);
+		return key;
+	}
 
+	/**
+	 * Encrypts rsa
+	 * @param val
+	 * @param publicKey
+	 * @returns rsa encrypted string
+	 *
+	 * @info This method implements the NodeRSA library -> https://www.npmjs.com/package/node-rsa
+	 *
+	 * @example
+	 * ```
+	 * let encrypted = Encryption.encryptRsa("Hello World", key);
+	 * let decrypted = Encryption.decryptRsa(encrypted, key);
+	 * ```
+	 */
+	public encryptRsa(val: string, publicKey: string): string {
+		let rsa = new NodeRSA(publicKey);
+		let encrypted = rsa.encrypt(val, 'base64');
+		return encrypted;
+	}
+
+	/**
+	 * Decrypts rsa
+	 * @param val
+	 * @param privateKey
+	 * @returns rsa decrypted string
+	 *
+	 * @info This method implements the NodeRSA library -> https://www.npmjs.com/package/node-rsa
+	 *
+	 * @example
+	 * ```
+	 * let encrypted = Encryption.encryptRsa("Hello World", "key");
+	 * let decrypted = Encryption.decryptRsa(encrypted, "key");
+	 * ```
+	 */
+	public decryptRsa(val: string, privateKey: string): string {
+		let rsa = new NodeRSA(privateKey);
+		let decrypted = rsa.decrypt(val, 'base64');
+		decrypted = Buffer.from(decrypted, 'base64').toString();
+		return decrypted;
+	}
+
+	/**
+	 * Imports rsa key
+	 * @param val
+	 * @returns rsa key
+	 *
+	 * @info This method implements the NodeRSA library -> https://www.npmjs.com/package/node-rsa
+	 *
+	 * @example
+	 * ```
+	 * let key = Encryption.importRsaKey("-----BEGIN RSA PRIVATE KEY-----...");
+	 * ```
+	 */
+	public importRsaKey(val: string): RSA {
+		let key = new NodeRSA();
+		key.importKey(val, 'pkcs8-private-pem');
+		return key;
+	}
+
+	/**
+	 * Exports rsa key
+	 * @param key
+	 * @returns rsa key string
+	 *
+	 * @info This method implements the NodeRSA library -> https://www.npmjs.com/package/node-rsa
+	 *
+	 * @example
+	 * ```
+	 * let key = Encryption.exportRsaKey(key, "public");
+	 * ```
+	 */
+	public exportRsaKey(key: RSA, pub: string): string{
+		let check: boolean;
+		switch (pub) {
+			case "public":
+				check = true
+				break;
+
+			case "private":
+				check = false
+				break;
+
+			default:
+				check = false
+				break;
+		}
+		let exported = key.exportKey(check ? 'pkcs8-public-pem' : 'pkcs8-private-pem');
+		return exported;
+	}
 }
