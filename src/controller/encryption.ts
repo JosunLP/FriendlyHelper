@@ -1,7 +1,6 @@
 import aesjs from 'aes-js';
 import NodeRSA from 'node-rsa';
 import { RSA } from '../types/rsaKey';
-import StringController from './string';
 
 /**
  * Encryption
