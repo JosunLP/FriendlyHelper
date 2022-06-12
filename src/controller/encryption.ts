@@ -26,7 +26,7 @@ export default class Encryption {
 	 *
 	 */
 	public encryptSymmetric(a: string, key: string): string {
-		let encrypted: string[] = [];
+		const encrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			encrypted.push(String.fromCharCode(a.charCodeAt(i) + key.charCodeAt(i % key.length)));
 		}
@@ -50,7 +50,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public decryptSymmetric(a: string, key: string): string {
-		let decrypted: string[] = [];
+		const decrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			decrypted.push(String.fromCharCode(a.charCodeAt(i) - key.charCodeAt(i % key.length)));
 		}
@@ -89,10 +89,10 @@ export default class Encryption {
 	 * ```
 	 */
 	public encryptAES(val: string, key: string): string {
-		let textBytes = aesjs.utils.utf8.toBytes(val);
-		let aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
-		let encryptedBytes = aesCtr.encrypt(textBytes);
-		let encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
+		const textBytes = aesjs.utils.utf8.toBytes(val);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
+		const encryptedBytes = aesCtr.encrypt(textBytes);
+		const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 		return encryptedHex;
 	}
 
@@ -111,10 +111,10 @@ export default class Encryption {
 	 * ```
 	 */
 	public decryptAES(val: string, key: string): string {
-		let encryptedBytes = aesjs.utils.hex.toBytes(val);
-		let aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
-		let decryptedBytes = aesCtr.decrypt(encryptedBytes);
-		let decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
+		const encryptedBytes = aesjs.utils.hex.toBytes(val);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
+		const decryptedBytes = aesCtr.decrypt(encryptedBytes);
+		const decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
 		return decryptedText;
 	}
 
@@ -132,7 +132,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public generateRsaKeyPair(bits?: number, exponent?: number): RSA {
-		let key = new NodeRSA().generateKeyPair(bits, exponent);
+		const key = new NodeRSA().generateKeyPair(bits, exponent);
 		return key;
 	}
 
@@ -151,8 +151,8 @@ export default class Encryption {
 	 * ```
 	 */
 	public encryptRsa(val: string, publicKey: string): string {
-		let rsa = new NodeRSA(publicKey);
-		let encrypted = rsa.encrypt(val, 'base64');
+		const rsa = new NodeRSA(publicKey);
+		const encrypted = rsa.encrypt(val, 'base64');
 		return encrypted;
 	}
 
@@ -171,7 +171,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public decryptRsa(val: string, privateKey: string): string {
-		let rsa = new NodeRSA(privateKey);
+		const rsa = new NodeRSA(privateKey);
 		let decrypted = rsa.decrypt(val, 'base64');
 		decrypted = Buffer.from(decrypted, 'base64').toString();
 		return decrypted;
@@ -190,7 +190,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public importRsaKey(val: string): RSA {
-		let key = new NodeRSA();
+		const key = new NodeRSA();
 		key.importKey(val, 'pkcs8-private-pem');
 		return key;
 	}
@@ -222,7 +222,7 @@ export default class Encryption {
 				check = false
 				break;
 		}
-		let exported = key.exportKey(check ? 'pkcs8-public-pem' : 'pkcs8-private-pem');
+		const exported = key.exportKey(check ? 'pkcs8-public-pem' : 'pkcs8-private-pem');
 		return exported;
 	}
 }
