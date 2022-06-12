@@ -11,7 +11,7 @@ export default class Person {
 	 * @param [properties]
 	 */
 	constructor(properties?: string[]) {
-		let _random = new Random();
+		const _random = new Random();
 		this.id = new GUID().generate();
 		this.firstName = _random.generateFirstName();
 		this.lastName = _random.generateLastName();
