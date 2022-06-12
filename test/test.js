@@ -29,3 +29,13 @@ const key = H.guid.generate() + H.guid.generate() + H.guid.generate() + H.guid.g
 console.log(text = H.encryption.encryptSymmetric(text, key));
 console.log(JSON.parse(H.encryption.decryptSymmetric(text, key)));
 console.log(key);
+console.log(H.encryption.generateSymetricKey());
+text = H.random.generateText(H.random.generateNumber(10, 200));
+console.log(text);
+const keyPair = H.encryption.generateRsaKeyPair();
+console.log(H.encryption.exportRsaKey(keyPair, "public"));
+console.log(H.encryption.importRsaKey(H.encryption.exportRsaKey(keyPair, "private")));
+const encrypted = H.encryption.encryptRsa(text, H.encryption.exportRsaKey(keyPair, "public"));
+console.log(encrypted);
+console.log(" ");
+console.log(H.encryption.decryptRsa(encrypted, H.encryption.exportRsaKey(keyPair, "private")));

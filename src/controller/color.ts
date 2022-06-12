@@ -24,10 +24,10 @@ export default class Color {
 	 * @returns random rgba
 	 */
 	public generateRandomRgba(): string {
-		let r = Math.floor(Math.random() * 255);
-		let g = Math.floor(Math.random() * 255);
-		let b = Math.floor(Math.random() * 255);
-		let a = Math.random();
+		const r = Math.floor(Math.random() * 255);
+		const g = Math.floor(Math.random() * 255);
+		const b = Math.floor(Math.random() * 255);
+		const a = Math.random();
 		return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
 	}
 
@@ -36,10 +36,10 @@ export default class Color {
 	 * @returns random cmyk
 	 */
 	public generateRandomCmyk(): string {
-		let c = Math.floor(Math.random() * 100);
-		let m = Math.floor(Math.random() * 100);
-		let y = Math.floor(Math.random() * 100);
-		let k = Math.floor(Math.random() * 100);
+		const c = Math.floor(Math.random() * 100);
+		const m = Math.floor(Math.random() * 100);
+		const y = Math.floor(Math.random() * 100);
+		const k = Math.floor(Math.random() * 100);
 		return 'cmyk(' + c + ',' + m + ',' + y + ',' + k + ')';
 	}
 
@@ -48,9 +48,9 @@ export default class Color {
 	 * @returns random hsl
 	 */
 	public generateRandomHsl(): string {
-		let h = Math.floor(Math.random() * 360);
-		let s = Math.floor(Math.random() * 100);
-		let l = Math.floor(Math.random() * 100);
+		const h = Math.floor(Math.random() * 360);
+		const s = Math.floor(Math.random() * 100);
+		const l = Math.floor(Math.random() * 100);
 		return 'hsl(' + h + ',' + s + '%,' + l + '%)';
 	}
 
@@ -59,10 +59,10 @@ export default class Color {
 	 * @returns random hsla
 	 */
 	public generateRandomHsla(): string {
-		let h = Math.floor(Math.random() * 360);
-		let s = Math.floor(Math.random() * 100);
-		let l = Math.floor(Math.random() * 100);
-		let a = Math.random();
+		const h = Math.floor(Math.random() * 360);
+		const s = Math.floor(Math.random() * 100);
+		const l = Math.floor(Math.random() * 100);
+		const a = Math.random();
 		return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
 	}
 
@@ -72,7 +72,7 @@ export default class Color {
 	 * @returns to hex
 	 */
 	public rgbToHex(rgb: string): string {
-		let result = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i.exec(rgb);
+		const result = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i.exec(rgb);
 		return result ? '#' +
 			('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
 			('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
@@ -91,7 +91,7 @@ export default class Color {
 	 * ```
 	 */
 	public rgbaToHex(rgba: string): string {
-		let result = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(rgba);
+		const result = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(rgba);
 		return result ? '#' +
 			('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
 			('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
@@ -110,7 +110,7 @@ export default class Color {
 	 * ```
 	 */
 	public hslToHex(hsl: string): string {
-		let result = /^hsl\((\d+),\s*(\d+%),\s*(\d+%)\)$/i.exec(hsl);
+		const result = /^hsl\((\d+),\s*(\d+%),\s*(\d+%)\)$/i.exec(hsl);
 		return result ? '#' +
 			('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
 			('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
@@ -129,7 +129,7 @@ export default class Color {
 	 * ```
 	 */
 	public hslaToHex(hsla: string): string {
-		let result = /^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(hsla);
+		const result = /^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(hsla);
 		return result ? '#' +
 			('0' + parseInt(result[1], 10).toString(16)).slice(-2) +
 			('0' + parseInt(result[2], 10).toString(16)).slice(-2) +
@@ -148,7 +148,7 @@ export default class Color {
 	 * ```
 	 */
 	public hexToRgb(hex: string): { r: number, g: number, b: number } | null {
-		let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 		return result ? {
 			r: parseInt(result[1], 16),
 			g: parseInt(result[2], 16),
@@ -175,10 +175,10 @@ export default class Color {
 			console.error(e);
 			return false;
 		}
-		let r = c.r;
-		let g = c.g;
-		let b = c.b;
-		let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+		const r = c.r;
+		const g = c.g;
+		const b = c.b;
+		const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 		return (yiq >= 128);
 	}
 
@@ -214,10 +214,10 @@ export default class Color {
 		r = r / 255;
 		g = g / 255;
 		b = b / 255;
-		let k = 1 - Math.max(r, g, b);
-		let c = (1 - r - k) / (1 - k);
-		let m = (1 - g - k) / (1 - k);
-		let y = (1 - b - k) / (1 - k);
+		const k = 1 - Math.max(r, g, b);
+		const c = (1 - r - k) / (1 - k);
+		const m = (1 - g - k) / (1 - k);
+		const y = (1 - b - k) / (1 - k);
 		return { c: c, m: m, y: y, k: k };
 	}
 
@@ -239,10 +239,10 @@ export default class Color {
 		r = r / 255;
 		g = g / 255;
 		b = b / 255;
-		let k = 1 - Math.max(r, g, b);
-		let c = (1 - r - k) / (1 - k);
-		let m = (1 - g - k) / (1 - k);
-		let y = (1 - b - k) / (1 - k);
+		const k = 1 - Math.max(r, g, b);
+		const c = (1 - r - k) / (1 - k);
+		const m = (1 - g - k) / (1 - k);
+		const y = (1 - b - k) / (1 - k);
 		return { c: c, m: m, y: y, k: k };
 	}
 
@@ -261,9 +261,9 @@ export default class Color {
 	 * ```
 	 */
 	public cmykToRgb(c: number, m: number, y: number, k: number): { r: number, g: number, b: number } {
-		let r = (1 - c) * (1 - k);
-		let g = (1 - m) * (1 - k);
-		let b = (1 - y) * (1 - k);
+		const r = (1 - c) * (1 - k);
+		const g = (1 - m) * (1 - k);
+		const b = (1 - y) * (1 - k);
 		return { r: r * 255, g: g * 255, b: b * 255 };
 	}
 
@@ -295,10 +295,10 @@ export default class Color {
 			|| c.b === null) {
 			return 0;
 		}
-		let r = c.r;
-		let g = c.g;
-		let b = c.b;
-		let yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+		const r = c.r;
+		const g = c.g;
+		const b = c.b;
+		const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
 		return (yiq >= 128) ? 0 : 1;
 	}
 
