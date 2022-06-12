@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.4.1] - Removing unused code
+
+* Removing unused code, imports and constants
+
 ## [1.4.0] - Implementing encrytpion, decryption and Bugfixes
 
 * Added encryption and decryption via XOR, AES and RSA.
