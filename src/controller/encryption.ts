@@ -1,6 +1,9 @@
 import aesjs from 'aes-js';
-import NodeRSA from 'node-rsa';
-import { RSA } from '../types/rsaKey';
+import pkgkey from 'jsencrypt/lib/JSEncryptRSAKey.js';
+const { JSEncryptRSAKey } = pkgkey;
+import pkg from 'jsencrypt/lib/JSEncrypt.js';
+const { JSEncrypt } = pkg;
+import { RSA } from '../types/rsaKey.js';
 
 /**
  * Encryption
@@ -130,8 +133,8 @@ export default class Encryption {
 	 * let key = Encryption.generateRsaKeyPair();
 	 * ```
 	 */
-	public generateRsaKeyPair(bits?: number, exponent?: number): RSA {
-		const key = new NodeRSA().generateKeyPair(bits, exponent);
+	public generateRsaKeyPair(): RSA {
+		const key = new JSEncrypt().getKey();
 		return key;
 	}
 
@@ -150,8 +153,8 @@ export default class Encryption {
 	 * ```
 	 */
 	public encryptRsa(val: string, publicKey: string): string {
-		const rsa = new NodeRSA(publicKey);
-		const encrypted = rsa.encrypt(val, 'base64');
+		const rsa = new JSEncryptRSAKey(publicKey);
+		const encrypted = rsa.encrypt(val);
 		return encrypted;
 	}
 
@@ -170,9 +173,8 @@ export default class Encryption {
 	 * ```
 	 */
 	public decryptRsa(val: string, privateKey: string): string {
-		const rsa = new NodeRSA(privateKey);
-		let decrypted = rsa.decrypt(val, 'base64');
-		decrypted = Buffer.from(decrypted, 'base64').toString();
+		const rsa = new JSEncryptRSAKey(privateKey);
+		let decrypted = rsa.decrypt(val);
 		return decrypted;
 	}
 
@@ -189,8 +191,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public importRsaKey(val: string): RSA {
-		const key = new NodeRSA();
-		key.importKey(val, 'pkcs8-private-pem');
+		const key = new JSEncryptRSAKey(val);
 		return key;
 	}
 
@@ -207,21 +208,20 @@ export default class Encryption {
 	 * ```
 	 */
 	public exportRsaKey(key: RSA, pub: string): string{
-		let check: boolean;
+		let result: string;
 		switch (pub) {
 			case "public":
-				check = true
+				result = key.getPublicKey();
 				break;
 
 			case "private":
-				check = false
+				result = key.getPrivateKey();
 				break;
 
 			default:
-				check = false
+				result = key.getPublicKey();
 				break;
 		}
-		const exported = key.exportKey(check ? 'pkcs8-public-pem' : 'pkcs8-private-pem');
-		return exported;
+		return result;
 	}
 }

@@ -1,3 +1,3 @@
-import NodeRSA from "node-rsa"
+import { JSEncryptRSAKey } from "jsencrypt/lib/JSEncryptRSAKey";
 
-export type RSA = NodeRSA;
+export type RSA = JSEncryptRSAKey;
