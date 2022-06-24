@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.5.0] - Removing RSA Support
+
+* Removal of RSA support due to incompatibility issues with major libraries. It will be considered again if there is a way to stably implement RSA encryption from Browser and Node without incompatible packages.
+
 ## [1.4.1-2] - Removing unused code
 
 * Removing unused code, imports and constants
