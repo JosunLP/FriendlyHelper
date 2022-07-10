@@ -373,25 +373,8 @@ export default class Random {
 	 * generateRandomPassword(); // generates a random password
 	 */
 	public generateRandomPassword() {
-
-		// remove whitespace from string
-		const removeWhitespace = (str: string) => {
-			return str.replace(/\s/g, '');
-		}
-
-		const cheapPassword = removeWhitespace(this.generateWords(1) + this.generateNumber(1, 9) + this.generateWords(1) + this.generateNumber(1, 9) + this.generateWords(1));
-
 		const password = this.generatePassword(this.generateNumber(8, 32), [], true, true);
-		const key = this.generateNumber(1, 2);
-
-		switch (key) {
-			case 1:
-				return '\'' + cheapPassword + '\'';
-			case 2:
-				return '\'' + password + '\'';
-			default:
-				return '\'' + cheapPassword + '\'';
-		}
+		return password;
 	}
 
 	/**
@@ -687,7 +670,7 @@ export default class Random {
 	 * 		// 	'4': 'string'
 	 * 		// }
 	 */
-	public generateStringArrayObejct(length: number): {} {
+	public generateStringArrayObejct(length: number): object {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generateString(this.generateNumber(5, 10)));
