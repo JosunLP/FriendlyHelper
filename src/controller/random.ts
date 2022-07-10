@@ -45,6 +45,59 @@ export default class Random {
 	}
 
 	/**
+	 * Generates byte
+	 * @returns byte
+	 */
+	public generateByte(): number {
+		return this.generateNumber(0, 255);
+	}
+
+	/**
+	 * Generates bytes
+	 * @param length
+	 * @returns bytes
+	 */
+	public generateBytes(length: number): number[] {
+		const result: number[] = [];
+		for (let i = 0; i < length; i++) {
+			result.push(this.generateByte());
+		}
+		return result;
+	}
+
+	/**
+	 * Generates short
+	 * @returns short
+	 */
+	public generateShort(): number {
+		return this.generateNumber(0, 9);
+	}
+
+	/**
+	 * Generates long
+	 * @returns long
+	 */
+	public generateLong(): number {
+		return this.generateNumber(1, 9999999999999);
+	}
+
+	/**
+	 * Generates float
+	 * @returns float
+	 */
+	public generateFloat(): number {
+		return this.generateNumber(0, 9999999999999) / 100;
+	}
+
+	/**
+	 * Generates double
+	 * @returns double
+	 */
+	public generateDouble(): number {
+		return this.generateNumber(0, 9999999999999) / 100;
+	}
+
+	/**
 	 * Generates date
 	 * @param min
 	 * @param max
@@ -266,6 +319,79 @@ export default class Random {
 	 */
 	public generatePhoneNumber(): string {
 		return new PhoneNumber().phoneNumber;
+	}
+
+	/**
+	 * Generates password
+	 * @param length
+	 * @param possibleCharacters
+	 * @param includeNumbers
+	 * @param allSpecialCharacters
+	 * @returns password
+	 *
+	 * @warning This method is not secure. It should only be used for testing purposes.
+	 *
+	 * @example
+	 * generatePassword(10, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'], false, false); // generates a password with 10 characters and only letters
+	 */
+	public generatePassword(length: number, possibleCharacters: string[], includeNumbers: boolean, allSpecialCharacters: boolean): string {
+		let password = '';
+		let characterList: string[] = [];
+		const alphabetList = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+		const alphabetListCaps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+		const numberList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+		const specialList = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '<', '>', '?', '/'];
+
+		if (includeNumbers) {
+			characterList = characterList.concat(alphabetList, alphabetListCaps, numberList);
+		} else {
+			characterList = characterList.concat(alphabetList, alphabetListCaps);
+		}
+
+		if (possibleCharacters.length > 0) {
+			characterList = characterList.concat(possibleCharacters);
+		}
+
+		if (allSpecialCharacters) {
+			characterList = characterList.concat(specialList);
+		}
+
+		for (let i = 0; i < length; i++) {
+			password += characterList[Math.floor(Math.random() * characterList.length)];
+		}
+
+		return password;
+	}
+
+	/**
+	 * Generates random password
+	 * @returns password string
+	 *
+	 * @warning This method is not secure. It should only be used for testing purposes.
+	 *
+	 * @example
+	 * generateRandomPassword(); // generates a random password
+	 */
+	public generateRandomPassword() {
+
+		// remove whitespace from string
+		const removeWhitespace = (str: string) => {
+			return str.replace(/\s/g, '');
+		}
+
+		const cheapPassword = removeWhitespace(this.generateWords(1) + this.generateNumber(1, 9) + this.generateWords(1) + this.generateNumber(1, 9) + this.generateWords(1));
+
+		const password = this.generatePassword(this.generateNumber(8, 32), [], true, true);
+		const key = this.generateNumber(1, 2);
+
+		switch (key) {
+			case 1:
+				return '\'' + cheapPassword + '\'';
+			case 2:
+				return '\'' + password + '\'';
+			default:
+				return '\'' + cheapPassword + '\'';
+		}
 	}
 
 	/**
