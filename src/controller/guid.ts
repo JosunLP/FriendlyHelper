@@ -1,5 +1,7 @@
 /**
- * Guid
+ * Guid generator
+ *
+ * @description Generates a guid based on Math.random()
  */
 export default class GUID {
 
