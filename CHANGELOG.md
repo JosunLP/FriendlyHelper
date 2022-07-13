@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.6.1] - Fixing wor generation](#161---fixing-wor-generation)
   - [[1.6.0] - Adding new content](#160---adding-new-content)
   - [[1.5.0] - Removing RSA Support](#150---removing-rsa-support)
   - [[1.4.1-2] - Removing unused code](#141-2---removing-unused-code)
@@ -15,6 +16,11 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.6.1] - Fixing wor generation
+
+- Fixing a Bug that enabled the generation of a word with a zero length.
+- Fixing a Bug that caused the generation of a word list with empty words.
 
 ## [1.6.0] - Adding new content
 
