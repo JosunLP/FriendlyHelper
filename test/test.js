@@ -35,3 +35,12 @@ console.log(key);
 console.log(H.encryption.generateSymetricKey());
 text = H.random.generateText(H.random.generateNumber(10, 200));
 console.log(text);
+
+let color1 = H.color.generateRandomHex();
+let color2 = H.color.generateRandomHex();
+
+console.log(color1);
+console.log(H.color.isDark(color1));
+
+console.log(color2);
+console.log(H.color.isDark(color2));
