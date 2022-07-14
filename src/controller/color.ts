@@ -168,18 +168,11 @@ export default class Color {
 	 * ```
 	 */
 	public isDark(hex: string): boolean {
-		let c: { r: number, g: number, b: number };
-		try {
-			c = <{ r: number, g: number, b: number }>this.hexToRgb(hex);
-		} catch (e) {
-			console.error(e);
-			return false;
+		const rgb = this.hexToRgb(hex);
+		if (rgb) {
+			return (rgb.r * 0.299 + rgb.g * 0.587 + rgb.b * 0.114) < 186;
 		}
-		const r = c.r;
-		const g = c.g;
-		const b = c.b;
-		const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-		return (yiq >= 128);
+		return false;
 	}
 
 	/**
