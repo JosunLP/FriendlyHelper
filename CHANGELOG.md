@@ -3,7 +3,7 @@
 ___
 
 - [Changelog](#changelog)
-  - [[1.6.1] - Fixing dark/light mode](#161---fixing-darklight-mode)
+  - [[1.6.2] - Fixing dark/light mode](#162---fixing-darklight-mode)
   - [[1.6.1] - Fixing word generation](#161---fixing-word-generation)
   - [[1.6.0] - Adding new content](#160---adding-new-content)
   - [[1.5.0] - Removing RSA Support](#150---removing-rsa-support)
@@ -18,7 +18,7 @@ ___
 
 ___
 
-## [1.6.1] - Fixing dark/light mode
+## [1.6.2] - Fixing dark/light mode
 
 - Fixing a bug in the dark/light determination
 
