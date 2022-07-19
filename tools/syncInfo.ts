@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'fs';
 
-let packageFile = "./package.json";
-let targetFile = "./src/models/info.ts";
+const packageFile = "./package.json";
+const targetFile = "./src/models/info.ts";
 
 readFile(packageFile, 'utf8', (err, data) => {
 	if (err) {
@@ -29,7 +29,7 @@ readFile(packageFile, 'utf8', (err, data) => {
 })
 
 function replaceLine(target: string, searchString: string, pkg: any) {
-	let re = new RegExp('^.*' + searchString + '.*$', 'gm');
+	const re = new RegExp('^.*' + searchString + '.*$', 'gm');
 	target = target.replace(re, '	private ' + searchString + ': string = "' + pkg + '"');
 	return target;
 }

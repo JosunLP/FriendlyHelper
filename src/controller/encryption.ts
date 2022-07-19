@@ -75,7 +75,7 @@ export default class Encryption {
 			length: 256,
 		}, true, ["encrypt", "decrypt"])
 			.then((key) => {
-				let keyHex = Encryption._crypto.exportKey("raw", key)
+				const keyHex = Encryption._crypto.exportKey("raw", key)
 					.then((keyHex) => {
 						return aesjs.utils.hex.fromBytes(keyHex);
 					})

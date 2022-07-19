@@ -60,8 +60,8 @@ output(H.encryption.generateSymetricKey());
 text = H.random.generateText(H.random.generateNumber(10, 200));
 output(text);
 
-let color1 = H.color.generateRandomHex();
-let color2 = H.color.generateRandomHex();
+const color1 = H.color.generateRandomHex();
+const color2 = H.color.generateRandomHex();
 
 output(color1);
 output(H.color.isDark(color1));
