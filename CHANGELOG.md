@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.6.3] - Adding crypto API support](#163---adding-crypto-api-support)
   - [[1.6.2] - Fixing dark/light mode](#162---fixing-darklight-mode)
   - [[1.6.1] - Fixing word generation](#161---fixing-word-generation)
   - [[1.6.0] - Adding new content](#160---adding-new-content)
@@ -17,6 +18,15 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.6.3] - Adding crypto API support
+
+- Added crypto support to the application
+  - Usage of the crypto API is now implemented
+    - this will be used in future versions to encrypt and decrypt the data
+  - For the generation of UUIDs
+  - For the generation of symeterial keys
+- Moved the tooling from JS to TS
 
 ## [1.6.2] - Fixing dark/light mode
 
