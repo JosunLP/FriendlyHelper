@@ -1,9 +1,15 @@
 import aesjs from 'aes-js';
+import crypto from "crypto";
 
 /**
  * Encryption
  */
 export default class Encryption {
+
+	/**
+	 * Crypto alias of encryption
+	 */
+	private static _crypto = crypto.subtle;
 
 	/**
 	 * Encrypts symmetric
@@ -17,7 +23,7 @@ export default class Encryption {
 	 *
 	 * @example
 	 * ```
-	 * let encrypted = Encryption.encryptSymmetric("Hello World", "password");
+	 * let encrypted = Encryption  .encryptSymmetric("Hello World", "password");
 	 * let decrypted = Encryption.decryptSymmetric(encrypted, "password");
 	 * ```
 	 *
@@ -55,7 +61,7 @@ export default class Encryption {
 	}
 
 	/**
-	 * Generates symetric key
+	 * Generates symetric key for AES encryption
 	 * @returns symetric key
 	 *
 	 * @example
@@ -63,11 +69,24 @@ export default class Encryption {
 	 * let key = Encryption.generateSymetricKey();
 	 * ```
 	 */
-	public generateSymetricKey(): string {
-		let key = "";
-		for (let i = 0; i < 16; i++) {
-			key += String.fromCharCode(Math.floor(Math.random() * 256));
-		}
+	public generateSymetricKey(): Promise<string | boolean> {
+		const key = Encryption._crypto.generateKey({
+			name: "AES-CBC",
+			length: 256,
+		}, true, ["encrypt", "decrypt"])
+			.then((key) => {
+				let keyHex = Encryption._crypto.exportKey("raw", key)
+					.then((keyHex) => {
+						return aesjs.utils.hex.fromBytes(keyHex);
+					})
+					.catch((err) => {
+						console.error(err);
+						return false;
+					}
+					);
+
+				return keyHex;
+			});
 		return key;
 	}
 

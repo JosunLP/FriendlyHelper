@@ -8,7 +8,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node ./test/test.js",
+    "test": "tsc ./test/test.ts --target esnext --module esnext && node ./test/test.js",
     "build": "npm i && npm run updateInfo && tsc -p tsconfig.json",
     "watch": "tsc -w",
     "updateInfo": "node ./tools/syncInfo.js"
@@ -35,5 +35,8 @@
   "dependencies": {
     "@types/aes-js": "^3.1.1",
     "aes-js": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.6"
   }
 }
