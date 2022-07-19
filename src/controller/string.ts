@@ -249,4 +249,13 @@ export default class StringController {
 	public toLowercase(str: string): string {
 		return str.toLowerCase();
 	}
+
+	/**
+	 * String to buffer
+	 * @param str
+	 * @returns to buffer
+	 */
+	public stringToBuffer(str: string): Buffer {
+		return Buffer.from(str);
+	}
 }
