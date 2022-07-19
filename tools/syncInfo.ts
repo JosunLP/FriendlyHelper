@@ -28,7 +28,7 @@ readFile(packageFile, 'utf8', (err, data) => {
 	})
 })
 
-function replaceLine(target, searchString, pkg) {
+function replaceLine(target: string, searchString: string, pkg: any) {
 	let re = new RegExp('^.*' + searchString + '.*$', 'gm');
 	target = target.replace(re, '	private ' + searchString + ': string = "' + pkg + '"');
 	return target;

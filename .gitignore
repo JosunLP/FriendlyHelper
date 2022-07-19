@@ -743,4 +743,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,node,webstorm,intellij
 
 .logs
-./test/test.js
+**/test.js
+**/syncInfo.js

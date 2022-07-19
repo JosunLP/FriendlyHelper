@@ -11,7 +11,7 @@
     "test": "tsc ./test/test.ts --target esnext --module esnext && node ./test/test.js",
     "build": "npm i && npm run updateInfo && tsc -p tsconfig.json",
     "watch": "tsc -w",
-    "updateInfo": "node ./tools/syncInfo.js"
+    "updateInfo": "tsc ./tools/syncInfo.ts --target esnext --module esnext && node ./tools/syncInfo.js"
   },
   "repository": {
     "type": "git",
