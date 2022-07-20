@@ -10,7 +10,7 @@ ___
   - [[1.6.0] - Adding new content](#160---adding-new-content)
   - [[1.5.0] - Removing RSA Support](#150---removing-rsa-support)
   - [[1.4.1-2] - Removing unused code](#141-2---removing-unused-code)
-  - [[1.4.0] - Implementing encryption, decryption and Bug fixes](#140---implementing-encryption-decryption-and-bug-fixes)
+  - [[1.4.0] - Implementing encryption, decryption, and Bug fixes](#140---implementing-encryption-decryption-and-bug-fixes)
   - [[1.3.0] - Updated Objects and Persons](#130---updated-objects-and-persons)
   - [[1.2.1] - BUG FIXES -> Null pointer Exception in random controller](#121---bug-fixes---null-pointer-exception-in-random-controller)
   - [[1.2.0] - Profile data generation, emails, and improvements](#120---profile-data-generation-emails-and-improvements)
@@ -23,7 +23,7 @@ ___
 ## [1.7.0] - Reworking Persons
 
 - Reworked the Person class to make it more flexible and easier to use.
-  - Reworked the way, a Person is created with modifyers.
+  - Reworked the way, a Person is created with modifiers.
 - Added a default export and Type Exports
   - Added a export for the Person model.
   - Added a export for the XmlElement model.
@@ -36,7 +36,7 @@ ___
   - Usage of the crypto API is now implemented
     - this will be used in future versions to encrypt and decrypt the data
   - For the generation of UUIDs
-  - For the generation of symeterial keys
+  - For the generation of symmetrical keys
 - Moved the tooling from JS to TS
 
 ## [1.6.2] - Fixing dark/light mode
@@ -61,7 +61,7 @@ ___
 
 - Removing unused code, imports, and constants
 
-## [1.4.0] - Implementing encryption, decryption and Bug fixes
+## [1.4.0] - Implementing encryption, decryption, and Bug fixes
 
 - Added encryption and decryption via XOR, AES and RSA.
 - Bug fixes and improvements
