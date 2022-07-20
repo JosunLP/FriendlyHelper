@@ -3,6 +3,7 @@ import LoremIpsum from './loremIpsum.js';
 import Names from '../models/names.js';
 import PhoneNumber from '../models/phoneNumber.js';
 import Person from '../models/person.js';
+import { PersonProperties } from '../types/personProperties.type.js';
 
 /**
  * Random
@@ -386,28 +387,13 @@ export default class Random {
 	 *
 	 * generatePerson(['firstName', 'lastName', 'email']); // generates random person with only firstName, lastName and email
 	 */
-	public generatePerson(properties?: string[]): Person {
-		const person = new Person();
-		const _props: string[] = Object.getOwnPropertyNames(person);
-		const _stayList: string[] = [];
+	public generatePerson(properties?: PersonProperties): Person {
+		let person: Person;
 
 		if (properties) {
-			properties.forEach(property => {
-				_props.forEach(prop => {
-					if (prop === property) {
-						_stayList.push(property);
-					}
-				});
-			});
-		}
-
-		if (_stayList.length > 0) {
-			_props.forEach(property => {
-				if (!_stayList.includes(property)) {
-					// @ts-ignore
-					delete person[property];
-				}
-			});
+			person = new Person(properties);
+		} else {
+			person = new Person();
 		}
 
 		return person;
@@ -628,7 +614,7 @@ export default class Random {
 	 * generatePersonArray(5, ['firstName', 'lastName', 'age']);
 	 * // returns 3 persons with only firstName, lastName and age properties^
 	 */
-	public generatePersonArray(length: number, properties?: string[]): Person[] {
+	public generatePersonArray(length: number, properties?: PersonProperties): Person[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
 			array.push(this.generatePerson(properties));
@@ -727,14 +713,14 @@ export default class Random {
 
 		jsonTemplate = jsonTemplate.toLowerCase();
 
-		jsonTemplate = jsonTemplate.replaceAll('{{guid}}', person.id);
-		jsonTemplate = jsonTemplate.replaceAll('{{fullname}}', person.fullName);
-		jsonTemplate = jsonTemplate.replaceAll('{{age}}', person.age.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{guid}}', <string>person.id);
+		jsonTemplate = jsonTemplate.replaceAll('{{fullname}}', <string>person.fullName);
+		jsonTemplate = jsonTemplate.replaceAll('{{age}}', person.age!.toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{boolean}}', this.generateBoolean().toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{date}}', randomModel.DATE.toDateString());
 		jsonTemplate = jsonTemplate.replaceAll('{{array}}', this.generateArray(this.generateNumber(1, 10)).toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{person}}', person.toString());
-		jsonTemplate = jsonTemplate.replaceAll('{{email}}', person.email.toString());
+		jsonTemplate = jsonTemplate.replaceAll('{{email}}', person.email!.toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{stringarray}}', this.generateStringArray(this.generateNumber(1, 10)).toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{numberarray}}', this.generateNumberArray(this.generateNumber(1, 10)).toString());
 		jsonTemplate = jsonTemplate.replaceAll('{{booleanarray}}', this.generateBooleanArray(this.generateNumber(1, 10)).toString());

@@ -1,12 +1,19 @@
 /**
  * Info
+ *
+ * @description - A class that represents an info model for the library, containing the following properties:
+ * 					- VERSION: The version of the library.
+ * 					- AUTHOR: The author of the library.
+ * 					- LICENSE: The license of the library.
+ * 					- HOMEPAGE: The homepage of the library.
+ * 					- REPOSITORY: The repository of the library.
  */
 export default class Info {
 
 	/**
 	 * Version  of info
 	 */
-	private readonly VERSION: string = "1.6.3"
+	private readonly VERSION: string = "1.7.0"
 
 	/**
 	 * Author  of info

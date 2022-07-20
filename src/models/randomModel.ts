@@ -3,6 +3,8 @@ import Random from "../controller/random.js";
 
 /**
  * Random model
+ *
+ * @description - Random model
  */
 export default class RandomModel {
 

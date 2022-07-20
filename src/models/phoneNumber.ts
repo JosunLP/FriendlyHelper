@@ -2,6 +2,8 @@ import Random from "../controller/random.js";
 
 /**
  * Phone number
+ *
+ * @description Phone number model
  */
 export default class PhoneNumber {
 
