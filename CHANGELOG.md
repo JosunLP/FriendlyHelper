@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.7.1] - Fixing Persons code example](#171---fixing-persons-code-example)
   - [[1.7.0] - Reworking Persons](#170---reworking-persons)
   - [[1.6.3] - Adding crypto API support](#163---adding-crypto-api-support)
   - [[1.6.2] - Fixing dark/light mode](#162---fixing-darklight-mode)
@@ -19,6 +20,10 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.7.1] - Fixing Persons code example
+
+- Fixing Persons code example
 
 ## [1.7.0] - Reworking Persons
 

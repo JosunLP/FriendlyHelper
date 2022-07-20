@@ -385,7 +385,7 @@ export default class Random {
 	 * @example
 	 * generatePerson(); // generates random person with all available properties
 	 *
-	 * generatePerson(['firstName', 'lastName', 'email']); // generates random person with only firstName, lastName and email
+	 * generatePerson({ id: true, fullName: true, lastName: true, email: false}); // generates random person with only firstName, lastName and email
 	 */
 	public generatePerson(properties?: PersonProperties): Person {
 		let person: Person;
@@ -611,7 +611,7 @@ export default class Random {
 	 * generatePersonArray(5);
 	 * // returns 3 persons with all available properties^
 	 *
-	 * generatePersonArray(5, ['firstName', 'lastName', 'age']);
+	 * generatePersonArray(5, { id: true, fullName: true, lastName: true, email: false});
 	 * // returns 3 persons with only firstName, lastName and age properties^
 	 */
 	public generatePersonArray(length: number, properties?: PersonProperties): Person[] {
