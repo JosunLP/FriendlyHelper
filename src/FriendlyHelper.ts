@@ -5,7 +5,7 @@ import General from './controller/general.js';
 import GUID from './controller/guid.js';
 import ImageController from './controller/image.js';
 import Info from './models/info.js';
-import Number from './controller/number.js';
+import Number from './controller/numberController.js';
 import Random from './controller/random.js';
 import StringController from './controller/string.js';
 import TypeChecker from './controller/typechecker.js';
@@ -14,6 +14,7 @@ import Person from './models/person.js';
 import XmlElement from './models/xmlElement.js';
 import { imageType } from './types/image.type.js';
 import { PersonProperties } from './types/personProperties.type.js';
+import NumberController from './controller/numberController.js';
 
 
 /**
@@ -68,10 +69,10 @@ class FriendlyHelper {
 
 	/**
 	 * Number  of friendly helper
-	 * @type {Number}
+	 * @type {NumberController}
 	 * @memberof FriendlyHelper
 	 */
-	public static readonly number: number = new Number();
+	public static readonly number: NumberController = new NumberController();
 
 	/**
 	 * General  of friendly helper

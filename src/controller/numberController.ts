@@ -1,7 +1,7 @@
 /**
  * Number
  */
-export default class Number {
+export default class NumberController {
 
 	/**
 	 * Gets numbers from string
