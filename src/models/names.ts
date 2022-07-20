@@ -1,5 +1,7 @@
 /**
  * Names Dataset
+ *
+ * @description This is the names dataset. It contains all the names that are used in the library.
  */
 export default class Names {
 	/**

@@ -1,5 +1,5 @@
 import FileController from './file.js';
-import { imageType } from '../types/imageType.type.js';
+import { imageType } from '../types/image.type.js';
 
 /**
  * Image controller

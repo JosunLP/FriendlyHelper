@@ -1,5 +1,6 @@
 /**
  * Email
+ * @description - Email model
  */
 export default class Email {
 
