@@ -71,7 +71,7 @@ class FriendlyHelper {
 	 * @type {Number}
 	 * @memberof FriendlyHelper
 	 */
-	public static readonly number: Number = new Number();
+	public static readonly number: number = new Number();
 
 	/**
 	 * General  of friendly helper
