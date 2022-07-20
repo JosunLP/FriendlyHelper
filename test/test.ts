@@ -1,6 +1,6 @@
 import { H } from "../dist/src/FriendlyHelper.js";
 import * as fs from 'fs';
-import { PersonProperties } from "../dist/src/types/personProperties.type.js";
+import { PersonProperties } from "../dist/src/FriendlyHelper.js";
 
 const logFolder = ".logs/";
 

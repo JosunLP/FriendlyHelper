@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.7.0] - Reworking Persons](#170---reworking-persons)
   - [[1.6.3] - Adding crypto API support](#163---adding-crypto-api-support)
   - [[1.6.2] - Fixing dark/light mode](#162---fixing-darklight-mode)
   - [[1.6.1] - Fixing word generation](#161---fixing-word-generation)
@@ -18,6 +19,16 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.7.0] - Reworking Persons
+
+- Reworked the Person class to make it more flexible and easier to use.
+  - Reworked the way, a Person is created with modifyers.
+- Added a default export and Type Exports
+  - Added a export for the Person model.
+  - Added a export for the XmlElement model.
+  - Added a export for the PersonProperties Type.
+  - Added a export for the imageType Type.
 
 ## [1.6.3] - Adding crypto API support
 
