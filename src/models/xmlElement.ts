@@ -1,5 +1,7 @@
 /**
  * Xml element
+ *
+ * @description Xml element model
  */
 export default class XmlElement {
 
