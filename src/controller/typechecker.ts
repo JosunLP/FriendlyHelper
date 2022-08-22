@@ -2,7 +2,6 @@
  * Type checker
  */
 export default class TypeChecker {
-
 	/**
 	 * Determines whether string is
 	 * @param value
@@ -14,7 +13,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isString(value: undefined): boolean {
-		return typeof value === 'string';
+		return typeof value === "string";
 	}
 
 	/**
@@ -28,7 +27,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isNumber(value: undefined): boolean {
-		return typeof value === 'number';
+		return typeof value === "number";
 	}
 
 	/**
@@ -42,7 +41,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isBoolean(value: undefined): boolean {
-		return typeof value === 'boolean';
+		return typeof value === "boolean";
 	}
 
 	/**
@@ -70,7 +69,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isObject(value: object): boolean {
-		return typeof value === 'object';
+		return typeof value === "object";
 	}
 
 	/**
@@ -84,7 +83,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isFunction(value: undefined): boolean {
-		return typeof value === 'function';
+		return typeof value === "function";
 	}
 
 	/**
@@ -98,7 +97,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isUndefined(value: undefined): boolean {
-		return typeof value === 'undefined';
+		return typeof value === "undefined";
 	}
 
 	/**
@@ -154,7 +153,7 @@ export default class TypeChecker {
 	 * ```
 	 */
 	public isEmpty(value: undefined): boolean {
-		return this.isNullOrUndefined(value) || value === '';
+		return this.isNullOrUndefined(value) || value === "";
 	}
 
 	/**

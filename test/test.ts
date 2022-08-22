@@ -124,10 +124,27 @@ output(
 			email: false,
 		},
 		[
-			<CustomPersonPropertie>{ key: "rofl", value: "numeric", length: 40000 },
+			<CustomPersonPropertie>{
+				key: "rofl",
+				value: "numeric",
+				length: 40000,
+			},
 			<CustomPersonPropertie>{ key: "lol", value: "string", length: 10 },
-			<CustomPersonPropertie>{ key: "change", value: "currency", length: 10 },
-			<CustomPersonPropertie>{ key: "growth", value: "percentage", length: 10 },
+			<CustomPersonPropertie>{
+				key: "change",
+				value: "currency",
+				length: 10,
+			},
+			<CustomPersonPropertie>{
+				key: "growth",
+				value: "percentage",
+				length: 10,
+			},
+			<CustomPersonPropertie>{
+				key: "AdIdSomething",
+				value: "template",
+				template: "{numeric}.{string}-{date}:{percentage}",
+			},
 		]
 	)
 );

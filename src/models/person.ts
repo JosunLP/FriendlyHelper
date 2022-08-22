@@ -24,14 +24,17 @@ import { PersonProperties } from "../types/personProperties.type.js";
  * @property {string} country - Person country
  */
 export default class Person {
-
 	/**
 	 * Creates an instance of person.
 	 */
 	constructor(properties?: PersonProperties) {
 		const _random = new Random();
 
-		if (!properties || typeof properties !== "object" || properties === undefined) {
+		if (
+			!properties ||
+			typeof properties !== "object" ||
+			properties === undefined
+		) {
 			this.id = new GUID().generate();
 			this.firstName = _random.generateFirstName();
 			this.lastName = _random.generateLastName();
@@ -94,7 +97,9 @@ export default class Person {
 				this.jobTitle = _random.generateJobTitle();
 			}
 			if (properties.about) {
-				this.about = _random.generateText(_random.generateNumber(10, 100));
+				this.about = _random.generateText(
+					_random.generateNumber(10, 100)
+				);
 			}
 
 			Object.keys(this).forEach((key) => {

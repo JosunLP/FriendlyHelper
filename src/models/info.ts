@@ -9,7 +9,6 @@
  * 					- REPOSITORY: The repository of the library.
  */
 export default class Info {
-
 	/**
 	 * Version  of info
 	 */
@@ -50,8 +49,7 @@ export default class Info {
 			AUTHOR: this.AUTHOR,
 			LICENSE: this.LICENSE,
 			REPOSITORY: this.REPOSITORY,
-			HOMEPAGE: this.HOMEPAGE
+			HOMEPAGE: this.HOMEPAGE,
 		};
 	}
-
 }

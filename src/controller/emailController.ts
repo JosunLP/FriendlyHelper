@@ -4,7 +4,6 @@ import Email from "../models/email.js";
  * Email controller
  */
 export default class EmailController {
-
 	/**
 	 * Generates email by template
 	 * @param subject
@@ -28,7 +27,12 @@ export default class EmailController {
 	 * 		console.log(result);
 	 *
 	 */
-	public generateEmailByTemplate(subject: string, body: string, logoUrl: string, domain: string): string {
+	public generateEmailByTemplate(
+		subject: string,
+		body: string,
+		logoUrl: string,
+		domain: string
+	): string {
 		return new Email(subject, body, logoUrl, domain).getMail();
 	}
 }
