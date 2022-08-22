@@ -3,7 +3,6 @@
  * @description - Email model
  */
 export default class Email {
-
 	/**
 	 * Subject  of email
 	 */
@@ -17,7 +16,7 @@ export default class Email {
 	/**
 	 * Mail  of email
 	 */
-	private mail: string = '';
+	private mail: string = "";
 
 	/**
 	 * Logo url of email
@@ -108,7 +107,12 @@ export default class Email {
 	 * const email = new Email('Hello', 'Hello world', 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png', 'https://www.google.com');
 	 *
 	 */
-	constructor(subject: string, body: string, logoUrl: string, domain: string) {
+	constructor(
+		subject: string,
+		body: string,
+		logoUrl: string,
+		domain: string
+	) {
 		this.subject = subject;
 		this.body = body;
 		this.logoUrl = logoUrl;
@@ -130,10 +134,13 @@ export default class Email {
 	 */
 	private generateMail(): void {
 		this.mail = this.template
-			.replace(new RegExp('{{subject}}', 'g'), this.subject)
-			.replace(new RegExp('{{body}}', 'g'), this.body)
-			.replace(new RegExp('{{logoUrl}}', 'g'), this.logoUrl)
-			.replace(new RegExp('{{domain}}', 'g'), this.domain)
-			.replace(new RegExp('{{year}}', 'g'), new Date().getFullYear().toString());
+			.replace(new RegExp("{{subject}}", "g"), this.subject)
+			.replace(new RegExp("{{body}}", "g"), this.body)
+			.replace(new RegExp("{{logoUrl}}", "g"), this.logoUrl)
+			.replace(new RegExp("{{domain}}", "g"), this.domain)
+			.replace(
+				new RegExp("{{year}}", "g"),
+				new Date().getFullYear().toString()
+			);
 	}
 }

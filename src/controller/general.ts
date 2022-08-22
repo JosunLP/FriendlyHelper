@@ -2,7 +2,6 @@
  * General
  */
 export default class General {
-
 	/**
 	 * Pauses execution
 	 * @param ms

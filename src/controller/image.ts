@@ -1,11 +1,10 @@
-import FileController from './file.js';
-import { imageType } from '../types/image.type.js';
+import FileController from "./file.js";
+import { imageType } from "../types/image.type.js";
 
 /**
  * Image controller
  */
 export default class ImageController {
-
 	/**
 	 * Base64s to blob
 	 * @param base64
@@ -17,12 +16,12 @@ export default class ImageController {
 	 * ```
 	 */
 	public async base64ToBlob(base64: string): Promise<Blob> {
-		const binary = atob(base64.split(',')[1]);
+		const binary = atob(base64.split(",")[1]);
 		const array = [];
 		for (let i = 0; i < binary.length; i++) {
 			array.push(binary.charCodeAt(i));
 		}
-		const blob = new Blob([new Uint8Array(array)], { type: 'image/png' });
+		const blob = new Blob([new Uint8Array(array)], { type: "image/png" });
 		return blob;
 	}
 
@@ -54,12 +53,12 @@ export default class ImageController {
 	 * ```
 	 */
 	public async dataURLtoBlob(dataURL: string): Promise<Blob> {
-		const binary = atob(dataURL.split(',')[1]);
+		const binary = atob(dataURL.split(",")[1]);
 		const array = [];
 		for (let i = 0; i < binary.length; i++) {
 			array.push(binary.charCodeAt(i));
 		}
-		const blob = new Blob([new Uint8Array(array)], { type: 'image/png' });
+		const blob = new Blob([new Uint8Array(array)], { type: "image/png" });
 		return blob;
 	}
 
@@ -84,10 +83,12 @@ export default class ImageController {
 			reader.onload = (e: any) => {
 				const img = new Image();
 				img.onload = () => {
-					const canvas = document.createElement('canvas');
+					const canvas = document.createElement("canvas");
 					canvas.width = img.width;
 					canvas.height = img.height;
-					const ctx = <CanvasRenderingContext2D>canvas.getContext('2d');
+					const ctx = <CanvasRenderingContext2D>(
+						canvas.getContext("2d")
+					);
 					ctx.drawImage(img, 0, 0);
 					const dataURL = canvas.toDataURL(imageType);
 					const blob = this.dataURLtoBlob(dataURL);

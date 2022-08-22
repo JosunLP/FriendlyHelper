@@ -7,7 +7,9 @@ import Random from "../controller/random.js";
  * @description - Random model
  */
 export default class RandomModel {
-
+	/**
+	 * Random  of random model
+	 */
 	private readonly random = new Random();
 
 	/**
@@ -18,7 +20,9 @@ export default class RandomModel {
 	/**
 	 * Text  of random model
 	 */
-	public readonly TEXT = this.random.generateText(this.random.generateNumber(100, 1000));
+	public readonly TEXT = this.random.generateText(
+		this.random.generateNumber(100, 1000)
+	);
 
 	/**
 	 * Number  of random model
@@ -38,5 +42,7 @@ export default class RandomModel {
 	/**
 	 * Array  of random model
 	 */
-	public readonly ARRAY = this.random.generateArray(this.random.generateNumber(1, 100));
+	public readonly ARRAY = this.random.generateArray(
+		this.random.generateNumber(1, 100)
+	);
 }

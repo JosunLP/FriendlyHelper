@@ -6,7 +6,6 @@ import crypto from "crypto";
  * @description Generates a guid based on Math.random()
  */
 export default class GUID {
-
 	/**
 	 * Generates guid
 	 * @returns generate
