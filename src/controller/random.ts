@@ -4,6 +4,7 @@ import Names from '../models/names.js';
 import PhoneNumber from '../models/phoneNumber.js';
 import Person from '../models/person.js';
 import { PersonProperties } from '../types/personProperties.type.js';
+import { CustomPersonPropertie } from '../types/customPersonPropertie.type.js';
 
 /**
  * Random
@@ -387,7 +388,7 @@ export default class Random {
 	 *
 	 * generatePerson({ id: true, fullName: true, lastName: true, email: false}); // generates random person with only firstName, lastName and email
 	 */
-	public generatePerson(properties?: PersonProperties): Person {
+	public generatePerson(properties?: PersonProperties, customProperties?: CustomPersonPropertie[]): Person {
 		let person: Person;
 
 		if (properties) {
@@ -396,7 +397,71 @@ export default class Random {
 			person = new Person();
 		}
 
+		if (customProperties) {
+			for (const customProperty of customProperties) {
+				let hasLength = false;
+				if (customProperty.length) {
+					hasLength = true;
+				}
+				switch (customProperty.value) {
+
+					case 'string':
+						if (hasLength) {
+							// @ts-ignore
+							person[customProperty.key] = this.generateString(<number>customProperty.length);
+						} else {
+							// @ts-ignore
+							person[customProperty.key] = this.generateString(this.generateNumber(1, 32));
+						}
+						break;
+
+					case 'numeric':
+						if (hasLength) {
+							// @ts-ignore
+							person[customProperty.key] = this.generateNumber(1,<number>customProperty.length);
+						} else {
+							// @ts-ignore
+							person[customProperty.key] = this.generateNumber(1, 32);
+						}
+						break;
+
+					case 'boolean':
+						// @ts-ignore
+						person[customProperty.key] = this.generateBoolean();
+						break;
+
+					case 'date':
+						// @ts-ignore
+						person[customProperty.key] = this.generateDate(new Date(1970, 0, 1), new Date());
+						break;
+
+					case 'currency':
+						// @ts-ignore
+						person[customProperty.key] = this.generateCurrency();
+						break;
+
+					case 'percentage':
+						// @ts-ignore
+						person[customProperty.key] = this.generatePercentage();
+
+					default:
+						break;
+				}
+			}
+		}
+
 		return person;
+	}
+
+	/**
+	 * Generates percentage
+	 * @returns percentage
+	 *
+	 * @example
+	 * generatePercentage(); // generates random percentage
+	 */
+	public generatePercentage(): string {
+		return this.generateNumber(1, 100).toString() + '%';
 	}
 
 	/**

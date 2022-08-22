@@ -1,10 +1,10 @@
 /**
- * Type for the person properties.
+ * Type for the custom person properties.
  * @export
- * @interface PersonProperties
+ * @type PersonProperties
  * @extends {Object}
  */
-export type PersonProperties ={
+export type PersonProperties = {
 	id:  boolean | undefined;
 	firstName:  boolean | undefined;
 	lastName:  boolean | undefined;
