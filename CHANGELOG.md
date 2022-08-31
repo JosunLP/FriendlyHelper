@@ -26,6 +26,7 @@ ___
 
 - Adding a new extendet way to generate profile data.
 - Fixing an Error related to crypto API.
+- Fixing errors regarding the sanatization of strings.
 
 ## [1.7.1] - Fixing Persons code example
 
