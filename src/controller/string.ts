@@ -59,7 +59,11 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeHtml(str: string): string {
-		return str.replace(/<(?:.|\s)*?>/g, "");
+		str = this.xmlRemoveScript(str);
+		str = this.xmlRemoveCdata(str);
+		str = this.xmlRemoveComents(str);
+		str = this.purgeXmltags(str);
+		return this.htmlSanitize(str);
 	}
 
 	/**
@@ -91,10 +95,7 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public htmlRemoveScript(str: string): string {
-		return str.replace(
-			/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-			""
-		);
+		return str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 	}
 
 	/**
