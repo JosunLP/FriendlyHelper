@@ -17,6 +17,7 @@ export default class StringController {
 	public purgeXmltags(str: string): string {
 		str = this.xmlRemoveScript(str);
 		str = str.replace(/['"]+/g, '');
+		str = this.xmlRemoveScript(str);
 		return str.replace(/<[^>]*>/g, '');
 	}
 
@@ -27,6 +28,7 @@ export default class StringController {
 	 */
 	public xmlRemoveComents(str: string): string {
 		str = str.replace(/['"]+/g, "");
+		str = str.replace(/\[/g, "");
 		return str.replace(/<!--[\s\S]*?-->/g, '');
 	}
 
@@ -103,6 +105,8 @@ export default class StringController {
 	 */
 	public htmlRemoveScript(str: string): string {
 		str = str.replace(/['"]+/g, "");
+		str = str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+		str = str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*>/gi, '');
 		return str.replace(
 			/<*script*(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/*script*>/gi,
 			""
