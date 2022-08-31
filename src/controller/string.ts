@@ -16,6 +16,7 @@ export default class StringController {
 	 */
 	public purgeXmltags(str: string): string {
 		str = this.xmlRemoveScript(str);
+		str = str.replace(/['"]+/g, '');
 		return str.replace(/<[^>]*>/g, '');
 	}
 
@@ -25,6 +26,7 @@ export default class StringController {
 	 * @returns remove coments
 	 */
 	public xmlRemoveComents(str: string): string {
+		str = str.replace(/['"]+/g, "");
 		return str.replace(/<!--[\s\S]*?-->/g, '');
 	}
 
@@ -34,6 +36,7 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public xmlRemoveScript(str: string): string {
+		str = str.replace(/['"]+/g, "");
 		return this.htmlRemoveScript(this.xmlRemoveComents(str));
 	}
 
@@ -44,6 +47,7 @@ export default class StringController {
 	 */
 	public xmlRemoveCdata(str: string): string
 	{
+		str = str.replace(/['"]+/g, "");
 		return str.replace(/<!\[CDATA\[.*?\]\]>/g, "");
 	}
 
@@ -60,6 +64,7 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeHtml(str: string): string {
+		str = str.replace(/['"]+/g, "");
 		str = this.xmlRemoveScript(str);
 		str = this.xmlRemoveCdata(str);
 		str = this.xmlRemoveComents(str);
@@ -87,7 +92,8 @@ export default class StringController {
 	 * @returns remove coments
 	 */
 	public htmlRemoveComents(str: string): string {
-		return str.replace(/<!--(?:.|\s)*?-->/g, "");
+		str = str.replace(/['"]+/g, "");
+		return str.replace(/<!--(?:.|\s)*?-->/g, '');
 	}
 
 	/**
@@ -96,6 +102,7 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public htmlRemoveScript(str: string): string {
+		str = str.replace(/['"]+/g, "");
 		return str.replace(
 			/<*script*(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/*script*>/gi,
 			""
