@@ -2,7 +2,6 @@
  * String controller
  */
 export default class StringController {
-
 	/**
 	 * Purges xmltags
 	 * @param str
@@ -16,7 +15,9 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeXmltags(str: string): string {
-		return this.xmlRemoveScript(this.xmlRemoveComents(this.xmlRemoveCdata(str.replace(/<(?:.|\s)*?>/g, ''))));
+		str = str.replace(/['"]+/g, '');
+		str = this.xmlRemoveScript(str);
+		return str.replace(/<[^>]*>/g, '');
 	}
 
 	/**
@@ -25,7 +26,9 @@ export default class StringController {
 	 * @returns remove coments
 	 */
 	public xmlRemoveComents(str: string): string {
-		return str.replace(/<!--(?:.|\s)*?-->/g, '');
+		str = str.replace(/['"]+/g, "");
+		str = str.replace(/\[/g, "");
+		return str.replace(/<!--[\s\S]*?-->/g, '');
 	}
 
 	/**
@@ -34,7 +37,8 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public xmlRemoveScript(str: string): string {
-		return str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+		str = str.replace(/['"]+/g, "");
+		return this.htmlRemoveScript(this.xmlRemoveComents(str));
 	}
 
 	/**
@@ -42,8 +46,10 @@ export default class StringController {
 	 * @param str
 	 * @returns remove cdata
 	 */
-	public xmlRemoveCdata(str: string): string {
-		return str.replace(/<!\[CDATA\[(?:.|\s)*?\]\]>/g, '');
+	public xmlRemoveCdata(str: string): string
+	{
+		str = str.replace(/['"]+/g, "");
+		return str.replace(/<!\[CDATA\[.*?\]\]>/g, "");
 	}
 
 	/**
@@ -59,7 +65,12 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeHtml(str: string): string {
-		return this.htmlSanitize(this.htmlRemoveScript(this.htmlRemoveComents(str.replace(/<(?:.|\s)*?>/g, ''))));
+		str = str.replace(/['"]+/g, "");
+		str = this.xmlRemoveScript(str);
+		str = this.xmlRemoveCdata(str);
+		str = this.xmlRemoveComents(str);
+		str = this.purgeXmltags(str);
+		return this.htmlSanitize(str);
 	}
 
 	/**
@@ -68,7 +79,12 @@ export default class StringController {
 	 * @returns sanitized string
 	 */
 	public htmlSanitize(str: string): string {
-		return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+		return str
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#039;");
 	}
 
 	/**
@@ -77,6 +93,7 @@ export default class StringController {
 	 * @returns remove coments
 	 */
 	public htmlRemoveComents(str: string): string {
+		str = str.replace(/['"]+/g, "");
 		return str.replace(/<!--(?:.|\s)*?-->/g, '');
 	}
 
@@ -86,7 +103,14 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public htmlRemoveScript(str: string): string {
-		return str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+		str = str.replace(/['"]+/g, "");
+		str = str.replace(/\[/g, "");
+		str = str.replace(/<script.*?>.*?<\/script>/gi, '');
+		str = str.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+		return str.replace(
+			/<script*(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/*script>/gi,
+			""
+		);
 	}
 
 	/**
@@ -95,7 +119,11 @@ export default class StringController {
 	 * @returns camel case
 	 */
 	public toCamelCase(str: string): string {
-		return str.replace(/\s(.)/g, function ($1) { return $1.toUpperCase(); }).replace(/\s/g, '');
+		return str
+			.replace(/\s(.)/g, function ($1) {
+				return $1.toUpperCase();
+			})
+			.replace(/\s/g, "");
 	}
 
 	/**
@@ -104,7 +132,7 @@ export default class StringController {
 	 * @returns snake case
 	 */
 	public toSnakeCase(str: string): string {
-		return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+		return str.replace(/([a-z])([A-Z])/g, "$1_$2").toLowerCase();
 	}
 
 	/**
@@ -113,7 +141,7 @@ export default class StringController {
 	 * @returns kebab case
 	 */
 	public toKebabCase(str: string): string {
-		return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+		return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 	}
 
 	/**
@@ -122,7 +150,7 @@ export default class StringController {
 	 * @returns sql
 	 */
 	public purgeSql(str: string): string {
-		return str.replace(/\'/g, '\'\'');
+		return str.replace(/\'/g, "''");
 	}
 
 	/**
@@ -131,8 +159,8 @@ export default class StringController {
 	 * @returns json
 	 */
 	public purgeJson(str: string): string {
-		str = str.replace(/\\/g, '\\\\');
-		return str.replace(/\'/g, '\\\'');
+		str = str.replace(/\\/g, "\\\\");
+		return str.replace(/\'/g, "\\'");
 	}
 
 	/**
@@ -141,7 +169,7 @@ export default class StringController {
 	 * @returns dangerous characters
 	 */
 	public purgeDangerousCharacters(str: string): string {
-		return str.replace(/[\u0000-\u001F]/g, '');
+		return str.replace(/[\u0000-\u001F]/g, "");
 	}
 
 	/**
@@ -150,7 +178,7 @@ export default class StringController {
 	 * @returns clean
 	 */
 	public clean(str: string): string {
-		return str.replace(/\s+/g, ' ').trim();
+		return str.replace(/\s+/g, " ").trim();
 	}
 
 	/**
@@ -159,30 +187,29 @@ export default class StringController {
 	 * @returns markdown
 	 */
 	public purgeMarkdown(str: string): string {
-
 		// remove markdown header
-		str = str.replace(/^#+\s+/, '');
+		str = str.replace(/^#+\s+/, "");
 
 		// remove markdown list
-		str = str.replace(/^\s*\*\s*/gm, '');
+		str = str.replace(/^\s*\*\s*/gm, "");
 
 		// remove markdown link
-		str = str.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '$1');
+		str = str.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "$1");
 
 		// remove markdown image
-		str = str.replace(/!\[([^\]]+)\]\(([^\)]+)\)/g, '$1');
+		str = str.replace(/!\[([^\]]+)\]\(([^\)]+)\)/g, "$1");
 
 		// remove markdown code
-		str = str.replace(/`([^`]+)`/g, '$1');
+		str = str.replace(/`([^`]+)`/g, "$1");
 
 		// remove markdown italic
-		str = str.replace(/\*([^\*]+)\*/g, '$1');
+		str = str.replace(/\*([^\*]+)\*/g, "$1");
 
 		// remove markdown bold
-		str = str.replace(/\*\*([^\*]+)\*\*/g, '$1');
+		str = str.replace(/\*\*([^\*]+)\*\*/g, "$1");
 
 		// remove markdown bold italic
-		str = str.replace(/\*\*\*([^\*]+)\*\*/g, '$1');
+		str = str.replace(/\*\*\*([^\*]+)\*\*/g, "$1");
 
 		return str;
 	}
@@ -193,7 +220,17 @@ export default class StringController {
 	 * @returns all
 	 */
 	public purgeAll(str: string): string {
-		return this.purgeXmltags(this.purgeHtml(this.purgeSql(this.purgeJson(this.purgeDangerousCharacters(this.clean(this.purgeMarkdown(str)))))));
+		return this.purgeXmltags(
+			this.purgeHtml(
+				this.purgeSql(
+					this.purgeJson(
+						this.purgeDangerousCharacters(
+							this.clean(this.purgeMarkdown(str))
+						)
+					)
+				)
+			)
+		);
 	}
 
 	/**
@@ -202,7 +239,7 @@ export default class StringController {
 	 * @returns string from array
 	 */
 	public getStringFromArray(array: string[]): string {
-		return array.join(', ');
+		return array.join(", ");
 	}
 
 	/**
@@ -211,7 +248,7 @@ export default class StringController {
 	 * @returns array from string
 	 */
 	public getArrayFromString(str: string): string[] {
-		return str.split(', ');
+		return str.split(", ");
 	}
 
 	/**

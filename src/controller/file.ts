@@ -4,7 +4,6 @@ import XmlBuilder from "./xmlBuilder.js";
  * File controller
  */
 export default class FileController {
-
 	/**
 	 * Jsons to xml recursive
 	 * @param json
@@ -31,10 +30,10 @@ export default class FileController {
 	 * ```
 	 */
 	jsonToXmlRecursive(json: [], root: boolean): string {
-		const xml = root ? new XmlBuilder('root') : new XmlBuilder('child');
+		const xml = root ? new XmlBuilder("root") : new XmlBuilder("child");
 		for (const key in json) {
 			if (json.hasOwnProperty(key)) {
-				if (typeof json[key] === 'object') {
+				if (typeof json[key] === "object") {
 					xml.ele(key, this.jsonToXmlRecursive(json[key], false));
 				} else {
 					xml.ele(key, json[key]);
@@ -58,12 +57,14 @@ export default class FileController {
 	xmlToJsonRecursive(xml: string): JSON {
 		const json: any = {};
 		const parser = new DOMParser();
-		const doc = parser.parseFromString(xml, 'text/xml');
+		const doc = parser.parseFromString(xml, "text/xml");
 		const root = doc.children[0];
 		if (root.children.length > 0) {
 			for (const child of root.children) {
 				if (child.children.length > 0) {
-					json[child.nodeName] = this.xmlToJsonRecursive(child.outerHTML);
+					json[child.nodeName] = this.xmlToJsonRecursive(
+						child.outerHTML
+					);
 				} else {
 					json[child.nodeName] = child.innerHTML;
 				}
@@ -148,7 +149,9 @@ export default class FileController {
 	 * ```
 	 */
 	public arrayBufferToFile(arrayBuffer: ArrayBuffer, fileName: string): File {
-		const blob = new Blob([arrayBuffer], { type: 'application/octet-stream' });
+		const blob = new Blob([arrayBuffer], {
+			type: "application/octet-stream",
+		});
 		return this.blobToFile(blob, fileName);
 	}
 }

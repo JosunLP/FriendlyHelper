@@ -1,20 +1,19 @@
-import Color from './controller/color.js';
-import EmailController from './controller/emailController.js';
-import FileController from './controller/file.js';
-import General from './controller/general.js';
-import GUID from './controller/guid.js';
-import ImageController from './controller/image.js';
-import Info from './models/info.js';
-import Random from './controller/random.js';
-import StringController from './controller/string.js';
-import TypeChecker from './controller/typechecker.js';
-import Encryption from './controller/encryption.js';
-import Person from './models/person.js';
-import XmlElement from './models/xmlElement.js';
-import { imageType } from './types/image.type.js';
-import { PersonProperties } from './types/personProperties.type.js';
-import NumberController from './controller/numberController.js';
-
+import Color from "./controller/color.js";
+import EmailController from "./controller/emailController.js";
+import FileController from "./controller/file.js";
+import General from "./controller/general.js";
+import GUID from "./controller/guid.js";
+import ImageController from "./controller/image.js";
+import Info from "./models/info.js";
+import Random from "./controller/random.js";
+import StringController from "./controller/string.js";
+import TypeChecker from "./controller/typechecker.js";
+import Encryption from "./controller/encryption.js";
+import Person from "./models/person.js";
+import XmlElement from "./models/xmlElement.js";
+import { imageType } from "./types/image.type.js";
+import { PersonProperties } from "./types/personProperties.type.js";
+import NumberController from "./controller/numberController.js";
 
 /**
  * Friendly helper
@@ -22,7 +21,6 @@ import NumberController from './controller/numberController.js';
  * @description A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.
  */
 class FriendlyHelper {
-
 	/**
 	 * Info  of friendly helper
 	 * @type {Info}

@@ -4,7 +4,6 @@
  * @description Xml element model
  */
 export default class XmlElement {
-
 	/**
 	 * Creates an instance of xml element.
 	 * @param name
@@ -44,23 +43,23 @@ export default class XmlElement {
 	 * @returns string
 	 */
 	toString(): string {
-		let str = '<' + this.name;
+		let str = "<" + this.name;
 		for (const attr in this.attributes) {
 			if (this.attributes.hasOwnProperty(attr)) {
-				str += ' ' + attr + '="' + this.attributes[attr] + '"';
+				str += " " + attr + '="' + this.attributes[attr] + '"';
 			}
 		}
 		if (this.children.length === 0 && this.content === undefined) {
-			str += '/>';
+			str += "/>";
 		} else {
-			str += '>';
+			str += ">";
 			if (this.content !== undefined) {
 				str += this.content;
 			}
 			for (const child of this.children) {
 				str += child.toString();
 			}
-			str += '</' + this.name + '>';
+			str += "</" + this.name + ">";
 		}
 		return str;
 	}

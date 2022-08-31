@@ -4,7 +4,6 @@ import XmlElement from "../models/xmlElement.js";
  * Xml builder
  */
 export default class XmlBuilder {
-
 	/**
 	 * Creates an instance of xml builder.
 	 * @param rootName

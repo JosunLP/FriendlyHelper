@@ -6,7 +6,6 @@ import Random from "../controller/random.js";
  * @description Phone number model
  */
 export default class PhoneNumber {
-
 	/**
 	 * Random  of phone number
 	 */
@@ -33,15 +32,21 @@ export default class PhoneNumber {
 		"+93",
 		"+94",
 		"+95",
-		"+98"
-	]
+		"+98",
+	];
 
 	/**
 	 * Generates phone number
 	 * @returns phone number
 	 */
 	private generatePhoneNumber(): string {
-		const prefix = this._phoneNumberPrefixes[this._random.generateNumber(0, this._phoneNumberPrefixes.length - 1)];
+		const prefix =
+			this._phoneNumberPrefixes[
+				this._random.generateNumber(
+					0,
+					this._phoneNumberPrefixes.length - 1
+				)
+			];
 		const number = this._random.generateNumber(1000000, 9999999);
 		return `${prefix}${number}`;
 	}

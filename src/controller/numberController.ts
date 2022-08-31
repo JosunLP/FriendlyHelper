@@ -2,7 +2,6 @@
  * Number
  */
 export default class NumberController {
-
 	/**
 	 * Gets numbers from string
 	 * @param string
@@ -63,13 +62,14 @@ export default class NumberController {
 
 		for (let i = 0; i < numbers.length; i++) {
 			if (numbers[i].length > 0) {
-				const highestNumberFromArray = this.getHighestNumberFromArray(numbers[i]);
+				const highestNumberFromArray = this.getHighestNumberFromArray(
+					numbers[i]
+				);
 				if (highestNumberFromArray > highestNumber) {
 					highestNumber = highestNumberFromArray;
 				}
 			}
 		}
 		return highestNumber;
-
 	}
 }

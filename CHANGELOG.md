@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.8.0] - Extendet Profile data generation](#180---extendet-profile-data-generation)
   - [[1.7.1] - Fixing Persons code example](#171---fixing-persons-code-example)
   - [[1.7.0] - Reworking Persons](#170---reworking-persons)
   - [[1.6.3] - Adding crypto API support](#163---adding-crypto-api-support)
@@ -20,6 +21,12 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.8.0] - Extendet Profile data generation
+
+- Adding a new extendet way to generate profile data.
+- Fixing an Error related to crypto API.
+- Fixing errors regarding the sanatization of strings.
 
 ## [1.7.1] - Fixing Persons code example
 
