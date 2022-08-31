@@ -105,8 +105,8 @@ export default class StringController {
 	 */
 	public htmlRemoveScript(str: string): string {
 		str = str.replace(/['"]+/g, "");
-		str = str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-		str = str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*>/gi, '');
+		str = str.replace(/\[/g, "");
+		str = str.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
 		return str.replace(
 			/<*script*(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/*script*>/gi,
 			""
