@@ -15,11 +15,7 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeXmltags(str: string): string {
-		return this.xmlRemoveScript(
-			this.xmlRemoveComents(
-				this.xmlRemoveCdata(str.replace(/<(?:.|\s)*?>/g, ""))
-			)
-		);
+		return str.replace(/<(?:.|\s)*?>/g, "");
 	}
 
 	/**
@@ -37,10 +33,7 @@ export default class StringController {
 	 * @returns remove script
 	 */
 	public xmlRemoveScript(str: string): string {
-		return str.replace(
-			/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-			""
-		);
+		return str.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 	}
 
 	/**
@@ -48,7 +41,8 @@ export default class StringController {
 	 * @param str
 	 * @returns remove cdata
 	 */
-	public xmlRemoveCdata(str: string): string {
+	public xmlRemoveCdata(str: string): string
+	{
 		return str.replace(/<!\[CDATA\[(?:.|\s)*?\]\]>/g, "");
 	}
 
@@ -65,11 +59,7 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeHtml(str: string): string {
-		return this.htmlSanitize(
-			this.htmlRemoveScript(
-				this.htmlRemoveComents(str.replace(/<(?:.|\s)*?>/g, ""))
-			)
-		);
+		return str.replace(/<(?:.|\s)*?>/g, "");
 	}
 
 	/**
