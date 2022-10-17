@@ -3,6 +3,7 @@
 ___
 
 - [Changelog](#changelog)
+  - [[1.8.1] - Updating dependencies](#181---updating-dependencies)
   - [[1.8.0] - Extendet Profile data generation](#180---extendet-profile-data-generation)
   - [[1.7.1] - Fixing Persons code example](#171---fixing-persons-code-example)
   - [[1.7.0] - Reworking Persons](#170---reworking-persons)
@@ -21,6 +22,11 @@ ___
   - [[1.0.0] - Initial release](#100---initial-release)
 
 ___
+
+## [1.8.1] - Updating dependencies
+
+- Updating dependencies
+- Removing the crypto package from the project, since it is now build in
 
 ## [1.8.0] - Extendet Profile data generation
 

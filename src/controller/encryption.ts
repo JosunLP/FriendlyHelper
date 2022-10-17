@@ -8,7 +8,7 @@ export default class Encryption {
 	/**
 	 * Crypto alias of encryption
 	 */
-	private static _crypto = crypto.subtle;
+	private static _crypto: SubtleCrypto = crypto.subtle;
 
 	/**
 	 * Encrypts symmetric
