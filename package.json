@@ -1,6 +1,6 @@
 {
   "name": "friendly-helper",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.",
   "main": "./dist/src/FriendlyHelper.js",
   "type": "module",
@@ -34,8 +34,7 @@
   "homepage": "https://github.com/JosunLP/FriendlyHelper#readme",
   "dependencies": {
     "@types/aes-js": "^3.1.1",
-    "aes-js": "^3.1.2",
-    "crypto": "^1.0.1"
+    "aes-js": "^3.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.0.6"

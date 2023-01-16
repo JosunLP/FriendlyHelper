@@ -478,8 +478,10 @@ export default class Random {
 		}
 
 		for (let i = 0; i < length; i++) {
+			const buf = new Uint8Array(1);
+			window.crypto.getRandomValues(buf);
 			password +=
-				characterList[Math.floor(Math.random() * characterList.length)];
+				characterList[Math.floor(buf[0] * characterList.length)];
 		}
 
 		return password;
