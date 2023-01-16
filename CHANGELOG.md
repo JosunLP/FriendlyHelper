@@ -3,25 +3,31 @@
 ___
 
 - [Changelog](#changelog)
-  - [[1.8.1] - Updating dependencies](#181---updating-dependencies)
-  - [[1.8.0] - Extendet Profile data generation](#180---extendet-profile-data-generation)
-  - [[1.7.1] - Fixing Persons code example](#171---fixing-persons-code-example)
-  - [[1.7.0] - Reworking Persons](#170---reworking-persons)
-  - [[1.6.3] - Adding crypto API support](#163---adding-crypto-api-support)
-  - [[1.6.2] - Fixing dark/light mode](#162---fixing-darklight-mode)
-  - [[1.6.1] - Fixing word generation](#161---fixing-word-generation)
-  - [[1.6.0] - Adding new content](#160---adding-new-content)
-  - [[1.5.0] - Removing RSA Support](#150---removing-rsa-support)
-  - [[1.4.1-2] - Removing unused code](#141-2---removing-unused-code)
-  - [[1.4.0] - Implementing encryption, decryption, and Bug fixes](#140---implementing-encryption-decryption-and-bug-fixes)
-  - [[1.3.0] - Updated Objects and Persons](#130---updated-objects-and-persons)
-  - [[1.2.1] - BUG FIXES -> Null pointer Exception in random controller](#121---bug-fixes---null-pointer-exception-in-random-controller)
-  - [[1.2.0] - Profile data generation, emails, and improvements](#120---profile-data-generation-emails-and-improvements)
-  - [[1.1.0] - Changes to File handling](#110---changes-to-file-handling)
-  - [[1.0.1] - Bug fix README](#101---bug-fix-readme)
-  - [[1.0.0] - Initial release](#100---initial-release)
+  - [\[1.8.2\] - Updating dependencies and security](#182---updating-dependencies-and-security)
+  - [\[1.8.1\] - Updating dependencies](#181---updating-dependencies)
+  - [\[1.8.0\] - Extendet Profile data generation](#180---extendet-profile-data-generation)
+  - [\[1.7.1\] - Fixing Persons code example](#171---fixing-persons-code-example)
+  - [\[1.7.0\] - Reworking Persons](#170---reworking-persons)
+  - [\[1.6.3\] - Adding crypto API support](#163---adding-crypto-api-support)
+  - [\[1.6.2\] - Fixing dark/light mode](#162---fixing-darklight-mode)
+  - [\[1.6.1\] - Fixing word generation](#161---fixing-word-generation)
+  - [\[1.6.0\] - Adding new content](#160---adding-new-content)
+  - [\[1.5.0\] - Removing RSA Support](#150---removing-rsa-support)
+  - [\[1.4.1-2\] - Removing unused code](#141-2---removing-unused-code)
+  - [\[1.4.0\] - Implementing encryption, decryption, and Bug fixes](#140---implementing-encryption-decryption-and-bug-fixes)
+  - [\[1.3.0\] - Updated Objects and Persons](#130---updated-objects-and-persons)
+  - [\[1.2.1\] - BUG FIXES -\> Null pointer Exception in random controller](#121---bug-fixes---null-pointer-exception-in-random-controller)
+  - [\[1.2.0\] - Profile data generation, emails, and improvements](#120---profile-data-generation-emails-and-improvements)
+  - [\[1.1.0\] - Changes to File handling](#110---changes-to-file-handling)
+  - [\[1.0.1\] - Bug fix README](#101---bug-fix-readme)
+  - [\[1.0.0\] - Initial release](#100---initial-release)
 
 ___
+
+## [1.8.2] - Updating dependencies and security
+
+- Updating dependencies
+- Fixing a security issue related to the crypto API and random password generation
 
 ## [1.8.1] - Updating dependencies
 
