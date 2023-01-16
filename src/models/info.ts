@@ -12,7 +12,7 @@ export default class Info {
 	/**
 	 * Version  of info
 	 */
-	private readonly VERSION: string = "1.8.1"
+	private readonly VERSION: string = "1.8.2"
 
 	/**
 	 * Author  of info
