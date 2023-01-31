@@ -6,9 +6,13 @@ import crypto from "crypto";
  */
 export default class Encryption {
 	/**
-	 * Crypto alias of encryption
+	 * Creates an instance of encryption.
 	 */
-	private static _crypto: SubtleCrypto = crypto.subtle;
+	constructor() {
+		if (typeof window !== "undefined" && window.crypto) {
+			global.crypto = window.crypto;
+		}
+	}
 
 	/**
 	 * Encrypts symmetric
@@ -77,7 +81,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public generateSymetricKey(): Promise<string | boolean> {
-		const key = Encryption._crypto
+		const key = crypto.subtle
 			.generateKey(
 				{
 					name: "AES-CBC",
@@ -87,7 +91,7 @@ export default class Encryption {
 				["encrypt", "decrypt"]
 			)
 			.then((key) => {
-				const keyHex = Encryption._crypto
+				const keyHex = crypto.subtle
 					.exportKey("raw", key)
 					.then((keyHex) => {
 						return aesjs.utils.hex.fromBytes(keyHex);

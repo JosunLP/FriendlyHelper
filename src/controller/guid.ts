@@ -7,6 +7,15 @@ import crypto from "crypto";
  */
 export default class GUID {
 	/**
+	 * Creates an instance of guid.
+	 */
+	constructor() {
+		if (typeof window !== "undefined" && window.crypto) {
+			global.crypto = window.crypto;
+		}
+	}
+
+	/**
 	 * Generates guid
 	 * @returns generate
 	 *

@@ -295,4 +295,15 @@ export default class StringController {
 	public stringToBuffer(str: string): Buffer {
 		return Buffer.from(str);
 	}
+
+	/**
+	 * Replaces all
+	 * @param str
+	 * @param find
+	 * @param replace
+	 * @returns all
+	 */
+	public replaceAll(str: string, find: string, replace: string): string {
+		return str.replace(new RegExp(find, "g"), replace);
+	}
 }

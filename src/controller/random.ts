@@ -5,11 +5,21 @@ import PhoneNumber from "../models/phoneNumber.js";
 import Person from "../models/person.js";
 import { PersonProperties } from "../types/personProperties.type.js";
 import { CustomPersonPropertie } from "../types/customPersonPropertie.type.js";
+import crypto from "crypto";
 
 /**
  * Random
  */
 export default class Random {
+	/**
+	 * Creates an instance of random.
+	 */
+	constructor() {
+		if (typeof window !== "undefined" && window.crypto) {
+			global.crypto = window.crypto;
+		}
+	}
+
 	//#region Basic
 
 	/**
@@ -478,8 +488,10 @@ export default class Random {
 		}
 
 		for (let i = 0; i < length; i++) {
-			const buf = new Uint8Array(1);
-			window.crypto.getRandomValues(buf);
+			let buf = new Uint8Array(1);
+
+			buf = crypto.getRandomValues(buf);
+
 			password +=
 				characterList[Math.floor(buf[0] * characterList.length)];
 		}
@@ -633,26 +645,26 @@ export default class Random {
 			if (template.includes(templatePart)) {
 				switch (templatePart) {
 					case "{numeric}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateNumber(1, 32).toString()
 						);
 						break;
 					case "{string}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateString(this.generateNumber(1, 32))
 						);
 						break;
 					case "{boolean}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateBoolean().toString()
 						);
 						break;
 					case "{date}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateDate(
 								new Date(1970, 0, 1),
 								new Date()
@@ -660,20 +672,20 @@ export default class Random {
 						);
 						break;
 					case "{currency}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateCurrency().toString()
 						);
 						break;
 					case "{percentage}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generatePercentage().toString()
 						);
 						break;
 					case "{text}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateText(
 								this.generateNumber(1, 320)
 							).toString()
@@ -1022,70 +1034,73 @@ export default class Random {
 
 		jsonTemplate = jsonTemplate.toLowerCase();
 
-		jsonTemplate = jsonTemplate.replaceAll("{{guid}}", <string>person.id);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{fullname}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{guid}}", "g"),
+			<string>person.id
+		);
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{fullname}}", "g"),
 			<string>person.fullName
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{age}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{age}}", "g"),
 			person.age!.toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{boolean}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{boolean}}", "g"),
 			this.generateBoolean().toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{date}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{date}}", "g"),
 			randomModel.DATE.toDateString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{array}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{array}}", "g"),
 			this.generateArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll("{{person}}", person.toString());
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{email}}",
+		jsonTemplate = jsonTemplate.replace("{{person}}", person.toString());
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{email}}", "g"),
 			person.email!.toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{stringarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{stringarray}}", "g"),
 			this.generateStringArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{numberarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{numberarray}}", "g"),
 			this.generateNumberArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{booleanarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{booleanarray}}", "g"),
 			this.generateBooleanArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{datearray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{datearray}}", "g"),
 			this.generateDateArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{objectarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{objectarray}}", "g"),
 			this.generateObjectArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{words}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{words}}", "g"),
 			this.generateWord(this.generateNumber(1, 10))
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{wordsarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{wordsarray}}", "g"),
 			this.generateWordArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{text}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{text}}", "g"),
 			this.generateText(this.generateNumber(1, 10))
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{textarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{textarray}}", "g"),
 			this.generateTextArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{personarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{personarray}}", "g"),
 			this.generatePersonArray(this.generateNumber(1, 10)).toString()
 		);
 
