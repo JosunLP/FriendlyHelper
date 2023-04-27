@@ -2,6 +2,20 @@
  * Type checker
  */
 export default class TypeChecker {
+	private static _instance: TypeChecker;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): TypeChecker {
+		if (!this._instance) {
+			this._instance = new TypeChecker();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Determines whether string is
 	 * @param value

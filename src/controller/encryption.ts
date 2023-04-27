@@ -5,10 +5,22 @@ import crypto from "crypto";
  * Encryption
  */
 export default class Encryption {
+	private static _instance: Encryption;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): Encryption {
+		if (!this._instance) {
+			this._instance = new Encryption();
+		}
+		return this._instance;
+	}
+
 	/**
 	 * Creates an instance of encryption.
 	 */
-	constructor() {
+	private constructor() {
 		if (typeof window !== "undefined" && window.crypto) {
 			global.crypto = window.crypto;
 		}

@@ -2,6 +2,20 @@
  * String controller
  */
 export default class StringController {
+	private static _instance: StringController;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): StringController {
+		if (!this._instance) {
+			this._instance = new StringController();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Purges xmltags
 	 * @param str
