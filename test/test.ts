@@ -26,6 +26,8 @@ function output(func: any) {
 	printToLog(func, logFileName);
 }
 
+output(H.random.generateRandomPassword());
+output(H.random.generateEmailArray(10));
 output(H.info.getInfo());
 output(H.guid.generate());
 output(H.color.generateRandomHex());
