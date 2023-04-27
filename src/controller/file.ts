@@ -4,6 +4,20 @@ import XmlBuilder from "./xmlBuilder.js";
  * File controller
  */
 export default class FileController {
+	private static _instance: FileController;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): FileController {
+		if (!this._instance) {
+			this._instance = new FileController();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Jsons to xml recursive
 	 * @param json

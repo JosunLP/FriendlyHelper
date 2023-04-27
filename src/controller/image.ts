@@ -5,6 +5,20 @@ import { imageType } from "../types/image.type.js";
  * Image controller
  */
 export default class ImageController {
+	private static _instance: ImageController;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): ImageController {
+		if (!this._instance) {
+			this._instance = new ImageController();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Base64s to blob
 	 * @param base64
@@ -38,7 +52,7 @@ export default class ImageController {
 	 */
 	public async base64ToFile(base64: string, fileName: string): Promise<File> {
 		const blob = await this.base64ToBlob(base64);
-		const file = new FileController().blobToFile(blob, fileName);
+		const file = FileController.getInstance().blobToFile(blob, fileName);
 		return file;
 	}
 

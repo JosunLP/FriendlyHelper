@@ -11,10 +11,22 @@ import crypto from "crypto";
  * Random
  */
 export default class Random {
+	private static _instance: Random;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): Random {
+		if (!this._instance) {
+			this._instance = new Random();
+		}
+		return this._instance;
+	}
+
 	/**
 	 * Creates an instance of random.
 	 */
-	constructor() {
+	private constructor() {
 		if (typeof window !== "undefined" && window.crypto) {
 			global.crypto = window.crypto;
 		}
@@ -711,7 +723,7 @@ export default class Random {
 	 * @returns word
 	 */
 	public generateWord(length: number): string {
-		const loremIpsum = new LoremIpsum();
+		const loremIpsum = LoremIpsum.getInstance();
 		const text = loremIpsum.getText(length);
 		const words = text.split(" ");
 		return words[this.generateNumber(1, words.length)];
@@ -723,7 +735,7 @@ export default class Random {
 	 * @returns text
 	 */
 	public generateText(length: number): string {
-		const loremIpsum = new LoremIpsum();
+		const loremIpsum = LoremIpsum.getInstance();
 		return loremIpsum.getText(length);
 	}
 

@@ -2,6 +2,20 @@
  * Lorem impsum
  */
 export default class LoremImpsum {
+	private static _instance: LoremImpsum;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): LoremImpsum {
+		if (!this._instance) {
+			this._instance = new LoremImpsum();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Words  of lorem impsum
 	 */

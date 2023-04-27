@@ -2,6 +2,20 @@
  * Number
  */
 export default class NumberController {
+	private static _instance: NumberController;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): NumberController {
+		if (!this._instance) {
+			this._instance = new NumberController();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Gets numbers from string
 	 * @param string
