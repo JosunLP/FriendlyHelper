@@ -749,7 +749,7 @@ export default class Random {
 	 * @returns gamer tag array
 	 */
 	public generateGamerTagArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const tag = this.generateGamerTag();
 			array.push(tag);
@@ -763,7 +763,7 @@ export default class Random {
 	 * @returns gamer name array
 	 */
 	public generateGamerNameArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const name = this.generateGamerName();
 			array.push(name);
@@ -777,7 +777,7 @@ export default class Random {
 	 * @returns name array
 	 */
 	public generateNameArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const name = this.generateFullName();
 			array.push(name);
@@ -805,7 +805,7 @@ export default class Random {
 	 * @returns string array
 	 */
 	public generateStringArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const string = this.generateString(this.generateNumber(5, 30));
 			array.push(string);
@@ -819,7 +819,7 @@ export default class Random {
 	 * @returns number array
 	 */
 	public generateNumberArray(length: number): number[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const number = this.generateNumber(0, 100000);
 			array.push(number);
@@ -833,7 +833,7 @@ export default class Random {
 	 * @returns boolean array
 	 */
 	public generateBooleanArray(length: number): boolean[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const bool = this.generateBoolean();
 			array.push(bool);
@@ -847,7 +847,7 @@ export default class Random {
 	 * @returns date array
 	 */
 	public generateDateArray(length: number): Date[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const date = this.generateDate(
 				new Date(2017, 1, 1),
@@ -868,7 +868,7 @@ export default class Random {
 		length: number,
 		enumeration: undefined
 	): undefined[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const enumValue = this.generateEnum(enumeration);
 			array.push(enumValue);
@@ -882,7 +882,7 @@ export default class Random {
 	 * @returns object array
 	 */
 	public generateObjectArray(length: number): undefined[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const object = this.generateObject();
 			array.push(object);
@@ -896,7 +896,7 @@ export default class Random {
 	 * @returns word array
 	 */
 	public generateWordArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const word = this.generateWord(this.generateNumber(1, 10));
 			array.push(word);
@@ -910,7 +910,7 @@ export default class Random {
 	 * @returns text array
 	 */
 	public generateTextArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const text = this.generateText(this.generateNumber(1, 10));
 			array.push(text);
@@ -935,7 +935,7 @@ export default class Random {
 		length: number,
 		properties?: PersonProperties
 	): Person[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const person = this.generatePerson(properties);
 			array.push(person);
@@ -979,7 +979,7 @@ export default class Random {
 	 * 		// }
 	 */
 	public generateStringArrayObejct(length: number): object {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const string = this.generateString(this.generateNumber(5, 10));
 			array.push(string);
