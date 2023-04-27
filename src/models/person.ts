@@ -97,9 +97,7 @@ export default class Person {
 				this.jobTitle = _random.generateJobTitle();
 			}
 			if (properties.about) {
-				this.about = _random.generateText(
-					_random.generateNumber(10, 100)
-				);
+				this.about = _random.generateText(_random.generateNumber(10, 100));
 			}
 
 			Object.keys(this).forEach((key) => {

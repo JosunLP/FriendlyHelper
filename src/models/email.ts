@@ -16,7 +16,7 @@ export default class Email {
 	/**
 	 * Mail  of email
 	 */
-	private mail: string = "";
+	private mail = "";
 
 	/**
 	 * Logo url of email
@@ -107,12 +107,7 @@ export default class Email {
 	 * const email = new Email('Hello', 'Hello world', 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png', 'https://www.google.com');
 	 *
 	 */
-	constructor(
-		subject: string,
-		body: string,
-		logoUrl: string,
-		domain: string
-	) {
+	constructor(subject: string, body: string, logoUrl: string, domain: string) {
 		this.subject = subject;
 		this.body = body;
 		this.logoUrl = logoUrl;

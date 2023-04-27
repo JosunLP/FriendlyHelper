@@ -6,9 +6,13 @@ import crypto from "crypto";
  */
 export default class Encryption {
 	/**
-	 * Crypto alias of encryption
+	 * Creates an instance of encryption.
 	 */
-	private static _crypto: SubtleCrypto = crypto.subtle;
+	constructor() {
+		if (typeof window !== "undefined" && window.crypto) {
+			global.crypto = window.crypto;
+		}
+	}
 
 	/**
 	 * Encrypts symmetric
@@ -31,9 +35,7 @@ export default class Encryption {
 		const encrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			encrypted.push(
-				String.fromCharCode(
-					a.charCodeAt(i) + key.charCodeAt(i % key.length)
-				)
+				String.fromCharCode(a.charCodeAt(i) + key.charCodeAt(i % key.length))
 			);
 		}
 		return encrypted.join("");
@@ -59,9 +61,7 @@ export default class Encryption {
 		const decrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			decrypted.push(
-				String.fromCharCode(
-					a.charCodeAt(i) - key.charCodeAt(i % key.length)
-				)
+				String.fromCharCode(a.charCodeAt(i) - key.charCodeAt(i % key.length))
 			);
 		}
 		return decrypted.join("");
@@ -77,7 +77,7 @@ export default class Encryption {
 	 * ```
 	 */
 	public generateSymetricKey(): Promise<string | boolean> {
-		const key = Encryption._crypto
+		const key = crypto.subtle
 			.generateKey(
 				{
 					name: "AES-CBC",
@@ -87,7 +87,7 @@ export default class Encryption {
 				["encrypt", "decrypt"]
 			)
 			.then((key) => {
-				const keyHex = Encryption._crypto
+				const keyHex = crypto.subtle
 					.exportKey("raw", key)
 					.then((keyHex) => {
 						return aesjs.utils.hex.fromBytes(keyHex);
@@ -118,9 +118,7 @@ export default class Encryption {
 	 */
 	public encryptAES(val: string, key: string): string {
 		const textBytes = aesjs.utils.utf8.toBytes(val);
-		const aesCtr = new aesjs.ModeOfOperation.ctr(
-			aesjs.utils.hex.toBytes(key)
-		);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
 		const encryptedBytes = aesCtr.encrypt(textBytes);
 		const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 		return encryptedHex;
@@ -142,9 +140,7 @@ export default class Encryption {
 	 */
 	public decryptAES(val: string, key: string): string {
 		const encryptedBytes = aesjs.utils.hex.toBytes(val);
-		const aesCtr = new aesjs.ModeOfOperation.ctr(
-			aesjs.utils.hex.toBytes(key)
-		);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
 		const decryptedBytes = aesCtr.decrypt(encryptedBytes);
 		const decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
 		return decryptedText;

@@ -42,10 +42,7 @@ export default class PhoneNumber {
 	private generatePhoneNumber(): string {
 		const prefix =
 			this._phoneNumberPrefixes[
-				this._random.generateNumber(
-					0,
-					this._phoneNumberPrefixes.length - 1
-				)
+				this._random.generateNumber(0, this._phoneNumberPrefixes.length - 1)
 			];
 		const number = this._random.generateNumber(1000000, 9999999);
 		return `${prefix}${number}`;

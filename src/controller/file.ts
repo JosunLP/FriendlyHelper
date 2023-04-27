@@ -32,6 +32,7 @@ export default class FileController {
 	jsonToXmlRecursive(json: [], root: boolean): string {
 		const xml = root ? new XmlBuilder("root") : new XmlBuilder("child");
 		for (const key in json) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (json.hasOwnProperty(key)) {
 				if (typeof json[key] === "object") {
 					xml.ele(key, this.jsonToXmlRecursive(json[key], false));
@@ -62,9 +63,7 @@ export default class FileController {
 		if (root.children.length > 0) {
 			for (const child of root.children) {
 				if (child.children.length > 0) {
-					json[child.nodeName] = this.xmlToJsonRecursive(
-						child.outerHTML
-					);
+					json[child.nodeName] = this.xmlToJsonRecursive(child.outerHTML);
 				} else {
 					json[child.nodeName] = child.innerHTML;
 				}
