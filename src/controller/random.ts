@@ -45,7 +45,7 @@ export default class Random {
 	 * @returns number
 	 */
 	public generateNumber(min: number, max: number): number {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
+		return crypto.randomInt(min, max);
 	}
 
 	/**
@@ -192,22 +192,24 @@ export default class Random {
 				firstPart = lastNameSet + firstNameSet;
 				break;
 			case 6:
-				firstPart = lastNameSet + this.generateNumber(1, 455);
+				firstPart = lastNameSet + this.generateNumber(1, 455).toString();
 				break;
 			case 7:
-				firstPart = this.generateNumber(1, 455) + lastNameSet;
+				firstPart = this.generateNumber(1, 455).toString() + lastNameSet;
 				break;
 			case 8:
-				firstPart = firstNameSet + this.generateNumber(1, 455);
+				firstPart = firstNameSet + this.generateNumber(1, 455).toString();
 				break;
 			case 9:
-				firstPart = this.generateNumber(1, 455) + firstNameSet;
+				firstPart = this.generateNumber(1, 455).toString() + firstNameSet;
 				break;
 			case 10:
-				firstPart = this.generateGamerName() + this.generateNumber(1, 455);
+				firstPart =
+					this.generateGamerName() + this.generateNumber(1, 455).toString();
 				break;
 			case 11:
-				firstPart = this.generateNumber(1, 455) + this.generateGamerName();
+				firstPart =
+					this.generateNumber(1, 455).toString() + this.generateGamerName();
 				break;
 		}
 
@@ -220,7 +222,7 @@ export default class Random {
 	 */
 	public generateGamerName(): string {
 		return Names.gamingNicknames[
-			this.generateNumber(1, Names.lastNames.length)
+			this.generateNumber(1, Names.gamingNicknames.length)
 		];
 	}
 
@@ -473,11 +475,7 @@ export default class Random {
 		}
 
 		for (let i = 0; i < length; i++) {
-			let buf = new Uint8Array(1);
-
-			buf = crypto.getRandomValues(buf);
-
-			password += characterList[Math.floor(buf[0] * characterList.length)];
+			password += characterList[this.generateNumber(0, characterList.length)];
 		}
 
 		return password;
@@ -939,7 +937,7 @@ export default class Random {
 	 * @returns email array
 	 */
 	public generateEmailArray(length: number): string[] {
-		const array = new Array(length);
+		const array = new Array();
 		for (let i = 0; i < length; i++) {
 			const email = this.generateEmail();
 			array.push(email);
