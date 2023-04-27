@@ -3,6 +3,7 @@
 ---
 
 - [Changelog](#changelog)
+  - [\[1.9.0\] - Fixing a bug in the crypto API](#190---fixing-a-bug-in-the-crypto-api)
   - [\[1.8.2\] - Updating dependencies and security](#182---updating-dependencies-and-security)
   - [\[1.8.1\] - Updating dependencies](#181---updating-dependencies)
   - [\[1.8.0\] - Extendet Profile data generation](#180---extendet-profile-data-generation)
@@ -23,6 +24,12 @@
   - [\[1.0.0\] - Initial release](#100---initial-release)
 
 ---
+
+## [1.9.0] - Fixing a bug in the crypto API
+
+- Fixing a bug in the crypto API, that caused the generation of a wrong key.
+- Addet multiple new pipelines for testing and building the project.
+- Addet linting and code formating to the project using prettier and eslint.
 
 ## [1.8.2] - Updating dependencies and security
 
