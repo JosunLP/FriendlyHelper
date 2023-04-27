@@ -3,6 +3,7 @@
 ---
 
 - [Changelog](#changelog)
+  - [\[1.9.2\] - Performance improvements and bug fixes](#192---performance-improvements-and-bug-fixes)
   - [\[1.9.1\] - Fixing a password generation and email generation bug](#191---fixing-a-password-generation-and-email-generation-bug)
   - [\[1.9.0\] - Fixing a bug in the crypto API](#190---fixing-a-bug-in-the-crypto-api)
   - [\[1.8.2\] - Updating dependencies and security](#182---updating-dependencies-and-security)
@@ -25,6 +26,13 @@
   - [\[1.0.0\] - Initial release](#100---initial-release)
 
 ---
+
+## [1.9.2] - Performance improvements and bug fixes
+
+- Performance improvements
+  - implemented the singleton pattern for the most controllers
+- Fixing a common Array length bug
+  - Fixed a bug that caused the generation of an array with a length longer than the array itself.
 
 ## [1.9.1] - Fixing a password generation and email generation bug
 
