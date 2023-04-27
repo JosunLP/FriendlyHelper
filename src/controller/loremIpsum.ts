@@ -196,7 +196,7 @@ export default class LoremImpsum {
 	 * ```
 	 */
 	public getText(wordCount: number): string {
-		let result: string = "";
+		let result = "";
 		for (let i = 0; i < wordCount; i++) {
 			result +=
 				LoremImpsum._words[

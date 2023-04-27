@@ -86,9 +86,7 @@ export default class ImageController {
 					const canvas = document.createElement("canvas");
 					canvas.width = img.width;
 					canvas.height = img.height;
-					const ctx = <CanvasRenderingContext2D>(
-						canvas.getContext("2d")
-					);
+					const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
 					ctx.drawImage(img, 0, 0);
 					const dataURL = canvas.toDataURL(imageType);
 					const blob = this.dataURLtoBlob(dataURL);

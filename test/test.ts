@@ -40,9 +40,8 @@ output(
 	) + "%"
 );
 output(
-	H.color.determineTransparency(
-		H.color.hslToHex(H.color.generateRandomHsl())
-	) + "%"
+	H.color.determineTransparency(H.color.hslToHex(H.color.generateRandomHsl())) +
+		"%"
 );
 output(
 	H.color.determineTransparency(
@@ -50,9 +49,8 @@ output(
 	) + "%"
 );
 output(
-	H.color.determineTransparency(
-		H.color.rgbToHex(H.color.generateRandomRgb())
-	) + "%"
+	H.color.determineTransparency(H.color.rgbToHex(H.color.generateRandomRgb())) +
+		"%"
 );
 output(H.string.capitalise(H.random.generateString(10)));
 output(H.string.decapitalise(H.random.generateString(10)));
@@ -95,10 +93,7 @@ output(
 );
 let text = JSON.stringify(H.random.generatePerson());
 const key =
-	H.guid.generate() +
-	H.guid.generate() +
-	H.guid.generate() +
-	H.guid.generate();
+	H.guid.generate() + H.guid.generate() + H.guid.generate() + H.guid.generate();
 output((text = H.encryption.encryptSymmetric(text, key)));
 output(JSON.parse(H.encryption.decryptSymmetric(text, key)));
 output(key);

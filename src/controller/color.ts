@@ -100,8 +100,9 @@ export default class Color {
 	 * ```
 	 */
 	public rgbaToHex(rgba: string): string {
-		const result =
-			/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(rgba);
+		const result = /^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d*(?:\.\d+)?)\)$/i.exec(
+			rgba
+		);
 		return result
 			? "#" +
 					("0" + parseInt(result[1], 10).toString(16)).slice(-2) +
@@ -144,9 +145,7 @@ export default class Color {
 	 */
 	public hslaToHex(hsla: string): string {
 		const result =
-			/^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(
-				hsla
-			);
+			/^hsla\((\d+),\s*(\d+%),\s*(\d+%),\s*(\d*(?:\.\d+)?)\)$/i.exec(hsla);
 		return result
 			? "#" +
 					("0" + parseInt(result[1], 10).toString(16)).slice(-2) +
@@ -259,6 +258,7 @@ export default class Color {
 		b: number,
 		a: number
 	): { c: number; m: number; y: number; k: number } {
+		// eslint-disable-next-line no-unused-vars
 		a = a / 255;
 		r = r / 255;
 		g = g / 255;

@@ -5,11 +5,21 @@ import PhoneNumber from "../models/phoneNumber.js";
 import Person from "../models/person.js";
 import { PersonProperties } from "../types/personProperties.type.js";
 import { CustomPersonPropertie } from "../types/customPersonPropertie.type.js";
+import crypto from "crypto";
 
 /**
  * Random
  */
 export default class Random {
+	/**
+	 * Creates an instance of random.
+	 */
+	constructor() {
+		if (typeof window !== "undefined" && window.crypto) {
+			global.crypto = window.crypto;
+		}
+	}
+
 	//#region Basic
 
 	/**
@@ -23,9 +33,7 @@ export default class Random {
 			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		const charactersLength = characters.length;
 		for (let i = 0; i < length; i++) {
-			result += characters.charAt(
-				Math.floor(Math.random() * charactersLength)
-			);
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
 		}
 		return result;
 	}
@@ -117,9 +125,7 @@ export default class Random {
 	 * @returns first name
 	 */
 	public generateFirstName(): string {
-		return Names.firstNames[
-			this.generateNumber(1, Names.firstNames.length)
-		];
+		return Names.firstNames[this.generateNumber(1, Names.firstNames.length)];
 	}
 
 	/**
@@ -167,9 +173,7 @@ export default class Random {
 		}
 
 		const randomEmailDomain =
-			Names.emailDomains[
-				this.generateNumber(1, Names.emailDomains.length)
-			];
+			Names.emailDomains[this.generateNumber(1, Names.emailDomains.length)];
 
 		switch (randomNumber) {
 			case 1:
@@ -200,12 +204,10 @@ export default class Random {
 				firstPart = this.generateNumber(1, 455) + firstNameSet;
 				break;
 			case 10:
-				firstPart =
-					this.generateGamerName() + this.generateNumber(1, 455);
+				firstPart = this.generateGamerName() + this.generateNumber(1, 455);
 				break;
 			case 11:
-				firstPart =
-					this.generateNumber(1, 455) + this.generateGamerName();
+				firstPart = this.generateNumber(1, 455) + this.generateGamerName();
 				break;
 		}
 
@@ -263,9 +265,7 @@ export default class Random {
 	 * @returns street name
 	 */
 	public generateStreetName(): string {
-		return Names.streetNames[
-			this.generateNumber(1, Names.streetNames.length)
-		];
+		return Names.streetNames[this.generateNumber(1, Names.streetNames.length)];
 	}
 
 	/**
@@ -289,9 +289,7 @@ export default class Random {
 	 * @returns state
 	 */
 	public generateState(): string {
-		return Names.stateNames[
-			this.generateNumber(1, Names.stateNames.length)
-		];
+		return Names.stateNames[this.generateNumber(1, Names.stateNames.length)];
 	}
 
 	/**
@@ -463,10 +461,7 @@ export default class Random {
 				numberList
 			);
 		} else {
-			characterList = characterList.concat(
-				alphabetList,
-				alphabetListCaps
-			);
+			characterList = characterList.concat(alphabetList, alphabetListCaps);
 		}
 
 		if (possibleCharacters.length > 0) {
@@ -478,10 +473,11 @@ export default class Random {
 		}
 
 		for (let i = 0; i < length; i++) {
-			const buf = new Uint8Array(1);
-			window.crypto.getRandomValues(buf);
-			password +=
-				characterList[Math.floor(buf[0] * characterList.length)];
+			let buf = new Uint8Array(1);
+
+			buf = crypto.getRandomValues(buf);
+
+			password += characterList[Math.floor(buf[0] * characterList.length)];
 		}
 
 		return password;
@@ -557,10 +553,7 @@ export default class Random {
 							);
 						} else {
 							// @ts-ignore
-							person[customProperty.key] = this.generateNumber(
-								1,
-								32
-							);
+							person[customProperty.key] = this.generateNumber(1, 32);
 						}
 						break;
 
@@ -595,10 +588,9 @@ export default class Random {
 					case "template":
 						if (customProperty.template) {
 							// @ts-ignore
-							person[customProperty.key] =
-								this.generateValueByTemplate(
-									customProperty.template
-								);
+							person[customProperty.key] = this.generateValueByTemplate(
+								customProperty.template
+							);
 						}
 						break;
 
@@ -633,50 +625,45 @@ export default class Random {
 			if (template.includes(templatePart)) {
 				switch (templatePart) {
 					case "{numeric}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateNumber(1, 32).toString()
 						);
 						break;
 					case "{string}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateString(this.generateNumber(1, 32))
 						);
 						break;
 					case "{boolean}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateBoolean().toString()
 						);
 						break;
 					case "{date}":
-						value = value.replaceAll(
-							templatePart,
-							this.generateDate(
-								new Date(1970, 0, 1),
-								new Date()
-							).toString()
+						value = value.replace(
+							new RegExp(templatePart, "g"),
+							this.generateDate(new Date(1970, 0, 1), new Date()).toString()
 						);
 						break;
 					case "{currency}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generateCurrency().toString()
 						);
 						break;
 					case "{percentage}":
-						value = value.replaceAll(
-							templatePart,
+						value = value.replace(
+							new RegExp(templatePart, "g"),
 							this.generatePercentage().toString()
 						);
 						break;
 					case "{text}":
-						value = value.replaceAll(
-							templatePart,
-							this.generateText(
-								this.generateNumber(1, 320)
-							).toString()
+						value = value.replace(
+							new RegExp(templatePart, "g"),
+							this.generateText(this.generateNumber(1, 320)).toString()
 						);
 						break;
 
@@ -714,6 +701,7 @@ export default class Random {
 	 * 		};
 	 * 		const result = generateEnum(enumeration);
 	 */
+	// eslint-disable-next-line no-undef
 	public generateEnum(enumeration: any): Enumerator {
 		const keys = Object.keys(enumeration);
 		return enumeration[keys[this.generateNumber(1, keys.length)]];
@@ -753,7 +741,8 @@ export default class Random {
 	public generateGamerTagArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateGamerTag());
+			const tag = this.generateGamerTag();
+			array.push(tag);
 		}
 		return array;
 	}
@@ -766,7 +755,8 @@ export default class Random {
 	public generateGamerNameArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateGamerName());
+			const name = this.generateGamerName();
+			array.push(name);
 		}
 		return array;
 	}
@@ -779,7 +769,8 @@ export default class Random {
 	public generateNameArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateFullName());
+			const name = this.generateFullName();
+			array.push(name);
 		}
 		return array;
 	}
@@ -792,7 +783,8 @@ export default class Random {
 	public generateArray(length: number): string[] {
 		const result = [];
 		for (let i = 0; i < length; i++) {
-			result.push(this.generateString(this.generateNumber(5, 10)));
+			const value = this.generateString(this.generateNumber(5, 30));
+			result.push(value);
 		}
 		return result;
 	}
@@ -805,7 +797,8 @@ export default class Random {
 	public generateStringArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateString(this.generateNumber(5, 10)));
+			const string = this.generateString(this.generateNumber(5, 30));
+			array.push(string);
 		}
 		return array;
 	}
@@ -818,7 +811,8 @@ export default class Random {
 	public generateNumberArray(length: number): number[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateNumber(1, 100));
+			const number = this.generateNumber(0, 100000);
+			array.push(number);
 		}
 		return array;
 	}
@@ -831,7 +825,8 @@ export default class Random {
 	public generateBooleanArray(length: number): boolean[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateBoolean());
+			const bool = this.generateBoolean();
+			array.push(bool);
 		}
 		return array;
 	}
@@ -844,9 +839,11 @@ export default class Random {
 	public generateDateArray(length: number): Date[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(
-				this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31))
+			const date = this.generateDate(
+				new Date(2017, 1, 1),
+				new Date(2017, 12, 31)
 			);
+			array.push(date);
 		}
 		return array;
 	}
@@ -863,7 +860,8 @@ export default class Random {
 	): undefined[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateEnum(enumeration));
+			const enumValue = this.generateEnum(enumeration);
+			array.push(enumValue);
 		}
 		return array;
 	}
@@ -876,7 +874,8 @@ export default class Random {
 	public generateObjectArray(length: number): undefined[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateObject());
+			const object = this.generateObject();
+			array.push(object);
 		}
 		return array;
 	}
@@ -889,7 +888,8 @@ export default class Random {
 	public generateWordArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateWord(this.generateNumber(1, 10)));
+			const word = this.generateWord(this.generateNumber(1, 10));
+			array.push(word);
 		}
 		return array;
 	}
@@ -902,7 +902,8 @@ export default class Random {
 	public generateTextArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateText(this.generateNumber(1, 10)));
+			const text = this.generateText(this.generateNumber(1, 10));
+			array.push(text);
 		}
 		return array;
 	}
@@ -926,7 +927,8 @@ export default class Random {
 	): Person[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generatePerson(properties));
+			const person = this.generatePerson(properties);
+			array.push(person);
 		}
 		return array;
 	}
@@ -939,7 +941,8 @@ export default class Random {
 	public generateEmailArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateEmail());
+			const email = this.generateEmail();
+			array.push(email);
 		}
 		return array;
 	}
@@ -968,7 +971,8 @@ export default class Random {
 	public generateStringArrayObejct(length: number): object {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateString(this.generateNumber(5, 10)));
+			const string = this.generateString(this.generateNumber(5, 10));
+			array.push(string);
 		}
 
 		const result = {
@@ -1022,70 +1026,73 @@ export default class Random {
 
 		jsonTemplate = jsonTemplate.toLowerCase();
 
-		jsonTemplate = jsonTemplate.replaceAll("{{guid}}", <string>person.id);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{fullname}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{guid}}", "g"),
+			<string>person.id
+		);
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{fullname}}", "g"),
 			<string>person.fullName
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{age}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{age}}", "g"),
 			person.age!.toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{boolean}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{boolean}}", "g"),
 			this.generateBoolean().toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{date}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{date}}", "g"),
 			randomModel.DATE.toDateString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{array}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{array}}", "g"),
 			this.generateArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll("{{person}}", person.toString());
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{email}}",
+		jsonTemplate = jsonTemplate.replace("{{person}}", person.toString());
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{email}}", "g"),
 			person.email!.toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{stringarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{stringarray}}", "g"),
 			this.generateStringArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{numberarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{numberarray}}", "g"),
 			this.generateNumberArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{booleanarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{booleanarray}}", "g"),
 			this.generateBooleanArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{datearray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{datearray}}", "g"),
 			this.generateDateArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{objectarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{objectarray}}", "g"),
 			this.generateObjectArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{words}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{words}}", "g"),
 			this.generateWord(this.generateNumber(1, 10))
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{wordsarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{wordsarray}}", "g"),
 			this.generateWordArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{text}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{text}}", "g"),
 			this.generateText(this.generateNumber(1, 10))
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{textarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{textarray}}", "g"),
 			this.generateTextArray(this.generateNumber(1, 10)).toString()
 		);
-		jsonTemplate = jsonTemplate.replaceAll(
-			"{{personarray}}",
+		jsonTemplate = jsonTemplate.replace(
+			new RegExp("{{personarray}}", "g"),
 			this.generatePersonArray(this.generateNumber(1, 10)).toString()
 		);
 
@@ -1129,10 +1136,11 @@ export default class Random {
 	public generateObjectArrayByJsonTemplate(
 		length: number,
 		jsonTemplate: string
-	): undefined[] {
-		const array = new Array(length);
+	): object[] {
+		const array = [];
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateObjectByJsonTemplate(jsonTemplate));
+			const object = this.generateObjectByJsonTemplate(jsonTemplate);
+			array.push(object);
 		}
 		return array;
 	}
