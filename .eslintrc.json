@@ -1,0 +1,21 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true,
+		"node": true
+	},
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"sourceType": "module"
+	},
+	"extends": [
+		"eslint:recommended", // always (set of rules recommended by ESLint team)
+		"prettier" // always
+	],
+	"rules": {
+		"prettier/prettier": "error" // always
+	},
+	"plugins": [
+		"prettier" // always
+	]
+}

@@ -1,21 +1,40 @@
+# top-most EditorConfig file
 root = true
 
+# General
 [*]
-end_of_line = lf
-insert_final_newline = true
-trim_trailing_whitespace = true
-
-[*.{js,ts,svg,md}]
 charset = utf-8
-
-[*.md]
-indent_style = space
+end_of_line = lf
 indent_size = 2
-
-[*.{ts,js}]
 indent_style = tab
-indent_size = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
 
-[package.json]
+# Eslint rules
+[*.{js,ts}]
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+brace_style = Allman
+
+# Stylelint rules
+[*.{html,css,scss,less,sass}]
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Visual Studio EditorConfig rules
+[*.{csproj,vbproj,sln}]
+indent_style = tab
+end_of_line = crlf
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# CSV
+[*.csv]
 indent_style = space
-indent_size = 2
+indent_size = 1
+
+#EditorConfig
+[.editorconfig]
+indent_style = space

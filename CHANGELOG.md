@@ -1,6 +1,6 @@
 # Changelog
 
-___
+---
 
 - [Changelog](#changelog)
   - [\[1.8.2\] - Updating dependencies and security](#182---updating-dependencies-and-security)
@@ -22,7 +22,7 @@ ___
   - [\[1.0.1\] - Bug fix README](#101---bug-fix-readme)
   - [\[1.0.0\] - Initial release](#100---initial-release)
 
-___
+---
 
 ## [1.8.2] - Updating dependencies and security
 
@@ -75,7 +75,7 @@ ___
 ## [1.6.0] - Adding new content
 
 - Added new content to the system, including a bunch of new names.
-- Added a few new methods to ```random``` including byte, byte array and a few number types.
+- Added a few new methods to `random` including byte, byte array and a few number types.
 
 ## [1.5.0] - Removing RSA Support
 

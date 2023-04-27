@@ -33,9 +33,7 @@ export default class Random {
 			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		const charactersLength = characters.length;
 		for (let i = 0; i < length; i++) {
-			result += characters.charAt(
-				Math.floor(Math.random() * charactersLength)
-			);
+			result += characters.charAt(Math.floor(Math.random() * charactersLength));
 		}
 		return result;
 	}
@@ -127,9 +125,7 @@ export default class Random {
 	 * @returns first name
 	 */
 	public generateFirstName(): string {
-		return Names.firstNames[
-			this.generateNumber(1, Names.firstNames.length)
-		];
+		return Names.firstNames[this.generateNumber(1, Names.firstNames.length)];
 	}
 
 	/**
@@ -177,9 +173,7 @@ export default class Random {
 		}
 
 		const randomEmailDomain =
-			Names.emailDomains[
-				this.generateNumber(1, Names.emailDomains.length)
-			];
+			Names.emailDomains[this.generateNumber(1, Names.emailDomains.length)];
 
 		switch (randomNumber) {
 			case 1:
@@ -210,12 +204,10 @@ export default class Random {
 				firstPart = this.generateNumber(1, 455) + firstNameSet;
 				break;
 			case 10:
-				firstPart =
-					this.generateGamerName() + this.generateNumber(1, 455);
+				firstPart = this.generateGamerName() + this.generateNumber(1, 455);
 				break;
 			case 11:
-				firstPart =
-					this.generateNumber(1, 455) + this.generateGamerName();
+				firstPart = this.generateNumber(1, 455) + this.generateGamerName();
 				break;
 		}
 
@@ -273,9 +265,7 @@ export default class Random {
 	 * @returns street name
 	 */
 	public generateStreetName(): string {
-		return Names.streetNames[
-			this.generateNumber(1, Names.streetNames.length)
-		];
+		return Names.streetNames[this.generateNumber(1, Names.streetNames.length)];
 	}
 
 	/**
@@ -299,9 +289,7 @@ export default class Random {
 	 * @returns state
 	 */
 	public generateState(): string {
-		return Names.stateNames[
-			this.generateNumber(1, Names.stateNames.length)
-		];
+		return Names.stateNames[this.generateNumber(1, Names.stateNames.length)];
 	}
 
 	/**
@@ -473,10 +461,7 @@ export default class Random {
 				numberList
 			);
 		} else {
-			characterList = characterList.concat(
-				alphabetList,
-				alphabetListCaps
-			);
+			characterList = characterList.concat(alphabetList, alphabetListCaps);
 		}
 
 		if (possibleCharacters.length > 0) {
@@ -492,8 +477,7 @@ export default class Random {
 
 			buf = crypto.getRandomValues(buf);
 
-			password +=
-				characterList[Math.floor(buf[0] * characterList.length)];
+			password += characterList[Math.floor(buf[0] * characterList.length)];
 		}
 
 		return password;
@@ -569,10 +553,7 @@ export default class Random {
 							);
 						} else {
 							// @ts-ignore
-							person[customProperty.key] = this.generateNumber(
-								1,
-								32
-							);
+							person[customProperty.key] = this.generateNumber(1, 32);
 						}
 						break;
 
@@ -607,10 +588,9 @@ export default class Random {
 					case "template":
 						if (customProperty.template) {
 							// @ts-ignore
-							person[customProperty.key] =
-								this.generateValueByTemplate(
-									customProperty.template
-								);
+							person[customProperty.key] = this.generateValueByTemplate(
+								customProperty.template
+							);
 						}
 						break;
 
@@ -665,10 +645,7 @@ export default class Random {
 					case "{date}":
 						value = value.replace(
 							new RegExp(templatePart, "g"),
-							this.generateDate(
-								new Date(1970, 0, 1),
-								new Date()
-							).toString()
+							this.generateDate(new Date(1970, 0, 1), new Date()).toString()
 						);
 						break;
 					case "{currency}":
@@ -686,9 +663,7 @@ export default class Random {
 					case "{text}":
 						value = value.replace(
 							new RegExp(templatePart, "g"),
-							this.generateText(
-								this.generateNumber(1, 320)
-							).toString()
+							this.generateText(this.generateNumber(1, 320)).toString()
 						);
 						break;
 
@@ -726,6 +701,7 @@ export default class Random {
 	 * 		};
 	 * 		const result = generateEnum(enumeration);
 	 */
+	// eslint-disable-next-line no-undef
 	public generateEnum(enumeration: any): Enumerator {
 		const keys = Object.keys(enumeration);
 		return enumeration[keys[this.generateNumber(1, keys.length)]];
@@ -765,7 +741,8 @@ export default class Random {
 	public generateGamerTagArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateGamerTag());
+			const tag = this.generateGamerTag();
+			array.push(tag);
 		}
 		return array;
 	}
@@ -778,7 +755,8 @@ export default class Random {
 	public generateGamerNameArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateGamerName());
+			const name = this.generateGamerName();
+			array.push(name);
 		}
 		return array;
 	}
@@ -791,7 +769,8 @@ export default class Random {
 	public generateNameArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateFullName());
+			const name = this.generateFullName();
+			array.push(name);
 		}
 		return array;
 	}
@@ -804,7 +783,8 @@ export default class Random {
 	public generateArray(length: number): string[] {
 		const result = [];
 		for (let i = 0; i < length; i++) {
-			result.push(this.generateString(this.generateNumber(5, 10)));
+			const value = this.generateString(this.generateNumber(5, 30));
+			result.push(value);
 		}
 		return result;
 	}
@@ -817,7 +797,8 @@ export default class Random {
 	public generateStringArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateString(this.generateNumber(5, 10)));
+			const string = this.generateString(this.generateNumber(5, 30));
+			array.push(string);
 		}
 		return array;
 	}
@@ -830,7 +811,8 @@ export default class Random {
 	public generateNumberArray(length: number): number[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateNumber(1, 100));
+			const number = this.generateNumber(0, 100000);
+			array.push(number);
 		}
 		return array;
 	}
@@ -843,7 +825,8 @@ export default class Random {
 	public generateBooleanArray(length: number): boolean[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateBoolean());
+			const bool = this.generateBoolean();
+			array.push(bool);
 		}
 		return array;
 	}
@@ -856,9 +839,11 @@ export default class Random {
 	public generateDateArray(length: number): Date[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(
-				this.generateDate(new Date(2017, 1, 1), new Date(2017, 12, 31))
+			const date = this.generateDate(
+				new Date(2017, 1, 1),
+				new Date(2017, 12, 31)
 			);
+			array.push(date);
 		}
 		return array;
 	}
@@ -875,7 +860,8 @@ export default class Random {
 	): undefined[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateEnum(enumeration));
+			const enumValue = this.generateEnum(enumeration);
+			array.push(enumValue);
 		}
 		return array;
 	}
@@ -888,7 +874,8 @@ export default class Random {
 	public generateObjectArray(length: number): undefined[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateObject());
+			const object = this.generateObject();
+			array.push(object);
 		}
 		return array;
 	}
@@ -901,7 +888,8 @@ export default class Random {
 	public generateWordArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateWord(this.generateNumber(1, 10)));
+			const word = this.generateWord(this.generateNumber(1, 10));
+			array.push(word);
 		}
 		return array;
 	}
@@ -914,7 +902,8 @@ export default class Random {
 	public generateTextArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateText(this.generateNumber(1, 10)));
+			const text = this.generateText(this.generateNumber(1, 10));
+			array.push(text);
 		}
 		return array;
 	}
@@ -938,7 +927,8 @@ export default class Random {
 	): Person[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generatePerson(properties));
+			const person = this.generatePerson(properties);
+			array.push(person);
 		}
 		return array;
 	}
@@ -951,7 +941,8 @@ export default class Random {
 	public generateEmailArray(length: number): string[] {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateEmail());
+			const email = this.generateEmail();
+			array.push(email);
 		}
 		return array;
 	}
@@ -980,7 +971,8 @@ export default class Random {
 	public generateStringArrayObejct(length: number): object {
 		const array = new Array(length);
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateString(this.generateNumber(5, 10)));
+			const string = this.generateString(this.generateNumber(5, 10));
+			array.push(string);
 		}
 
 		const result = {
@@ -1144,10 +1136,11 @@ export default class Random {
 	public generateObjectArrayByJsonTemplate(
 		length: number,
 		jsonTemplate: string
-	): undefined[] {
-		const array = new Array(length);
+	): object[] {
+		const array = [];
 		for (let i = 0; i < length; i++) {
-			array.push(this.generateObjectByJsonTemplate(jsonTemplate));
+			const object = this.generateObjectByJsonTemplate(jsonTemplate);
+			array.push(object);
 		}
 		return array;
 	}

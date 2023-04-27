@@ -1,42 +1,49 @@
 {
-  "name": "friendly-helper",
-  "version": "1.8.2",
-  "description": "A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.",
-  "main": "./dist/src/FriendlyHelper.js",
-  "type": "module",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "tsc ./test/test.ts --target esnext --module esnext && node ./test/test.js",
-    "build": "npm i && npm run updateInfo && tsc -p tsconfig.json",
-    "watch": "tsc -w",
-    "updateInfo": "tsc ./tools/syncInfo.ts --target esnext --module esnext && node ./tools/syncInfo.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JosunLP/FriendlyHelper.git"
-  },
-  "keywords": [
-    "TypeScript",
-    "NPM",
-    "Helper",
-    "Library"
-  ],
-  "author": {
-    "name": "Jonas Pfalzgraf",
-    "email": "info@josunlp.de"
-  },
-  "license": "MPL-2.0",
-  "bugs": {
-    "url": "https://github.com/JosunLP/FriendlyHelper/issues"
-  },
-  "homepage": "https://github.com/JosunLP/FriendlyHelper#readme",
-  "dependencies": {
-    "aes-js": "^3.1.2"
-  },
-  "devDependencies": {
-    "@types/aes-js": "^3.1.1",
-    "@types/node": "^18.0.6"
-  }
+	"name": "friendly-helper",
+	"version": "1.8.2",
+	"description": "A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.",
+	"main": "./dist/src/FriendlyHelper.js",
+	"type": "module",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"test": "tsc ./test/test.ts --target esnext --module esnext && node ./test/test.js",
+		"build": "npm i && npm run updateInfo && tsc -p tsconfig.json",
+		"lint": "eslint --ext .ts . --fix && prettier --write .",
+		"watch": "tsc -w",
+		"updateInfo": "tsc ./tools/syncInfo.ts --target esnext --module esnext && node ./tools/syncInfo.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JosunLP/FriendlyHelper.git"
+	},
+	"keywords": [
+		"TypeScript",
+		"NPM",
+		"Helper",
+		"Library"
+	],
+	"author": {
+		"name": "Jonas Pfalzgraf",
+		"email": "info@josunlp.de"
+	},
+	"license": "MPL-2.0",
+	"bugs": {
+		"url": "https://github.com/JosunLP/FriendlyHelper/issues"
+	},
+	"homepage": "https://github.com/JosunLP/FriendlyHelper#readme",
+	"dependencies": {
+		"aes-js": "^3.1.2"
+	},
+	"devDependencies": {
+		"@types/aes-js": "^3.1.1",
+		"@types/node": "^18.0.6",
+		"@typescript-eslint/eslint-plugin": "^5.59.1",
+		"@typescript-eslint/parser": "^5.59.1",
+		"eslint-config-prettier": "^8.7.0",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint": "^8.39.0",
+		"prettier": "^2.8.4"
+	}
 }

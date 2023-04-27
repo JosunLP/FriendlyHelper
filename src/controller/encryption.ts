@@ -35,9 +35,7 @@ export default class Encryption {
 		const encrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			encrypted.push(
-				String.fromCharCode(
-					a.charCodeAt(i) + key.charCodeAt(i % key.length)
-				)
+				String.fromCharCode(a.charCodeAt(i) + key.charCodeAt(i % key.length))
 			);
 		}
 		return encrypted.join("");
@@ -63,9 +61,7 @@ export default class Encryption {
 		const decrypted: string[] = [];
 		for (let i = 0; i < a.length; i++) {
 			decrypted.push(
-				String.fromCharCode(
-					a.charCodeAt(i) - key.charCodeAt(i % key.length)
-				)
+				String.fromCharCode(a.charCodeAt(i) - key.charCodeAt(i % key.length))
 			);
 		}
 		return decrypted.join("");
@@ -122,9 +118,7 @@ export default class Encryption {
 	 */
 	public encryptAES(val: string, key: string): string {
 		const textBytes = aesjs.utils.utf8.toBytes(val);
-		const aesCtr = new aesjs.ModeOfOperation.ctr(
-			aesjs.utils.hex.toBytes(key)
-		);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
 		const encryptedBytes = aesCtr.encrypt(textBytes);
 		const encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
 		return encryptedHex;
@@ -146,9 +140,7 @@ export default class Encryption {
 	 */
 	public decryptAES(val: string, key: string): string {
 		const encryptedBytes = aesjs.utils.hex.toBytes(val);
-		const aesCtr = new aesjs.ModeOfOperation.ctr(
-			aesjs.utils.hex.toBytes(key)
-		);
+		const aesCtr = new aesjs.ModeOfOperation.ctr(aesjs.utils.hex.toBytes(key));
 		const decryptedBytes = aesCtr.decrypt(encryptedBytes);
 		const decryptedText = aesjs.utils.utf8.fromBytes(decryptedBytes);
 		return decryptedText;

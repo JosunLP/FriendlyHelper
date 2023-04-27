@@ -15,9 +15,9 @@ export default class StringController {
 	 * // Hello
 	 */
 	public purgeXmltags(str: string): string {
-		str = str.replace(/['"]+/g, '');
+		str = str.replace(/['"]+/g, "");
 		str = this.xmlRemoveScript(str);
-		return str.replace(/<[^>]*>/g, '');
+		return str.replace(/<[^>]*>/g, "");
 	}
 
 	/**
@@ -28,7 +28,7 @@ export default class StringController {
 	public xmlRemoveComents(str: string): string {
 		str = str.replace(/['"]+/g, "");
 		str = str.replace(/\[/g, "");
-		return str.replace(/<!--[\s\S]*?-->/g, '');
+		return str.replace(/<!--[\s\S]*?-->/g, "");
 	}
 
 	/**
@@ -46,8 +46,7 @@ export default class StringController {
 	 * @param str
 	 * @returns remove cdata
 	 */
-	public xmlRemoveCdata(str: string): string
-	{
+	public xmlRemoveCdata(str: string): string {
 		str = str.replace(/['"]+/g, "");
 		return str.replace(/<!\[CDATA\[.*?\]\]>/g, "");
 	}
@@ -94,7 +93,7 @@ export default class StringController {
 	 */
 	public htmlRemoveComents(str: string): string {
 		str = str.replace(/['"]+/g, "");
-		return str.replace(/<!--(?:.|\s)*?-->/g, '');
+		return str.replace(/<!--(?:.|\s)*?-->/g, "");
 	}
 
 	/**
@@ -105,8 +104,8 @@ export default class StringController {
 	public htmlRemoveScript(str: string): string {
 		str = str.replace(/['"]+/g, "");
 		str = str.replace(/\[/g, "");
-		str = str.replace(/<script.*?>.*?<\/script>/gi, '');
-		str = str.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+		str = str.replace(/<script.*?>.*?<\/script>/gi, "");
+		str = str.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "");
 		return str.replace(
 			/<script*(?:(?!\/\/)(?!\/\*)[^'"]|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\/\/.*(?:\n)|\/\*(?:(?:.|\s))*?\*\/)*?<\/*script>/gi,
 			""
@@ -150,7 +149,7 @@ export default class StringController {
 	 * @returns sql
 	 */
 	public purgeSql(str: string): string {
-		return str.replace(/\'/g, "''");
+		return str.replace(/'/g, "''");
 	}
 
 	/**
@@ -160,7 +159,7 @@ export default class StringController {
 	 */
 	public purgeJson(str: string): string {
 		str = str.replace(/\\/g, "\\\\");
-		return str.replace(/\'/g, "\\'");
+		return str.replace(/'/g, "\\'");
 	}
 
 	/**
@@ -169,6 +168,7 @@ export default class StringController {
 	 * @returns dangerous characters
 	 */
 	public purgeDangerousCharacters(str: string): string {
+		// eslint-disable-next-line no-control-regex
 		return str.replace(/[\u0000-\u001F]/g, "");
 	}
 
@@ -194,22 +194,22 @@ export default class StringController {
 		str = str.replace(/^\s*\*\s*/gm, "");
 
 		// remove markdown link
-		str = str.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, "$1");
+		str = str.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
 
 		// remove markdown image
-		str = str.replace(/!\[([^\]]+)\]\(([^\)]+)\)/g, "$1");
+		str = str.replace(/!\[([^\]]+)\]\(([^)]+)\)/g, "$1");
 
 		// remove markdown code
 		str = str.replace(/`([^`]+)`/g, "$1");
 
 		// remove markdown italic
-		str = str.replace(/\*([^\*]+)\*/g, "$1");
+		str = str.replace(/\*([^*]+)\*/g, "$1");
 
 		// remove markdown bold
-		str = str.replace(/\*\*([^\*]+)\*\*/g, "$1");
+		str = str.replace(/\*\*([^*]+)\*\*/g, "$1");
 
 		// remove markdown bold italic
-		str = str.replace(/\*\*\*([^\*]+)\*\*/g, "$1");
+		str = str.replace(/\*\*\*([^*]+)\*\*/g, "$1");
 
 		return str;
 	}
@@ -224,9 +224,7 @@ export default class StringController {
 			this.purgeHtml(
 				this.purgeSql(
 					this.purgeJson(
-						this.purgeDangerousCharacters(
-							this.clean(this.purgeMarkdown(str))
-						)
+						this.purgeDangerousCharacters(this.clean(this.purgeMarkdown(str)))
 					)
 				)
 			)

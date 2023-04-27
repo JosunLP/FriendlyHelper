@@ -45,6 +45,7 @@ export default class XmlElement {
 	toString(): string {
 		let str = "<" + this.name;
 		for (const attr in this.attributes) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (this.attributes.hasOwnProperty(attr)) {
 				str += " " + attr + '="' + this.attributes[attr] + '"';
 			}
