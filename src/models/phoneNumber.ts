@@ -9,7 +9,7 @@ export default class PhoneNumber {
 	/**
 	 * Random  of phone number
 	 */
-	private readonly _random = new Random();
+	private readonly _random = Random.getInstance();
 
 	/**
 	 * Phone number prefixes of phone number

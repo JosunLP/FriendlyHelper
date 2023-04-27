@@ -2,6 +2,20 @@
  * Color
  */
 export default class Color {
+	private static _instance: Color;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): Color {
+		if (!this._instance) {
+			this._instance = new Color();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Generates random
 	 * @returns random

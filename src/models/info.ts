@@ -13,27 +13,29 @@ export default class Info {
 	/**
 	 * Version  of info
 	 */
-	private readonly VERSION: string = "1.9.1"
+	private readonly VERSION: string = "1.9.2";
 
 	/**
 	 * Author  of info
 	 */
-	private readonly AUTHOR: string = "Jonas Pfalzgraf"
+	private readonly AUTHOR: string = "Jonas Pfalzgraf";
 
 	/**
 	 * License  of info
 	 */
-	private readonly LICENSE: string = "MPL-2.0"
+	private readonly LICENSE: string = "MPL-2.0";
 
 	/**
 	 * Repository  of info
 	 */
-	private readonly REPOSITORY: string = "git+https://github.com/JosunLP/FriendlyHelper.git"
+	private readonly REPOSITORY: string =
+		"git+https://github.com/JosunLP/FriendlyHelper.git";
 
 	/**
 	 * Homepage  of info
 	 */
-	private readonly HOMEPAGE: string = "https://github.com/JosunLP/FriendlyHelper#readme"
+	private readonly HOMEPAGE: string =
+		"https://github.com/JosunLP/FriendlyHelper#readme";
 
 	/**
 	 * Gets info

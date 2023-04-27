@@ -28,14 +28,14 @@ export default class Person {
 	 * Creates an instance of person.
 	 */
 	constructor(properties?: PersonProperties) {
-		const _random = new Random();
+		const _random = Random.getInstance();
 
 		if (
 			!properties ||
 			typeof properties !== "object" ||
 			properties === undefined
 		) {
-			this.id = new GUID().generate();
+			this.id = GUID.getInstance().generate();
 			this.firstName = _random.generateFirstName();
 			this.lastName = _random.generateLastName();
 			this.fullName = this.firstName + " " + this.lastName;
@@ -55,7 +55,7 @@ export default class Person {
 			const lName = _random.generateLastName();
 			const fullName = fName + " " + lName;
 			if (properties.id) {
-				this.id = new GUID().generate();
+				this.id = GUID.getInstance().generate();
 			}
 			if (properties.firstName) {
 				this.firstName = fName;

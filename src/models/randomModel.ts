@@ -10,12 +10,12 @@ export default class RandomModel {
 	/**
 	 * Random  of random model
 	 */
-	private readonly random = new Random();
+	private readonly random = Random.getInstance();
 
 	/**
 	 * Id  of random model
 	 */
-	public readonly ID = new GUID().generate();
+	public readonly ID = GUID.getInstance().generate();
 
 	/**
 	 * Text  of random model

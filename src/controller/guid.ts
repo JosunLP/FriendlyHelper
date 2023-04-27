@@ -6,10 +6,22 @@ import crypto from "crypto";
  * @description Generates a guid based on Math.random()
  */
 export default class GUID {
+	private static _instance: GUID;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): GUID {
+		if (!this._instance) {
+			this._instance = new GUID();
+		}
+		return this._instance;
+	}
+
 	/**
 	 * Creates an instance of guid.
 	 */
-	constructor() {
+	private constructor() {
 		if (typeof window !== "undefined" && window.crypto) {
 			global.crypto = window.crypto;
 		}

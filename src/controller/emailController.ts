@@ -4,6 +4,20 @@ import Email from "../models/email.js";
  * Email controller
  */
 export default class EmailController {
+	private static _instance: EmailController;
+
+	/**
+	 * Gets instance
+	 */
+	public static getInstance(): EmailController {
+		if (!this._instance) {
+			this._instance = new EmailController();
+		}
+		return this._instance;
+	}
+
+	private constructor() {}
+
 	/**
 	 * Generates email by template
 	 * @param subject
