@@ -1,5 +1,4 @@
 import aesjs from "aes-js";
-import crypto from "crypto";
 
 /**
  * Encryption

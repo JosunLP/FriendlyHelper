@@ -3,6 +3,7 @@
 ---
 
 - [Changelog](#changelog)
+  - [\[1.9.3\] - Bug fixes](#193---bug-fixes)
   - [\[1.9.2\] - Performance improvements and bug fixes](#192---performance-improvements-and-bug-fixes)
   - [\[1.9.1\] - Fixing a password generation and email generation bug](#191---fixing-a-password-generation-and-email-generation-bug)
   - [\[1.9.0\] - Fixing a bug in the crypto API](#190---fixing-a-bug-in-the-crypto-api)
@@ -26,6 +27,11 @@
   - [\[1.0.0\] - Initial release](#100---initial-release)
 
 ---
+
+## [1.9.3] - Bug fixes
+
+- Fixing a bug occured when trying to compile the project in a browser environment.
+- Package updates
 
 ## [1.9.2] - Performance improvements and bug fixes
 

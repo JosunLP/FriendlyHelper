@@ -5,7 +5,6 @@ import PhoneNumber from "../models/phoneNumber.js";
 import Person from "../models/person.js";
 import { PersonProperties } from "../types/personProperties.type.js";
 import { CustomPersonPropertie } from "../types/customPersonPropertie.type.js";
-import crypto from "crypto";
 
 /**
  * Random
@@ -57,7 +56,9 @@ export default class Random {
 	 * @returns number
 	 */
 	public generateNumber(min: number, max: number): number {
-		return crypto.randomInt(min, max);
+		return (
+			(crypto.getRandomValues(new Uint32Array(1))[0] % (max - min + 1)) + min
+		);
 	}
 
 	/**
