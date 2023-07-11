@@ -117,11 +117,12 @@ class FriendlyHelper {
 }
 
 export default FriendlyHelper;
-export { FriendlyHelper };
-export { FriendlyHelper as Helper };
-export { FriendlyHelper as H };
-export { FriendlyHelper as FH };
-export { Person };
-export { PersonProperties };
+export {
+	FriendlyHelper,
+	FriendlyHelper as Helper,
+	FriendlyHelper as H,
+	FriendlyHelper as FH,
+};
+export { Person, PersonProperties };
 export { XmlElement };
 export { imageType };
