@@ -3,6 +3,7 @@
 ---
 
 - [Changelog](#changelog)
+  - [\[1.9.4\] - Regular Update](#194---regular-update)
   - [\[1.9.3\] - Bug fixes](#193---bug-fixes)
   - [\[1.9.2\] - Performance improvements and bug fixes](#192---performance-improvements-and-bug-fixes)
   - [\[1.9.1\] - Fixing a password generation and email generation bug](#191---fixing-a-password-generation-and-email-generation-bug)
@@ -27,6 +28,10 @@
   - [\[1.0.0\] - Initial release](#100---initial-release)
 
 ---
+
+## [1.9.4] - Regular Update
+
+- Regular Update
 
 ## [1.9.3] - Bug fixes
 
