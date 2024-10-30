@@ -13,7 +13,7 @@ export default class Info {
 	/**
 	 * Version  of info
 	 */
-	private readonly VERSION: string = "1.9.3";
+	private readonly VERSION: string = "1.9.4";
 
 	/**
 	 * Author  of info

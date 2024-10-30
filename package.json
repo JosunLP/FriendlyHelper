@@ -1,6 +1,6 @@
 {
 	"name": "friendly-helper",
-	"version": "1.9.3",
+	"version": "1.9.4",
 	"description": "A Typescript-based standard library with handy little methods like GUID generation, retrieving numbers from strings, and a bunch of other standard methods that usually need to be rewritten for each new project.",
 	"main": "./dist/src/FriendlyHelper.js",
 	"type": "module",
@@ -12,7 +12,7 @@
 		"build": "npm i && npm run updateInfo && tsc -p tsconfig.json",
 		"lint": "eslint --ext .ts . --fix && prettier --write .",
 		"watch": "tsc -w",
-		"updateInfo": "tsc ./tools/syncInfo.ts --target esnext --module esnext && node ./tools/syncInfo.js"
+		"updateInfo": "tsc ./tools/syncInfo.ts --target esnext --moduleResolution nodenext --module nodenext && node ./tools/syncInfo.js"
 	},
 	"repository": {
 		"type": "git",
@@ -37,13 +37,13 @@
 		"aes-js": "^3.1.2"
 	},
 	"devDependencies": {
-		"@types/aes-js": "^3.1.1",
-		"@types/node": "^18.0.6",
-		"@typescript-eslint/eslint-plugin": "^5.59.1",
-		"@typescript-eslint/parser": "^5.59.1",
-		"eslint-config-prettier": "^8.7.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint": "^8.39.0",
-		"prettier": "^2.8.4"
+		"@types/aes-js": "^3.1.2",
+		"@types/node": "^22.8.4",
+		"@typescript-eslint/eslint-plugin": "^8.12.2",
+		"@typescript-eslint/parser": "^8.12.2",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.2.1",
+		"eslint": "^9.13.0",
+		"prettier": "^3.3.3"
 	}
 }
